@@ -1,0 +1,74 @@
+body {
+  --max-page-width: 1400px;
+  // --page-padding-inline: 1.75rem;
+  // --border-radius: 0.25rem;
+
+  //====== FONT SIZE VARIABLES ======//
+
+  // Body Font Size
+  --text-base-size: 1rem;
+
+  // Type Scale
+  --text-scale-ratio: 1.15;
+
+  --text-4xs: calc(var(--text-3xs) / var(--text-scale-ratio));
+  --text-3xs: calc(var(--text-2xs) / var(--text-scale-ratio));
+  --text-2xs: calc(var(--text-xs) / var(--text-scale-ratio));
+  --text-xs: calc(var(--text-base-size) / var(--text-scale-ratio));
+  --text-sm: var(--text-base-size);
+  --text-md: calc(var(--text-base-size) * var(--text-scale-ratio));
+  --text-lg: calc(var(--text-md) * var(--text-scale-ratio));
+  --text-xl: calc(var(--text-lg) * var(--text-scale-ratio));
+  --text-2xl: calc(var(--text-xl) * var(--text-scale-ratio));
+  --text-3xl: calc(var(--text-2xl) * var(--text-scale-ratio));
+  --text-4xl: calc(var(--text-3xl) * var(--text-scale-ratio));
+
+  //====== COLOR VARIABLES ======//
+  --color-primary: rgb(255, 105, 0);
+
+  --color-grad-1: rgb(59, 31, 93);
+  --color-grad-2: rgb(247, 233, 167);
+  --color-grad-3: rgb(134, 205, 186);
+
+  --color-background: #fefefe;
+  --color-background-accent: #f3f3f3;
+  --color-background-alpha75: #fefefebe;
+  --color-background-alpha50: #fefefe86;
+  --color-background-alpha25: #fefefe48;
+  --color-background-opposite: #353535;
+
+  --color-light-1: #fefefe;
+  --color-light-2: #f4ebd9;
+  --color-dark-1: #3a3b37;
+  --color-dark-2: #090909;
+
+  --color-text: #000000;
+  --color-text-accent: #423c3a;
+  --color-text-alpha75: #423c3ab7;
+  --color-text-alpha50: #423c3a83;
+  --color-text-alpha25: #423c3a48;
+  --color-text-alpha10: #423c3a1f;
+  --color-text-opposite: #f2f5ff;
+
+  --color-grey-light-1: #e9e9e9; // Light background
+  --color-grey-light-2: #f2efee; // Light lines
+  --color-grey-light-3: #d3c7c3; // Light text (placeholder)
+  --color-grey-dark-1: #4b4747; // Normal text
+  --color-grey-dark-2: #272525; // Lighter text
+}
+
+body.dark-mode {
+  --color-background: #353535;
+  --color-background-accent: #414141;
+  --color-background-alpha75: #353535b2;
+  --color-background-alpha50: #35353585;
+  --color-background-alpha25: #35353548;
+  --color-background-opposite: #fefefe;
+
+  --color-text: #f2f5ff;
+  --color-text-alpha75: #f2f5ffb7;
+  --color-text-alpha50: #f2f5ff86;
+  --color-text-alpha25: #f2f5ff49;
+  --color-text-alpha10: #f2f5ff1e;
+  --color-text-opposite: #423c3a;
+}

@@ -85,24 +85,29 @@ a,
 a:link,
 a:visited {
   text-decoration: none;
+  cursor: pointer;
 }
 
 p {
   line-height: 1.35;
 }
 
+svg {
+  fill: currentColor;
+}
+
 //==== GLOBALLY APPLIED STYLES ====//
 
 .home-page {
-  height: 100vh;
-  overflow-y: hidden;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  // height: 100vh;
+  // overflow-y: hidden;
+  // scroll-snap-type: y mandatory;
+  // scroll-behavior: smooth;
 }
 
 .home-section {
   position: relative;
   height: 100dvh;
-  min-height: 100vh;
-  scroll-snap-align: start;
+  // min-height: 100vh;
+  // border: 5px solid green;
 }

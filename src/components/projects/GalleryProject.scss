@@ -1,0 +1,42 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+
+.gallery {
+  position: relative;
+  width: clamp(200px, 100%, 25vw);
+  padding: 1.25rem 0.75rem;
+  background: var(--color-grey-light-3);
+
+  &__img {
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+  }
+
+  &__pop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(46, 40, 40, 0.75);
+    color: var(--color-grey-light-2);
+
+    & svg {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: clamp(20px, 15%, 45px);
+    }
+  }
+
+  &__details {
+    @include mx.center-self(both, absolute);
+    font-weight: 400;
+    font-size: min(1.8vw, 1.5rem);
+    font-family: var(--font-poppins);
+    line-height: 1.18;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+}

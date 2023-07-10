@@ -6,10 +6,12 @@ import { useState } from 'react';
 
 type StackItemProps = {
   name: keyof typeof stacks;
+  initTheme?: 'dark' | 'light';
+  width?: number;
 };
 
 function StackItem(props: StackItemProps) {
-  const { name } = props;
+  const { name, width = 60, initTheme = 'dark' } = props;
   const target = stacks[name];
 
   const [isFocus, setFocus] = useState(false);
@@ -30,9 +32,14 @@ function StackItem(props: StackItemProps) {
         onMouseLeave={hideTitle}
       >
         <img
+          style={{
+            width: `${width}px`,
+            height: `${width}px`,
+          }}
           src={target.logo}
           alt={`Logo for ${target.title}`}
           className={`stkm__logo ${isFocus && 'focus'}`}
+          data-theme={initTheme}
         />
         {isFocus && <p className="stkm__title">{target.title}</p>}
       </article>

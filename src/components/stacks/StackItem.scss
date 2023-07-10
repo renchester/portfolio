@@ -1,18 +1,21 @@
 @use '@/styles/mixins' as mx;
 
 .stkm {
-  width: 60px;
   position: relative;
+  width: fit-content;
 
   &:focus-within {
     outline: none;
   }
 
   &__logo {
-    width: 60px;
-    height: 60px;
-    // Change color to black, then app purple
-    filter: var(--filter-grad-1);
+    &[data-theme='light'] {
+      filter: var(--filter-grad-2);
+    }
+
+    &[data-theme='dark'] {
+      filter: var(--filter-grad-1);
+    }
 
     &.focus {
       filter: var(--filter-primary);

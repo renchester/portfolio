@@ -1,6 +1,8 @@
 import '@/styles/globals.scss';
 import type { Metadata } from 'next';
-import { nunito, inter, poppins } from '@/utils/fonts';
+import { nunito, inter, poppins, openSans } from '@/utils/fonts';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: {
@@ -18,9 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nunito.variable} ${poppins.variable}`}
+        className={`${inter.variable} ${nunito.variable} ${poppins.variable}  ${openSans.variable}`}
       >
+        <Header />
+
         {children}
+
+        <Footer />
       </body>
     </html>
   );

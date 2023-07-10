@@ -5,9 +5,15 @@ import Link from 'next/link';
 
 function Projects() {
   return (
-    <section className="home-section projects" id="projects-section">
+    <section
+      className="home-section projects"
+      id="projects-section"
+      aria-labelledby='projects__title"'
+    >
       <div className="projects__wrapper">
-        <h1 className="projects__title">Projects</h1>
+        <h1 className="projects__title" id="projects__title">
+          Projects
+        </h1>
         <ol className="projects__featured">
           {/* // * Reddit Clone */}
           <FeaturedProject
@@ -137,27 +143,27 @@ function Projects() {
         <ul className="projects__gallery-list">
           <GalleryProject
             image="/projects/home-page.png"
-            title="Weather App"
+            title="Tic-Tac-Toe"
             liveLink=""
           />
           <GalleryProject
             image="/projects/home-page.png"
-            title="What to Watch Next"
+            title="Rock Paper Scissors"
             liveLink=""
           />
           <GalleryProject
             image="/projects/home-page.png"
-            title="Battleship"
+            title="Knight's Travails"
             liveLink=""
           />
           <GalleryProject
             image="/projects/home-page.png"
-            title="CV Generator"
+            title="To-Do App"
             liveLink=""
           />
           <GalleryProject
             image="/projects/home-page.png"
-            title="Avatar Memory Game"
+            title="Library"
             liveLink=""
           />
         </ul>

@@ -22,7 +22,7 @@
   &__featured {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 2.25em;
   }
 
   &__gallery {
@@ -55,7 +55,7 @@
   }
 
   &__gallery-list {
-    padding-block: 1.75em;
+    margin-block: 2.65em;
     display: flex;
     gap: 1.25em;
   }

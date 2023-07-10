@@ -1,0 +1,109 @@
+@use '@/styles/placeholders';
+
+.featured {
+  display: flex;
+  border: 1px solid red;
+  border-radius: 5px;
+  background: rgb(41, 41, 41);
+  color: var(--color-light-1);
+
+  &__main {
+    border: 1px solid blue;
+    padding: 4.25em 2.25em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+  }
+
+  &__type {
+    color: var(--color-light-2);
+    font-size: var(--text-xs);
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  &__logo-wrapper {
+    position: relative;
+    max-width: 45px;
+    border-radius: 50%;
+    // padding: 12%;
+    background: var(--color-background);
+  }
+
+  &__logo {
+    padding: 7.5px;
+    width: 100%;
+  }
+
+  &__title-wrapper {
+    position: relative;
+  }
+
+  &__title {
+    font-size: var(--text-3xl);
+    font-family: var(--font-inter);
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  &__description {
+    @extend %text-paragraph;
+    font-size: var(--text-sm);
+    max-width: 500px;
+  }
+
+  &__disclaimer {
+    margin-top: 1em;
+    display: inline-block;
+    color: var(--color-light-2);
+    font-style: italic;
+    font-size: var(--text-xs);
+  }
+
+  &__stack {
+    margin-block: 2em;
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  &__links {
+    display: flex;
+    gap: 1em;
+  }
+
+  &__link {
+    @extend %parent-with-centered-children;
+
+    border: 1px solid currentColor;
+    width: fit-content;
+    padding: 0.75em 1.5em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+
+    font-weight: 600;
+    font-size: var(--text-2xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:hover,
+    &:focus {
+      color: var(--color-dark-1);
+      background: var(--color-light-1);
+      outline: 1px solid;
+
+      &.github img {
+        filter: var(--filter-grad-1);
+      }
+    }
+
+    &.github img {
+      width: 20px;
+      height: 20px;
+      filter: var(--filter-grad-2);
+    }
+
+    &.live svg {
+      margin-left: 0.25rem;
+    }
+  }
+}

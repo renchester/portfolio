@@ -99,6 +99,14 @@ const stacks = {
     title: 'Affinity Designer',
     logo: '/logos/affinity-designer.svg',
   },
+  passportjs: {
+    title: 'PassportJS',
+    logo: '/logos/passportjs.svg',
+  },
+  framer: {
+    title: 'Framer Motion',
+    logo: '/logos/framer.svg',
+  },
 };
 
 export default stacks;

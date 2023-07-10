@@ -1,0 +1,119 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+
+.footer {
+  position: relative;
+  padding-block: 4em;
+  bottom: 0;
+  background: var(--color-grey-dark-2);
+  font-family: var(--font-inter);
+  color: var(--color-grey-light-3);
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    column-gap: 2em;
+    max-width: var(--max-page-width);
+    margin-inline: auto;
+
+    @include mx.breakpoint(3xl) {
+      padding-inline: var(--section-padding);
+    }
+
+    @include mx.breakpoint(sm, max) {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+  }
+
+  &__name {
+    @extend %text-subtitle;
+    letter-spacing: -0.5px;
+    color: inherit;
+  }
+
+  &__loc {
+    margin-top: 0.15rem;
+    font-size: var(--text-md);
+  }
+
+  &__meta {
+    margin-top: 2.75em;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2.5em;
+    font-size: var(--text-xs);
+
+    @include mx.breakpoint(sm, max) {
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75em;
+
+      & *:not(:first-child) {
+        line-height: normal;
+      }
+    }
+  }
+
+  &__title {
+    font-size: var(--text-md);
+    font-weight: 500;
+    letter-spacing: -1px;
+  }
+
+  &__col-2 {
+    padding-inline: 1.65em;
+
+    @include mx.breakpoint(sm, max) {
+      padding-inline: 0;
+    }
+  }
+
+  &__stack {
+    margin-top: 1.25em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    row-gap: 2.25em;
+  }
+
+  &__coffee {
+    display: inline-block;
+    margin-top: 2em;
+
+    & span {
+      font-size: var(--text-lg);
+    }
+  }
+
+  &__col-3 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__links {
+    margin-top: 1.25em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    @include mx.breakpoint(sm, max) {
+      flex-direction: row;
+    }
+  }
+
+  &__link {
+    &:focus,
+    &:hover {
+      outline: none;
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+  }
+}

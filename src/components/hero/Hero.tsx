@@ -2,28 +2,7 @@
 
 import './Hero.scss';
 import { Variants, motion } from 'framer-motion';
-
-const bannerVariant: Variants = {
-  animate: {
-    transition: {
-      delayChildren: 0.4,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const letterVariant: Variants = {
-  initial: {
-    y: 400,
-  },
-  animate: {
-    y: 0,
-    transition: {
-      ease: [0.6, 0.01, -0.05, 0.95],
-      duration: 1,
-    },
-  },
-};
+import AnimatedLetters from '../animations/AnimatedLetters';
 
 const marqueeVariant: Variants = {
   animate: {
@@ -42,7 +21,11 @@ const marqueeVariant: Variants = {
 function Hero() {
   return (
     // TODO: Add accessibility
-    <motion.section className="hero home-section" aria-label="Hero section">
+    <motion.section
+      className="hero home-section"
+      aria-label="Hero section"
+      id="hero-section"
+    >
       <div className="hero__main">
         <div className="hero__text-wrapper">
           <h1 className="hero__title">
@@ -68,38 +51,19 @@ function Hero() {
         animate="animate"
       >
         <h4 className="hero__marquee-track">
-          <span>Developer. Designer. Planner.</span>
-          <span>Developer. Designer. Planner.</span>
+          <span>Developer — Designer — Planner — </span>{' '}
+          <span>Developer — Designer — Planner — </span>
         </h4>
       </motion.div>
 
       <div className="hero__pop">
-        <span className="hero__pop-loc">Based in the Philippines</span>
+        <span className="hero__pop-loc">
+          Currently based in Bulacan, Philippines
+        </span>
 
         <div className="hero__pop-globe"></div>
       </div>
     </motion.section>
-  );
-}
-
-function AnimatedLetters({ title }: { title: string }) {
-  return (
-    <motion.span
-      className="anm"
-      variants={bannerVariant}
-      initial="initial"
-      animate="animate"
-    >
-      {[...title].map((letter, i) => (
-        <motion.span
-          className="anm__item"
-          key={`letter-${letter}-${i}`}
-          variants={letterVariant}
-        >
-          {letter}
-        </motion.span>
-      ))}
-    </motion.span>
   );
 }
 

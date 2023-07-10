@@ -60,11 +60,12 @@
   &__title {
     overflow: hidden;
     height: fit-content;
-    margin-bottom: 0.375rem;
-    font-size: var(--text-3xl);
-    font-family: var(--font-nunito);
+    margin-bottom: 0.1em;
+    font-size: var(--text-4xl);
+    font-family: var(--font-inter);
     font-weight: 800;
-    text-transform: uppercase;
+    letter-spacing: -1.5px;
+    color: var(--color-grad-1);
 
     @media screen and (max-height: 900px) {
       font-size: var(--text-xl);
@@ -72,7 +73,7 @@
   }
 
   &__subtitle {
-    font-size: var(--text-2xl);
+    @extend %text-subtitle;
 
     @media screen and (max-height: 900px) {
       font-size: var(--text-lg);
@@ -158,10 +159,4 @@
   //     line-height: 1.25;
   //   }
   // }
-}
-
-.anm {
-  &__item {
-    display: inline-block;
-  }
 }

@@ -20,3 +20,27 @@
   height: 100vh;
   scroll-snap-type: y mandatory;
 }
+
+// TEXT PLACEHOLDERS
+
+%text-title {
+  font-size: var(--text-title);
+  font-family: var(--font-inter);
+  font-weight: 700;
+  letter-spacing: -2px;
+  color: var(--color-grad-1);
+}
+
+%text-subtitle {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  font-family: var(--font-inter);
+  letter-spacing: -1px;
+  color: var(--color-text-accent);
+}
+
+%text-paragraph {
+  font-family: var(--font-open-sans);
+  font-size: var(--text-md);
+  font-weight: 400;
+}

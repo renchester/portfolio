@@ -92,10 +92,6 @@ p {
   line-height: 1.35;
 }
 
-svg {
-  fill: currentColor;
-}
-
 //==== GLOBALLY APPLIED STYLES ====//
 
 .home-page {
@@ -107,7 +103,7 @@ svg {
 
 .home-section {
   position: relative;
-  height: 100dvh;
+  min-height: 100dvh;
   // min-height: 100vh;
   // border: 5px solid green;
 }

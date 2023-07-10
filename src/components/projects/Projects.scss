@@ -1,0 +1,62 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+
+.projects {
+  background: gainsboro;
+  padding-top: var(--header-height);
+
+  &__wrapper {
+    max-width: var(--max-page-width);
+    margin-inline: auto;
+
+    @include mx.breakpoint(3xl) {
+      padding-inline: var(--section-padding);
+    }
+  }
+
+  &__title {
+    @extend %text-title;
+    margin-bottom: 0.65em;
+  }
+
+  &__featured {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  &__gallery {
+    margin-top: var(--header-height);
+    padding-block: 2em;
+  }
+
+  &__gallery-title {
+    @extend %text-subtitle;
+    text-align: center;
+
+    width: fit-content;
+    margin-inline: auto;
+
+    & a {
+      padding: 0.25em 1.25em;
+      @extend %parent-with-centered-children;
+
+      &:focus,
+      &:hover {
+        color: var(--color-primary);
+        outline: none;
+        box-shadow: 0px 3px 0px 0px currentColor;
+      }
+    }
+
+    & svg {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &__gallery-list {
+    padding-block: 1.75em;
+    display: flex;
+    gap: 1.25em;
+  }
+}

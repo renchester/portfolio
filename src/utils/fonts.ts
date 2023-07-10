@@ -1,4 +1,4 @@
-import { Nunito_Sans, Inter, Poppins } from 'next/font/google';
+import { Nunito_Sans, Open_Sans, Inter, Poppins } from 'next/font/google';
 
 export const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -18,6 +18,13 @@ export const poppins = Poppins({
   weight: ['400', '500', '700', '100'],
   subsets: ['latin', 'latin-ext'],
   variable: '--font-poppins',
+  display: 'swap',
+  preload: false,
+});
+
+export const openSans = Open_Sans({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-open-sans',
   display: 'swap',
   preload: false,
 });

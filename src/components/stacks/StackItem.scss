@@ -1,0 +1,31 @@
+@use '@/styles/mixins' as mx;
+
+.stkm {
+  width: 60px;
+  position: relative;
+
+  &:focus-within {
+    outline: none;
+  }
+
+  &__logo {
+    width: 60px;
+    height: 60px;
+    // Change color to black, then app purple
+    filter: var(--filter-grad-1);
+
+    &.focus {
+      filter: var(--filter-primary);
+    }
+  }
+
+  &__title {
+    @include mx.center-self(horizontal, absolute);
+    top: calc(100% + 5px);
+    white-space: nowrap;
+    text-align: center;
+    color: var(--color-primary);
+    font-weight: 800;
+    font-size: var(--text-xs);
+  }
+}

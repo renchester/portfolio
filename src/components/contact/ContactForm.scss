@@ -1,0 +1,57 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+
+.contact {
+  padding-top: var(--header-height);
+
+  &__wrapper {
+    max-width: map-get($map: mx.$breakpoints, $key: xl);
+    margin-inline: auto;
+
+    @include mx.breakpoint(3xl) {
+      padding-inline: var(--section-padding);
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    @extend %text-title;
+  }
+
+  &__img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__send {
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    margin-top: 1.25em;
+    padding: 1.25em;
+    aspect-ratio: 1 / 1;
+    margin-left: auto;
+
+    color: var(--color-light-1);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    font-family: var(--font-poppins);
+
+    &:disabled {
+      background-color: var(--color-grey-light-3);
+      color: rgba(0, 0, 0, 0.35);
+      scale: 0.75;
+      cursor: not-allowed;
+    }
+  }
+}

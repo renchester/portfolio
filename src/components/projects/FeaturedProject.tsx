@@ -14,6 +14,9 @@ type ProjectProps = {
   disclaimer?: string;
   liveLink: string;
   repoLink: string;
+  background: string;
+  mobileView: string;
+  desktopView: string;
   techStack: (keyof typeof stacks)[];
 };
 
@@ -27,14 +30,21 @@ function Project(props: ProjectProps) {
     description,
     liveLink,
     repoLink,
+    mobileView,
+    desktopView,
     disclaimer,
     techStack,
+    background,
   } = props;
   const projectID = `project-${index}-${title}`;
 
   return (
-    <li>
+    <li className="featured__container">
       <article className="featured" aria-labelledby={projectID}>
+        <div className="featured__bg-wrapper" style={{ background }}>
+          <div className="featured__bg-overlay" />
+        </div>
+
         <div className="featured__main">
           <p className="featured__type">{type}</p>
 
@@ -58,7 +68,6 @@ function Project(props: ProjectProps) {
             )}
           </p>
           <ul className="featured__stack">
-            {/* //TODO: Perform lookup on a map/dictionary of stack used */}
             {techStack.map((item) => (
               <StackItem
                 name={item}
@@ -101,7 +110,19 @@ function Project(props: ProjectProps) {
           </div>
         </div>
         <div className="featured__img-gallery">
-          {/* //TODO: Figure out how to add images */}
+          <div className="featured__img-wrapper">
+            <img
+              src={mobileView}
+              alt={`Mockup on Pixel 5 phone for ${title}`}
+              className="featured__img mobile"
+            />
+            <img
+              src={desktopView}
+              alt={`Mockup on Laptop for ${title}`}
+              className="featured__img desktop"
+            />
+          </div>
+
           {children}
         </div>
       </article>

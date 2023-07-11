@@ -1,11 +1,9 @@
-import Link from 'next/link';
 import './Footer.scss';
+import Link from 'next/link';
 import StackItem from './stacks/StackItem';
-import formatInTimeZone from 'date-fns-tz/formatInTimeZone';
+import LocalTime from './LocalTime';
 
 function Footer() {
-  const manilaTime = formatInTimeZone(new Date(), 'Asia/Manila', 'hh:mmaa zzz');
-
   return (
     <footer className="footer">
       <div className="footer__wrapper">
@@ -34,7 +32,7 @@ function Footer() {
               <h6 id="footer-local-time" className="footer__title">
                 Local Time
               </h6>
-              <time dateTime={new Date().toDateString()}>{manilaTime}</time>
+              <LocalTime />
             </article>
           </div>
         </div>

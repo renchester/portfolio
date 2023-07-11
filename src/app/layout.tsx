@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { nunito, inter, poppins, openSans } from '@/utils/fonts';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ButtonToTop from '@/components/ButtonToTop';
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +28,7 @@ export default function RootLayout({
         {children}
 
         <Footer />
+        <ButtonToTop />
       </body>
     </html>
   );

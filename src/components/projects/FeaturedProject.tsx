@@ -3,6 +3,7 @@ import Link from 'next/link';
 import stacks from '@/config/stacks';
 import StackItem from '../stacks/StackItem';
 import { ReactNode } from 'react';
+import { Variants, motion } from 'framer-motion';
 
 type ProjectProps = {
   children?: ReactNode;
@@ -38,6 +39,15 @@ function Project(props: ProjectProps) {
   } = props;
   const projectID = `project-${index}-${title}`;
 
+  const logoVariant: Variants = {
+    focus: {
+      scale: 1.12,
+    },
+    active: {
+      scale: 0.9,
+    },
+  };
+
   return (
     <li className="featured__container">
       <article className="featured" aria-labelledby={projectID}>
@@ -48,13 +58,23 @@ function Project(props: ProjectProps) {
         <div className="featured__main">
           <p className="featured__type">{type}</p>
 
-          <div className="featured__logo-wrapper">
+          <motion.a
+            href={repoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="featured__logo-wrapper"
+            variants={logoVariant}
+            whileFocus="focus"
+            whileHover="focus"
+            whileTap="active"
+            tabIndex={0}
+          >
             <img
               src={logo}
               alt={`Logo for ${title}`}
               className="featured__logo"
             />
-          </div>
+          </motion.a>
           <h4 className="featured__title-wrapper">
             <span className="featured__title" id={projectID}>
               {title}
@@ -111,12 +131,18 @@ function Project(props: ProjectProps) {
         </div>
         <div className="featured__img-gallery">
           <div className="featured__img-wrapper">
-            <img
+            <motion.img
               src={mobileView}
               alt={`Mockup on Pixel 5 phone for ${title}`}
               className="featured__img mobile"
+              initial={{ rotate: 0, y: '-50%', x: '-10%' }}
+              whileHover={{
+                rotate: [8, -8, 5, -5, 3, -3, 1.5, -1.5, 0],
+                x: '-12%',
+                y: '-52%',
+              }}
             />
-            <img
+            <motion.img
               src={desktopView}
               alt={`Mockup on Laptop for ${title}`}
               className="featured__img desktop"

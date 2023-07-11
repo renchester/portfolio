@@ -17,6 +17,8 @@ function Projects() {
         <ol className="projects__featured">
           {/* // * Reddit Clone */}
           <FeaturedProject
+            mobileView={`/projects/reddit/mobile.png`}
+            desktopView={`/projects/reddit/desktop.png`}
             index={1}
             logo="/projects/reddit/logo.png"
             type="Full-stack Social Media App"
@@ -24,23 +26,33 @@ function Projects() {
             description="This Reddit clone replicates the basic features of Reddit, styled in the manner of the now defunct Apollo App. You can create accounts, posts, comments, and subreddits; and many more! This social media app was built with Next.js for the frontend and Firebase services for the backend."
             liveLink="https://reddit-apollo-clone.vercel.app/"
             repoLink="https://github.com/renchester/reddit-apollo-clone"
-            techStack={['next', 'react', 'typescript', 'firebase', 'framer']}
-          >
-            <span>Child Element</span>
-          </FeaturedProject>
+            background="#b1421a"
+            techStack={[
+              'next',
+              'react',
+              'typescript',
+              'firebase',
+              'framer',
+              'sass',
+            ]}
+          ></FeaturedProject>
           {/* // * Dezien Blog */}
           <FeaturedProject
+            mobileView={`/projects/dezien/mobile.png`}
+            desktopView={`/projects/dezien/desktop.png`}
             index={2}
             logo="/projects/dezien/logo.png"
             type="Full-stack Blog Application"
             title="Dezien Blog"
-            description="A blog focusing on architecture, design, and tech. The blog is built on an underlying RESTful API that manages content and handles authentication. The backend integrates with the client through Next.js' static-site generation to serve content quickly to the user."
+            description="Dezien is a blog focusing on architecture, design, and tech. The blog is built on an underlying RESTful API that manages content and handles authentication. The backend integrates with the client through Next.js' static-site generation to serve content quickly to the user."
             disclaimer="Note: This project's backend is hosted on a free Render plan. Features like comments and auth services may take a couple of seconds to spin up."
             liveLink="https://dezien-blog.vercel.app/"
             repoLink="https://github.com/renchester/design-blog"
+            background="#1687ED"
             techStack={[
               'next',
               'react',
+              'typescript',
               'node',
               'express',
               'mongodb',
@@ -50,23 +62,29 @@ function Projects() {
           />
           {/* // * Hidden Hunt */}
           <FeaturedProject
+            mobileView={`/projects/hidden-hunt/mobile.png`}
+            desktopView={`/projects/hidden-hunt/desktop.png`}
             index={3}
             logo="/projects/hidden-hunt/logo.png"
             type="Full-stack Web Game"
             title="Hidden Hunt"
-            description={`This is a seek-and-find web game based on the "Where's Waldo?" series. You have a bunch of popular characters that you need to find in three maps. Try to beat the scores in the leaderboard!`}
+            description={`This is a seek-and-find web game based on the "Where's Waldo?" series.The game has three maps with different levels of difficulty. In each map, you must find all the specified characters in the least amount of time. Try to beat the scores in the leaderboard!`}
             liveLink="https://hidden-hunt.vercel.app/"
             repoLink="https://github.com/renchester/hidden-hunt"
+            background="#4B1796"
             techStack={[
               'react',
               'react_router',
               'vite',
+              'typescript',
               'firebase',
               'tailwind',
             ]}
           />
           {/* // * Savant Eyewear */}
           <FeaturedProject
+            mobileView={`/projects/savant/mobile.png`}
+            desktopView={`/projects/savant/desktop.png`}
             index={4}
             logo="/projects/savant/logo.png"
             type="Front-end E-commerce Site"
@@ -74,14 +92,15 @@ function Projects() {
             description="Savant Eyewear is a mock-up of an e-commerce site that sells high-end eyewear products. A product search and sorter allows users to browse and find the perfect product which they can add to their cart!"
             liveLink="https://savant-eyewear.vercel.app/"
             repoLink="https://github.com/renchester/eyewear-shop"
+            background="#a07b00"
             techStack={[
               'react',
               'react_router',
               'vite',
               'vitest',
               'javascript',
-              'sass',
               'framer',
+              'sass',
             ]}
           />
         </ol>

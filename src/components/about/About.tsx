@@ -1,14 +1,15 @@
 'use client';
 
-import StackItem from '../stacks/StackItem';
 import './About.scss';
+import Link from 'next/link';
+import StackItem from '../stacks/StackItem';
 
 function About() {
   return (
     <section
       className="home-section about"
       aria-label="About section"
-      id="about-section"
+      id="about"
     >
       <div className="about__wrapper">
         <article className="about__main" aria-labelledby="about-renchester">
@@ -80,6 +81,75 @@ function About() {
             </li>
           </ul>
         </article>
+
+        {/* //TODO: ADD Linkedin and Github links here */}
+
+        <div className="about__links-wrapper">
+          <h3 className="about__links-title">Connect with me</h3>
+          <ul className="about__links">
+            <li>
+              <Link
+                className="about__link"
+                href={`https://www.linkedin.com/in/renchesterramos/`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/logos/linkedin.svg"
+                  className="about__link-icon"
+                  alt="Linkedin Logo"
+                />
+                <span>Linkedin</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="square"
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 7l9.2 9.2M17 7v10H7" />
+                </svg>
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="about__link"
+                href={`https://github.com/renchester`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/logos/github.svg"
+                  className="about__link-icon"
+                  alt="Github Logo"
+                />
+                <span>Github</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="square"
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 7l9.2 9.2M17 7v10H7" />
+                </svg>
+              </Link>
+            </li>
+            <li>
+              <button className="about__link" type="button">
+                renchesterjramos@gmail.com
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );

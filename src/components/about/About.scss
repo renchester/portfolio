@@ -2,7 +2,6 @@
 @use '@/styles/mixins' as mx;
 
 .about {
-  border: 1px solid red;
   padding-top: var(--header-height);
 
   &__wrapper {
@@ -10,7 +9,7 @@
     max-width: var(--max-page-width);
 
     @include mx.breakpoint(3xl) {
-      padding-inline: 1.65em;
+      padding-inline: var(--section-padding);
     }
   }
 
@@ -29,10 +28,49 @@
   &__description {
     @extend %text-paragraph;
     margin-top: 1.25em;
+  }
 
-    @include mx.breakpoint(lg) {
-      // font-size: var(--text-sm);
+  &__links-wrapper {
+    margin-block: 2.25em;
+    padding-bottom: 2.5em;
+  }
+
+  &__links-title {
+    @extend %text-subtitle;
+    margin-bottom: 0.675em;
+  }
+
+  &__links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    @extend %parent-with-centered-children;
+    align-items: flex-end;
+    line-height: normal;
+    padding: 0.75em 2.5em;
+    border: 1px solid var(--color-text-alpha25);
+    border-radius: 5rem;
+
+    font-size: var(--text-sm);
+    font-family: var(--font-nunito);
+
+    &:focus,
+    &:hover {
+      background: var(--color-grad-1);
+      color: var(--color-light-1);
+
+      & img {
+        filter: var(--filter-grad-2);
+      }
     }
+  }
+
+  &__link-icon {
+    width: 22.5px;
+    margin-right: 1em;
   }
 }
 

@@ -1,10 +1,12 @@
 'use client';
 
 import './ContactForm.scss';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ContactInput from './ContactInput';
 import validateEmail from '@/utils/validateEmail';
 import debounce from 'lodash.debounce';
+import emailjs from '@emailjs/browser';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function ContactForm() {
   const [name, setName] = useState('');
@@ -15,7 +17,15 @@ function ContactForm() {
   const [isEmailValid, setEmailValidity] = useState(false);
   const [emailError, setEmailError] = useState('');
 
-  // TODO: Add handle submit form
+  const [formStatus, setFormStatus] = useState<{
+    status: 'error' | 'success';
+    message: string;
+  } | null>({
+    status: 'success',
+    message: 'Lorem ipsum error message',
+  });
+
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const isButtonDisabled = !(
     isEmailValid &&
@@ -57,6 +67,55 @@ function ContactForm() {
     setMessage(inputValue);
   };
 
+  const handleSendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formRef.current) return;
+
+    const serviceID = process.env.NEXT_PUBLIC_SERVICE_ID as string;
+    const templateID = process.env.NEXT_PUBLIC_TEMPLATE_ID as string;
+    const userID = process.env.NEXT_PUBLIC_USER_ID as string;
+
+    emailjs.sendForm(serviceID, templateID, formRef.current, userID).then(
+      (result) => {
+        console.log(result.text);
+
+        // Send success message
+        setFormStatus({
+          status: 'success',
+          message: 'Successfully sent email',
+        });
+
+        // Reset form
+        setName('');
+        setServices('');
+        setEmail('');
+        setMessage('');
+        formRef.current && formRef.current.reset();
+      },
+      (error) => {
+        console.error(error.message);
+
+        // Send error message
+        setFormStatus({
+          status: 'error',
+          message: 'Unable to send your email at this time',
+        });
+      },
+    );
+  };
+
+  useEffect(() => {
+    // Reset form status on submit
+    if (formStatus === null) return;
+
+    const resetFormStatus = setTimeout(() => {
+      setFormStatus(null);
+    }, 5000);
+
+    return () => clearTimeout(resetFormStatus);
+  }, [formStatus]);
+
   return (
     <section
       className="home-section contact"
@@ -68,13 +127,20 @@ function ContactForm() {
           <h1 className="contact__title" id="contact__title">
             Let&apos;s connect!
           </h1>
-          <img
-            src="/profile.jpg"
+          <motion.img
+            src="/memoji_2.png"
             alt="Profile photo of portfolio subject"
             className="contact__img"
+            initial={{ rotate: 12 }}
+            whileHover={{ scale: 1.2, rotate: 0 }}
           />
         </div>
-        <form action="" className="contact__form">
+        <form
+          action=""
+          className="contact__form"
+          ref={formRef}
+          onSubmit={handleSendEmail}
+        >
           <ContactInput
             id="cont--name"
             index={1}
@@ -129,6 +195,15 @@ function ContactForm() {
             isValid={message.length > 0}
             isRequired
           />
+          <input
+            type="text"
+            name="from_name"
+            id="from_name_emailjs"
+            value="Renchester Ramos"
+            hidden
+            aria-hidden
+          />
+
           <button
             type="submit"
             className="contact__send"
@@ -136,6 +211,22 @@ function ContactForm() {
           >
             Send it!
           </button>
+
+          <AnimatePresence>
+            {formStatus && (
+              <motion.p
+                key="contact-form-status"
+                role="alert"
+                className="contact__form-status"
+                data-status={formStatus.status}
+                initial={{ y: 200 }}
+                animate={{ y: 0 }}
+                exit={{ y: 200, opacity: 0 }}
+              >
+                {formStatus.message}
+              </motion.p>
+            )}
+          </AnimatePresence>
         </form>
       </div>
     </section>

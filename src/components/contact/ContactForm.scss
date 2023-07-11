@@ -23,10 +23,11 @@
   }
 
   &__img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 50%;
+    background: var(--color-grey-light-3);
   }
 
   &__form {
@@ -52,6 +53,30 @@
       color: rgba(0, 0, 0, 0.35);
       scale: 0.75;
       cursor: not-allowed;
+    }
+  }
+
+  &__form-status {
+    position: absolute;
+    bottom: 0;
+    width: fit-content;
+    z-index: 1;
+    padding: 1em 2.5em;
+    margin-bottom: 1em;
+    border-radius: 2em;
+    font-size: var(--text-md);
+    color: var(--color-light-1);
+
+    &::after {
+      content: '!';
+    }
+
+    &[data-status='error'] {
+      background: var(--color-error);
+    }
+
+    &[data-status='success'] {
+      background: var(--color-success);
     }
   }
 }

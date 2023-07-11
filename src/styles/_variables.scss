@@ -1,7 +1,11 @@
+@use '@/styles/mixins' as mx;
+
 body {
   --max-page-width: 88em;
   --header-height: 90px;
   --section-padding: 1.65em;
+  --box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
   //====== FONT SIZE VARIABLES ======//
 
@@ -57,12 +61,20 @@ body {
   --color-grey-dark-1: #4b4747;
   --color-grey-dark-2: #272525;
 
+  --color-error: #86221b;
+  --color-success: #14630d;
+
   --filter-grad-1: brightness(0) invert(11%) sepia(39%) saturate(3582%)
     hue-rotate(251deg) brightness(99%) contrast(93%);
   --filter-grad-2: brightness(0) invert(96%) sepia(76%) saturate(7378%)
     hue-rotate(181deg) brightness(131%) contrast(91%);
   --filter-primary: invert(40%) sepia(68%) saturate(2034%) hue-rotate(2deg)
     brightness(104%) contrast(105%);
+
+  @include mx.breakpoint(xs) {
+    --section-padding: 0.75em;
+    --text-base-size: 0.9rem;
+  }
 }
 
 body.dark-mode {

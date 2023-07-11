@@ -61,7 +61,7 @@ function ContactForm() {
     <section
       className="home-section contact"
       aria-labelledby="contact__title"
-      id="contact-section"
+      id="contact"
     >
       <div className="contact__wrapper">
         <div className="contact__top">

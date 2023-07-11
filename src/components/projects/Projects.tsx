@@ -7,7 +7,7 @@ function Projects() {
   return (
     <section
       className="home-section projects"
-      id="projects-section"
+      id="projects"
       aria-labelledby='projects__title"'
     >
       <div className="projects__wrapper">
@@ -21,9 +21,9 @@ function Projects() {
             logo="/projects/reddit/logo.png"
             type="Full-stack Social Media App"
             title="Reddit Apollo Clone"
-            description=" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quaerat mollitia architecto autem, accusamus ratione fugiat labore unde possimus, deleniti ipsam perspiciatis, fugit sunt. "
-            liveLink=""
-            repoLink=""
+            description="This Reddit clone replicates the basic features of Reddit, styled in the manner of the now defunct Apollo App. You can create accounts, posts, comments, and subreddits; and many more! This social media app was built with Next.js for the frontend and Firebase services for the backend."
+            liveLink="https://reddit-apollo-clone.vercel.app/"
+            repoLink="https://github.com/renchester/reddit-apollo-clone"
             techStack={['next', 'react', 'typescript', 'firebase', 'framer']}
           >
             <span>Child Element</span>
@@ -34,10 +34,10 @@ function Projects() {
             logo="/projects/dezien/logo.png"
             type="Full-stack Blog Application"
             title="Dezien Blog"
-            description=" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quaerat mollitia architecto autem, accusamus ratione fugiat labore unde possimus, deleniti ipsam perspiciatis, fugit sunt. "
+            description="A blog focusing on architecture, design, and tech. The blog is built on an underlying RESTful API that manages content and handles authentication. The backend integrates with the client through Next.js' static-site generation to serve content quickly to the user."
             disclaimer="Note: This project's backend is hosted on a free Render plan. Features like comments and auth services may take a couple of seconds to spin up."
-            liveLink=""
-            repoLink=""
+            liveLink="https://dezien-blog.vercel.app/"
+            repoLink="https://github.com/renchester/design-blog"
             techStack={[
               'next',
               'react',
@@ -54,9 +54,9 @@ function Projects() {
             logo="/projects/hidden-hunt/logo.png"
             type="Full-stack Web Game"
             title="Hidden Hunt"
-            description=" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quaerat mollitia architecto autem, accusamus ratione fugiat labore unde possimus, deleniti ipsam perspiciatis, fugit sunt. "
-            liveLink=""
-            repoLink=""
+            description={`This is a seek-and-find web game based on the "Where's Waldo?" series. You have a bunch of popular characters that you need to find in three maps. Try to beat the scores in the leaderboard!`}
+            liveLink="https://hidden-hunt.vercel.app/"
+            repoLink="https://github.com/renchester/hidden-hunt"
             techStack={[
               'react',
               'react_router',
@@ -71,9 +71,9 @@ function Projects() {
             logo="/projects/savant/logo.png"
             type="Front-end E-commerce Site"
             title="Savant Eyewear"
-            description=" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quaerat mollitia architecto autem, accusamus ratione fugiat labore unde possimus, deleniti ipsam perspiciatis, fugit sunt. "
-            liveLink=""
-            repoLink=""
+            description="Savant Eyewear is a mock-up of an e-commerce site that sells high-end eyewear products. A product search and sorter allows users to browse and find the perfect product which they can add to their cart!"
+            liveLink="https://savant-eyewear.vercel.app/"
+            repoLink="https://github.com/renchester/eyewear-shop"
             techStack={[
               'react',
               'react_router',
@@ -115,56 +115,56 @@ function Projects() {
         </h4>
         <ul className="projects__gallery-list">
           <GalleryProject
-            image="/projects/home-page.png"
-            title="Weather App"
-            liveLink=""
-          />
-          <GalleryProject
-            image="/projects/home-page.png"
+            image="/projects/gallery/what-to-watch-next.png"
             title="What to Watch Next"
-            liveLink=""
+            liveLink="https://what-to-watch-next.vercel.app/"
           />
           <GalleryProject
-            image="/projects/home-page.png"
+            image="/projects/gallery/battleship.png"
             title="Battleship"
-            liveLink=""
+            liveLink="https://renchester.github.io/top-battleship/"
           />
           <GalleryProject
-            image="/projects/home-page.png"
+            image="/projects/gallery/weather-app.png"
+            title="Weather App"
+            liveLink="https://renchester.github.io/top-weather-app/"
+          />
+          <GalleryProject
+            image="/projects/gallery/cv-generator.png"
             title="CV Generator"
-            liveLink=""
+            liveLink="https://renchester.github.io/cv-generator/"
           />
           <GalleryProject
-            image="/projects/home-page.png"
-            title="Avatar Memory Game"
-            liveLink=""
+            image="/projects/gallery/rock-paper-scissors.png"
+            title="Rock Paper Scissors"
+            liveLink="https://renchester.github.io/top-rock-paper-scissors/"
           />
         </ul>
         <ul className="projects__gallery-list">
           <GalleryProject
-            image="/projects/home-page.png"
-            title="Tic-Tac-Toe"
-            liveLink=""
-          />
-          <GalleryProject
-            image="/projects/home-page.png"
-            title="Rock Paper Scissors"
-            liveLink=""
-          />
-          <GalleryProject
-            image="/projects/home-page.png"
+            image="/projects/gallery/knights-travails.png"
             title="Knight's Travails"
-            liveLink=""
+            liveLink="https://renchester.github.io/knights-travails/"
           />
           <GalleryProject
-            image="/projects/home-page.png"
+            image="/projects/gallery/todo-list.png"
             title="To-Do App"
-            liveLink=""
+            liveLink="https://todo-list-renchester.vercel.app/"
           />
           <GalleryProject
-            image="/projects/home-page.png"
+            image="/projects/gallery/memory-game.png"
+            title="Avatar Memory Game"
+            liveLink="https://renchester.github.io/memory-game/"
+          />
+          <GalleryProject
+            image="/projects/gallery/tic-tac-toe.png"
+            title="Tic-Tac-Toe"
+            liveLink="https://renchester.github.io/top-tictactoe/"
+          />
+          <GalleryProject
+            image="/projects/gallery/library.png"
             title="Library"
-            liveLink=""
+            liveLink="https://renchester.github.io/top-library/"
           />
         </ul>
       </section>

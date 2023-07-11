@@ -14,7 +14,7 @@
   }
 
   &__main {
-    width: 50%;
+    width: 70%;
 
     @include mx.breakpoint(lg) {
       width: 100%;
@@ -28,6 +28,13 @@
   &__description {
     @extend %text-paragraph;
     margin-top: 1.25em;
+
+    & a {
+      color: var(--color-grad-1);
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      box-shadow: 0px 1px 0px 0px currentColor;
+    }
   }
 
   &__links-wrapper {

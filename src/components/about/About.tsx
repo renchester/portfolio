@@ -16,19 +16,45 @@ function About() {
           <h1 className="about__title" id="about-renchester">
             About
           </h1>
-          {/*// TODO: Refactor this paragraph */}
+
           <p className="about__description">
             Hi, I&apos;m Chester. I am a self-taught web
-            developer—fully-investing my time into web dev since the start of
-            2023. I have a background in architecture, which allows me to always
-            think about how my product is going to be used by the end-user. I am
-            into sustainability, accessibility, and user-centric solutions.
-            Currently I am studying: GraphQL and SQL. Talk about TOP and FSO. I
-            am a quick learner. Incorporate buzz words from linkedin about.
+            developer—fully-investing my time into learning web development at
+            the beginning of 2023. My background in architecture allows me to
+            always view projects from the perspective of the end-user. Just as
+            an architect&apos;s fundamentals are functionality, aesthetics, and
+            usability, I strive to create products that not only meets the
+            functional needs but are also user-friendly and enjoyable to use.
+          </p>
+
+          <p className="about__description">
+            I learned web development skills through{' '}
+            <Link
+              href="https://theodinproject.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              The Odin Project
+            </Link>{' '}
+            and{' '}
+            <Link
+              href="https://fullstackopen.com/en/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Full Stack Open
+            </Link>
+            . This has provided me with opportunities to work on projects that
+            constantly challenge me to learn and apply new principles,
+            frameworks, and technologies. There is always so much to learn and I
+            cannot wait to embrace the endless learning possibilities within
+            this field.
           </p>
         </article>
-        <article className="stack" id="">
-          <h2 className="stack__title">My Tech Stack</h2>
+        <article className="stack" aria-labelledby="about-stack--title">
+          <h2 className="stack__title" id="about-stack--title">
+            My Tech Stack
+          </h2>
 
           <ul className="stack__tech">
             <li className="stack__tech-item">
@@ -81,8 +107,6 @@ function About() {
             </li>
           </ul>
         </article>
-
-        {/* //TODO: ADD Linkedin and Github links here */}
 
         <div className="about__links-wrapper">
           <h3 className="about__links-title">Connect with me</h3>
@@ -144,9 +168,9 @@ function About() {
               </Link>
             </li>
             <li>
-              <button className="about__link" type="button">
+              <Link className="about__link" href="#contact">
                 renchesterjramos@gmail.com
-              </button>
+              </Link>
             </li>
           </ul>
         </div>

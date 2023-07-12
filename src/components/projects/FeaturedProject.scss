@@ -154,7 +154,7 @@
     place-items: center;
     flex-grow: 1;
 
-    @include mx.breakpoint(xs, max) {
+    @include mx.breakpoint(sm, max) {
       display: none;
     }
   }
@@ -167,6 +167,10 @@
 
   &__img {
     height: auto;
+
+    &:focus {
+      outline: none;
+    }
 
     &.mobile {
       position: absolute;

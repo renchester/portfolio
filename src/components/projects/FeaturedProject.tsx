@@ -135,9 +135,15 @@ function Project(props: ProjectProps) {
               src={mobileView}
               alt={`Mockup on Pixel 5 phone for ${title}`}
               className="featured__img mobile"
+              tabIndex={0}
               initial={{ rotate: 0, y: '-50%', x: '-10%' }}
               whileHover={{
-                rotate: [8, -8, 5, -5, 3, -3, 1.5, -1.5, 0],
+                rotate: [null, 8, -8, 5, -5, 3, -3, 1.5, -1.5, 0],
+                x: '-12%',
+                y: '-52%',
+              }}
+              whileFocus={{
+                rotate: [null, 8, -8, 5, -5, 3, -3, 1.5, -1.5, 0],
                 x: '-12%',
                 y: '-52%',
               }}

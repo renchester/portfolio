@@ -4,29 +4,56 @@ import { AnimatePresence, motion } from 'framer-motion';
 import './Header.scss';
 import Logo from './Logo';
 import NavLink from './NavLink';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function Header() {
   const [isVisible, setVisibility] = useState(true);
-  const [prevScrollPostion, setPrevScrollPostion] = useState(0);
-
-  const controlHeader = () => {
-    if (window.scrollY > prevScrollPostion) {
-      setVisibility(false);
-    } else {
-      setVisibility(true);
-    }
-
-    setPrevScrollPostion(window.scrollY);
-  };
+  const [prevScrollPosition, setPrevScrollPosition] = useState(0);
+  const [isNavExpanded, setNavExpansion] = useState(false);
+  const navRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!window) return;
 
+    const controlHeader = () => {
+      if (window.scrollY > prevScrollPosition) {
+        setVisibility(false);
+      } else {
+        setVisibility(true);
+      }
+
+      setPrevScrollPosition(window.scrollY);
+    };
+
     window.addEventListener('scroll', controlHeader);
 
     return () => window.removeEventListener('scroll', controlHeader);
-  });
+  }, [prevScrollPosition]);
+
+  // Hide nav on Global Escape Key
+  useEffect(() => {
+    if (!window) return;
+
+    const escKeyListener = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+
+      setNavExpansion(false);
+    };
+
+    const globalClickListener = (e: MouseEvent) => {
+      if (!navRef.current?.contains(e.target as HTMLElement)) {
+        setNavExpansion(false);
+      }
+    };
+
+    window.addEventListener('keydown', escKeyListener);
+    window.addEventListener('click', globalClickListener);
+
+    return () => {
+      window.removeEventListener('keydown', escKeyListener);
+      window.addEventListener('click', globalClickListener);
+    };
+  }, []);
 
   return (
     <AnimatePresence>
@@ -65,22 +92,85 @@ function Header() {
                 tap: {
                   scale: 0.9,
                   rotate: -370,
-                  background: '#d3c7c3',
+                  background: '#eee',
                 },
               }}
               initial="initial"
               whileHover="focus"
+              whileFocus="focus"
               whileTap="tap"
             >
               <Logo className="header__logo" />
             </motion.div>
-            <nav className="nav">
-              <ul className="nav__links">
-                <NavLink label="About" href="#about" />
-                <NavLink label="Projects" href="#projects" />
-                <NavLink label="Contact" href="#contact" />
-              </ul>
-            </nav>
+
+            <div className="header__nav-wrapper" ref={navRef}>
+              <AnimatePresence>
+                {isNavExpanded && (
+                  <motion.nav
+                    className="nav"
+                    id="nav"
+                    variants={{
+                      initial: {
+                        opacity: 0,
+                        scale: 0,
+                      },
+                      visible: {
+                        opacity: 1,
+                        scale: 1,
+                        transformOrigin: 'right',
+                        transition: {
+                          bounce: 0.8,
+                        },
+                      },
+                    }}
+                    initial="initial"
+                    animate="visible"
+                    exit="initial"
+                  >
+                    <motion.ul className="nav__links">
+                      <NavLink label="About" href="#about" />
+                      <NavLink label="Projects" href="#projects" />
+                      <NavLink label="Contact" href="#contact" />
+                    </motion.ul>
+                  </motion.nav>
+                )}
+              </AnimatePresence>
+              <motion.button
+                type="button"
+                className="header__btn-nav"
+                aria-haspopup
+                aria-expanded={isNavExpanded}
+                aria-controls="nav"
+                onClick={() => setNavExpansion((prev) => !prev)}
+                whileFocus={{ scale: 1.1 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <svg className="hamburger" data-expanded={isNavExpanded}>
+                  <line
+                    x1="0"
+                    y1="50%"
+                    x2="100%"
+                    y2="50%"
+                    className="hamburger__bar hamburger__bar--top"
+                  />
+                  <line
+                    x1="0"
+                    y1="50%"
+                    x2="100%"
+                    y2="50%"
+                    className="hamburger__bar hamburger__bar--mid"
+                  />
+                  <line
+                    x1="0"
+                    y1="50%"
+                    x2="100%"
+                    y2="50%"
+                    className="hamburger__bar hamburger__bar--bot"
+                  />
+                </svg>
+              </motion.button>
+            </div>
           </div>
         </motion.header>
       )}

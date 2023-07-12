@@ -1,11 +1,20 @@
+'use client';
+
 import './AnimatedLetters.scss';
 import { motion, Variants } from 'framer-motion';
 
-function AnimatedLetters({ title }: { title: string }) {
+function AnimatedLetters({
+  title,
+  initialY = 400,
+  disabled = false,
+}: {
+  title: string;
+  initialY?: number;
+  disabled?: boolean;
+}) {
   const bannerVariant: Variants = {
     animate: {
       transition: {
-        delayChildren: 0.4,
         staggerChildren: 0.1,
       },
     },
@@ -13,7 +22,7 @@ function AnimatedLetters({ title }: { title: string }) {
 
   const letterVariant: Variants = {
     initial: {
-      y: 400,
+      y: initialY,
     },
     animate: {
       y: 0,
@@ -27,15 +36,17 @@ function AnimatedLetters({ title }: { title: string }) {
   return (
     <motion.span
       className="anm"
-      variants={bannerVariant}
+      variants={disabled ? undefined : bannerVariant}
       initial="initial"
       animate="animate"
+      aria-label={title}
     >
       {[...title].map((letter, i) => (
         <motion.span
           className="anm__item"
           key={`letter-${letter}-${i}`}
-          variants={letterVariant}
+          variants={disabled ? undefined : letterVariant}
+          aria-hidden
         >
           {letter}
         </motion.span>

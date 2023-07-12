@@ -44,3 +44,11 @@
   font-size: var(--text-md);
   font-weight: 400;
 }
+
+%memoji {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: var(--color-grey-light-3);
+}

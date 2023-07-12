@@ -57,6 +57,15 @@
   &__gallery-list {
     margin-block: 2.65em;
     display: flex;
+    justify-content: center;
     gap: 1.25em;
+
+    @include mx.breakpoint(md) {
+      padding-inline: 0.5em;
+      margin-block: 1em;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+    }
   }
 }

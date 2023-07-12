@@ -1,6 +1,7 @@
 import './Projects.scss';
 import FeaturedProject from './FeaturedProject';
 import GalleryProject from './GalleryProject';
+import SectionTitle from '../animations/SectionTitle';
 import Link from 'next/link';
 
 function Projects() {
@@ -11,9 +12,11 @@ function Projects() {
       aria-labelledby='projects__title"'
     >
       <div className="projects__wrapper">
-        <h1 className="projects__title" id="projects__title">
-          Projects
-        </h1>
+        <SectionTitle
+          className="projects__title"
+          id="projects__title"
+          title="Projects"
+        />
         <ol className="projects__featured">
           {/* // * Reddit Clone */}
           <FeaturedProject
@@ -118,6 +121,7 @@ function Projects() {
           >
             <span>More Works</span>{' '}
             <svg
+              aria-hidden
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -153,22 +157,12 @@ function Projects() {
             title="CV Generator"
             liveLink="https://renchester.github.io/cv-generator/"
           />
-          <GalleryProject
-            image="/projects/gallery/rock-paper-scissors.png"
-            title="Rock Paper Scissors"
-            liveLink="https://renchester.github.io/top-rock-paper-scissors/"
-          />
         </ul>
         <ul className="projects__gallery-list">
           <GalleryProject
             image="/projects/gallery/knights-travails.png"
             title="Knight's Travails"
             liveLink="https://renchester.github.io/knights-travails/"
-          />
-          <GalleryProject
-            image="/projects/gallery/todo-list.png"
-            title="To-Do App"
-            liveLink="https://todo-list-renchester.vercel.app/"
           />
           <GalleryProject
             image="/projects/gallery/memory-game.png"
@@ -181,9 +175,9 @@ function Projects() {
             liveLink="https://renchester.github.io/top-tictactoe/"
           />
           <GalleryProject
-            image="/projects/gallery/library.png"
-            title="Library"
-            liveLink="https://renchester.github.io/top-library/"
+            image="/projects/gallery/todo-list.png"
+            title="To-Do App"
+            liveLink="https://todo-list-renchester.vercel.app/"
           />
         </ul>
       </section>

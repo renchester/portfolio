@@ -3,6 +3,8 @@
 import './About.scss';
 import Link from 'next/link';
 import StackItem from '../stacks/StackItem';
+import SectionTitle from '../animations/SectionTitle';
+import { motion } from 'framer-motion';
 
 function About() {
   return (
@@ -12,10 +14,35 @@ function About() {
       id="about"
     >
       <div className="about__wrapper">
+        <motion.img
+          src="/memoji_3.png"
+          alt="Memoji of portfolio subject working on a Macbook"
+          className="about__memoji"
+          variants={{
+            initial: {
+              rotate: 0,
+              opacity: 0.85,
+            },
+            focus: {
+              rotate: [null, -10, 10, -5, 5, 0],
+              transformOrigin: 'bottom',
+              transition: {
+                duration: 1,
+                ease: 'easeInOut',
+              },
+            },
+          }}
+          initial="initial"
+          whileFocus="focus"
+          whileHover="focus"
+        />
+
         <article className="about__main" aria-labelledby="about-renchester">
-          <h1 className="about__title" id="about-renchester">
-            About
-          </h1>
+          <SectionTitle
+            id="about-renchester"
+            className="about__title"
+            title="About"
+          />
 
           <p className="about__description">
             Hi, I&apos;m Chester. I am a self-taught web
@@ -23,8 +50,9 @@ function About() {
             the beginning of 2023. My background in architecture allows me to
             always view projects from the perspective of the end-user. Just as
             an architect&apos;s fundamentals are functionality, aesthetics, and
-            usability, I strive to create products that not only meets the
-            functional needs but are also user-friendly and enjoyable to use.
+            usability—I strive to create products that not only meet the
+            technical requirements of the project, but are also user-friendly
+            and enjoyable to use.
           </p>
 
           <p className="about__description">
@@ -47,8 +75,8 @@ function About() {
             . This has provided me with opportunities to work on projects that
             constantly challenge me to learn and apply new principles,
             frameworks, and technologies. There is always so much to learn and I
-            cannot wait to embrace the endless learning possibilities within
-            this field.
+            cannot wait to tackle the endless learning possibilities in this
+            field.
           </p>
         </article>
         <article className="stack" aria-labelledby="about-stack--title">

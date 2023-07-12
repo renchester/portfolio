@@ -3,24 +3,12 @@
 import './Hero.scss';
 import { Variants, motion } from 'framer-motion';
 import AnimatedLetters from '../animations/AnimatedLetters';
+import Marquee from '../animations/Marquee';
 
-const marqueeVariant: Variants = {
-  animate: {
-    // x: [0, -1000],
-    // transition: {
-    //   x: {
-    //     repeat: Infinity,
-    //     repeatType: 'loop',
-    //     duration: 16,
-    //     ease: 'linear',
-    //   },
-    // },
-  },
-};
+// [0.6, 0.01, -0.05, 0.9];
 
-function Hero() {
+function Hero({ startAnimation }: { startAnimation: boolean }) {
   return (
-    // TODO: Add accessibility
     <motion.section
       className="hero home-section"
       aria-label="Hero section"
@@ -29,9 +17,7 @@ function Hero() {
       <div className="hero__main">
         <div className="hero__text-wrapper">
           <h1 className="hero__title">
-            <AnimatedLetters title="Renchester" />
-            <span>{'  '}</span>
-            <AnimatedLetters title="Ramos" />
+            {!startAnimation && <AnimatedLetters title="Renchester Ramos" />}
           </h1>
 
           <h2 className="hero__subtitle">Full-stack web developer</h2>
@@ -45,23 +31,21 @@ function Hero() {
         </div>
       </div>
 
-      <motion.div
-        className="hero__marquee"
-        variants={marqueeVariant}
-        animate="animate"
-      >
-        <h4 className="hero__marquee-track">
-          <span>Developer — Designer — Planner — </span>{' '}
-          <span>Developer — Designer — Planner — </span>
-        </h4>
-      </motion.div>
+      <div className="hero__marquee">
+        <Marquee baseVelocity={-1.5} repeatChildren={8}>
+          <span className="hero__marquee--name">Renchester Ramos —</span>
+        </Marquee>
+        <Marquee baseVelocity={1.5} repeatChildren={6}>
+          <span className="hero__marquee--sub">
+            Developer — Designer — Planner —
+          </span>
+        </Marquee>
+      </div>
 
       <div className="hero__pop">
-        <span className="hero__pop-loc">
+        <h6 className="hero__pop-loc">
           Currently based in Bulacan, Philippines
-        </span>
-
-        <div className="hero__pop-globe"></div>
+        </h6>
       </div>
     </motion.section>
   );

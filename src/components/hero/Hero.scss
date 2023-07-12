@@ -7,6 +7,7 @@
   height: 100vh;
   background: var(--color-bg-hero);
   padding-top: var(--header-height);
+  isolation: isolate;
 
   &__main {
     display: flex;
@@ -19,7 +20,8 @@
 
   &__img-wrapper {
     @include mx.center-self(horizontal);
-    width: min(72vh, 720px);
+    // width: min(72vh, 720px);
+    width: min(72vh, 88em);
     max-width: 100vw;
     overflow: hidden;
   }
@@ -74,6 +76,7 @@
 
   &__subtitle {
     @extend %text-subtitle;
+    color: var(--color-text-alpha75);
 
     @media screen and (max-height: 900px) {
       font-size: var(--text-lg);
@@ -82,23 +85,27 @@
 
   &__marquee {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    overflow-x: hidden;
+    bottom: 12%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25em;
 
-    &-track {
-      margin-bottom: 0.85em;
-      font-family: var(--font-inter);
-      font-size: max(16px, 12vh);
-      font-weight: 700;
-      white-space: nowrap;
-      color: var(--color-grey-dark-2);
-      letter-spacing: -6px;
-      opacity: 0.75;
+    text-transform: uppercase;
+    font-family: var(--font-raleway);
+    letter-spacing: -2.5px;
+    font-size: max(16px, 10vh);
+    opacity: 0.75;
 
-      @media screen and (max-height: 400px) {
-        display: none;
-      }
+    &--name {
+      color: var(--color-text-alpha50);
+      font-weight: 800;
+    }
+
+    &--sub {
+      color: var(--color-grad-1);
+      font-weight: 800;
     }
   }
 
@@ -116,47 +123,5 @@
     color: var(--color-light-1);
     line-height: 1.25;
     opacity: 0.95;
-
-    // @media (max-width: 400px) {
-    //   font-size: var(--text-2xs);
-    // }
-
-    // @media (max-height: 400px) {
-    //   font-size: var(--text-2xs);
-    // }
-
-    // & br {
-    //   @media (max-height: 400px) {
-    //     display: none;
-    //   }
-    // }
   }
-
-  // &__pop {
-  //   position: absolute;
-  //   background: var(--color-grey-dark-1);
-  //   padding-block: 1rem;
-  //   padding-inline: 2rem 3rem;
-  //   top: 60%;
-  //   border-top-right-radius: 5rem;
-  //   border-bottom-right-radius: 5rem;
-  //   transform-origin: left;
-
-  //   @media screen and (max-height: 600px) and (max-width: 800px) {
-  //     transform: scale(0.95);
-  //   }
-
-  //   @media screen and (max-height: 600px) {
-  //     top: 30%;
-  //   }
-
-  //   @media screen and (max-height: 350px) {
-  //     transform: scale(0.65);
-  //   }
-
-  //   &-loc {
-  //     color: var(--color-light-1);
-  //     line-height: 1.25;
-  //   }
-  // }
 }

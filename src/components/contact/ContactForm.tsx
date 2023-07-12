@@ -7,6 +7,7 @@ import validateEmail from '@/utils/validateEmail';
 import debounce from 'lodash.debounce';
 import emailjs from '@emailjs/browser';
 import { AnimatePresence, motion } from 'framer-motion';
+import SectionTitle from '../animations/SectionTitle';
 
 function ContactForm() {
   const [name, setName] = useState('');
@@ -20,10 +21,7 @@ function ContactForm() {
   const [formStatus, setFormStatus] = useState<{
     status: 'error' | 'success';
     message: string;
-  } | null>({
-    status: 'success',
-    message: 'Lorem ipsum error message',
-  });
+  } | null>(null);
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -124,9 +122,12 @@ function ContactForm() {
     >
       <div className="contact__wrapper">
         <div className="contact__top">
-          <h1 className="contact__title" id="contact__title">
-            Let&apos;s connect!
-          </h1>
+          <SectionTitle
+            className="contact__title"
+            id="contact__title"
+            title="Let's Connect"
+          />
+
           <motion.img
             src="/memoji_2.png"
             alt="Profile photo of portfolio subject"
@@ -204,13 +205,28 @@ function ContactForm() {
             aria-hidden
           />
 
-          <button
+          <motion.button
             type="submit"
             className="contact__send"
             disabled={isButtonDisabled}
+            variants={{
+              focus: {
+                scale: 1.1,
+                rotate: -15,
+              },
+              tap: {
+                scale: 0.9,
+                rotate: 0,
+                backgroundColor: 'var(--color-success)',
+                color: 'var(--color-light-1)',
+              },
+            }}
+            whileFocus="focus"
+            whileHover="focus"
+            whileTap="tap"
           >
             Send it!
-          </button>
+          </motion.button>
 
           <AnimatePresence>
             {formStatus && (

@@ -23,11 +23,7 @@
   }
 
   &__img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    background: var(--color-grey-light-3);
+    @extend %memoji;
   }
 
   &__form {
@@ -42,6 +38,7 @@
     padding: 1.25em;
     aspect-ratio: 1 / 1;
     margin-left: auto;
+    box-shadow: var(--box-shadow);
 
     color: var(--color-light-1);
     font-size: var(--text-lg);

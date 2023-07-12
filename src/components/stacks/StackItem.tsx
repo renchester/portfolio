@@ -3,6 +3,7 @@
 import './StackItem.scss';
 import stacks from '@/config/stacks';
 import { useState } from 'react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 type StackItemProps = {
   name: keyof typeof stacks;
@@ -18,6 +19,15 @@ function StackItem(props: StackItemProps) {
 
   const showTitle = () => setFocus(true);
   const hideTitle = () => setFocus(false);
+
+  const titleVariants: Variants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+    },
+  };
 
   return (
     <li className="stkm__container">
@@ -41,7 +51,19 @@ function StackItem(props: StackItemProps) {
           className={`stkm__logo ${isFocus && 'focus'}`}
           data-theme={initTheme}
         />
-        {isFocus && <p className="stkm__title">{target.title}</p>}
+        <AnimatePresence>
+          {isFocus && (
+            <motion.span
+              className="stkm__title"
+              variants={titleVariants}
+              initial="initial"
+              animate="animate"
+              exit="initial "
+            >
+              {target.title}
+            </motion.span>
+          )}
+        </AnimatePresence>
       </article>
     </li>
   );

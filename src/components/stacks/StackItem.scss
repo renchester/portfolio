@@ -25,6 +25,8 @@
   &__title {
     @include mx.center-self(horizontal, absolute);
     top: calc(100% + 5px);
+    height: fit-content;
+    overflow: hidden;
     white-space: nowrap;
     text-align: center;
     color: var(--color-primary);

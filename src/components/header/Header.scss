@@ -1,0 +1,81 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+@use '@/styles/maps' as maps;
+
+.header {
+  height: 0px;
+  position: sticky;
+  top: 0;
+  z-index: map-get($map: maps.$zindex, $key: header);
+
+  &__wrapper {
+    height: var(--header-height);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo-wrapper {
+    @extend %parent-with-centered-children;
+    flex-shrink: 0;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    padding: 5px;
+    background: var(--color-background);
+    box-shadow: var(--box-shadow);
+
+    @include mx.breakpoint(sm) {
+      height: 45px;
+      width: 45px;
+    }
+  }
+
+  &__logo {
+    width: 65%;
+    height: 65%;
+    fill: var(--color-text-alpha75);
+  }
+}
+
+.nav {
+  background: var(--color-background-accent);
+  box-shadow: var(--box-shadow);
+  border-radius: 10rem;
+  margin-left: 0.5rem;
+
+  &__links {
+    @extend %parent-with-centered-children;
+    gap: 0.25em;
+
+    @include mx.breakpoint(sm, max) {
+      gap: 0;
+    }
+  }
+
+  &__item {
+    display: block;
+    border-radius: 10rem;
+    font-size: var(--text-sm);
+    font-family: var(--font-raleway);
+    font-weight: 700;
+  }
+
+  &__link {
+    display: block;
+    border-radius: 10rem;
+    padding: 0.625em 1.5em;
+    width: 100%;
+    height: 100%;
+    color: var(--color-text-alpha75);
+
+    &:hover,
+    &:focus-within {
+      outline: none;
+      background-color: var(--color-grad-1);
+      color: var(--color-light-1);
+    }
+  }
+}

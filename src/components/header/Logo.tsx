@@ -24,4 +24,5 @@ function Logo(props: LogoProps) {
     </svg>
   );
 }
+
 export default Logo;

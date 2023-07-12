@@ -7,6 +7,17 @@ function ButtonToTop() {
     initial: {
       scale: 1,
     },
+    animate: {
+      rotate: [20, -20],
+      transition: {
+        rotate: {
+          repeat: Infinity,
+          repeatType: 'reverse',
+          duration: 2,
+          ease: 'linear',
+        },
+      },
+    },
     focus: {
       scale: 1.5,
     },
@@ -20,6 +31,7 @@ function ButtonToTop() {
       title="Scroll to top"
       variants={buttonVariant}
       initial="initial"
+      animate="animate"
       whileHover="focus"
       whileFocus="focus"
     >

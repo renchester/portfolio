@@ -1,4 +1,10 @@
-import { Nunito_Sans, Open_Sans, Inter, Poppins } from 'next/font/google';
+import {
+  Nunito_Sans,
+  Open_Sans,
+  Inter,
+  Poppins,
+  Raleway,
+} from 'next/font/google';
 
 export const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -25,6 +31,13 @@ export const poppins = Poppins({
 export const openSans = Open_Sans({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-open-sans',
+  display: 'swap',
+  preload: false,
+});
+
+export const raleway = Raleway({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-raleway',
   display: 'swap',
   preload: false,
 });

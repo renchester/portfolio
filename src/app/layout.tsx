@@ -1,7 +1,7 @@
 import '@/styles/globals.scss';
 import type { Metadata } from 'next';
-import { nunito, inter, poppins, openSans } from '@/utils/fonts';
-import Header from '@/components/Header';
+import { nunito, inter, poppins, openSans, raleway } from '@/utils/fonts';
+import Header from '@/components/header/Header';
 import Footer from '@/components/Footer';
 import ButtonToTop from '@/components/ButtonToTop';
 
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nunito.variable} ${poppins.variable}  ${openSans.variable}`}
+        className={`${inter.variable} ${nunito.variable} ${poppins.variable}  ${openSans.variable} ${raleway.variable}`}
       >
         <Header />
 

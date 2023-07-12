@@ -6,7 +6,7 @@ import Hero from '@/components/hero/Hero';
 import Projects from '@/components/projects/Projects';
 import WelcomeScreen from '@/components/transitions/WelcomeScreen';
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Home() {
   const [onWelcome, setOnWelcome] = useState(true);
@@ -16,7 +16,6 @@ export default function Home() {
     <main className="home-page">
       <AnimatePresence>
         {onWelcome && <WelcomeScreen hideScreen={hideWelcome} />}
-        {/* <WelcomeScreen hideScreen={hideWelcome} /> */}
       </AnimatePresence>
 
       {/* Hero */}

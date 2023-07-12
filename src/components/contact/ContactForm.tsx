@@ -210,6 +210,10 @@ function ContactForm() {
             className="contact__send"
             disabled={isButtonDisabled}
             variants={{
+              initial: {
+                scale: 1,
+                rotate: 0,
+              },
               focus: {
                 scale: 1.1,
                 rotate: -15,
@@ -217,10 +221,9 @@ function ContactForm() {
               tap: {
                 scale: 0.9,
                 rotate: 0,
-                backgroundColor: 'var(--color-success)',
-                color: 'var(--color-light-1)',
               },
             }}
+            initial="initial"
             whileFocus="focus"
             whileHover="focus"
             whileTap="tap"

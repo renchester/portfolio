@@ -2,11 +2,11 @@
 
 import './ContactForm.scss';
 import { useEffect, useRef, useState } from 'react';
-import ContactInput from './ContactInput';
 import validateEmail from '@/utils/validateEmail';
 import debounce from 'lodash.debounce';
 import emailjs from '@emailjs/browser';
 import { AnimatePresence, motion } from 'framer-motion';
+import ContactInput from './ContactInput';
 import SectionTitle from '../animations/SectionTitle';
 
 function ContactForm() {
@@ -130,7 +130,7 @@ function ContactForm() {
 
           <motion.img
             src="/memoji_2.png"
-            alt="Profile photo of portfolio subject"
+            alt="Memoji of portfolio subject"
             className="contact__img"
             initial={{ rotate: 12 }}
             whileHover={{ scale: 1.2, rotate: 0 }}
@@ -154,6 +154,9 @@ function ContactForm() {
             minLength={1}
             maxLength={240}
             isValid={name.length > 0}
+            errorMessage={
+              name.length > 0 ? 'Name must not be empty' : undefined
+            }
             isRequired
           />
           <ContactInput
@@ -181,6 +184,9 @@ function ContactForm() {
             handleChange={handleServiceChange}
             minLength={1}
             isValid={services.length > 0}
+            errorMessage={
+              services.length > 0 ? 'Services must not be empty' : undefined
+            }
             isRequired
           />
           <ContactInput
@@ -194,6 +200,9 @@ function ContactForm() {
             handleChange={handleMessageChange}
             minLength={1}
             isValid={message.length > 0}
+            errorMessage={
+              message.length > 0 ? 'Message must not be empty' : undefined
+            }
             isRequired
           />
           <input

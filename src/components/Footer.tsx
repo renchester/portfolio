@@ -8,8 +8,8 @@ function Footer() {
     <footer className="footer">
       <div className="footer__wrapper">
         <div className="footer__col-1">
-          <article>
-            <h3 className="footer__name">
+          <article aria-labelledby="footer__name">
+            <h3 className="footer__name" id="footer__name">
               <Link href="#hero-section">Renchester Ramos</Link>
             </h3>
             <h4 className="footer__loc">Bulacan, Philippines</h4>
@@ -19,20 +19,22 @@ function Footer() {
               className="footer__meta-item"
               aria-labelledby="footer-version"
             >
-              <h6 className="footer__title" id="footer-version">
+              <dt className="footer__title" id="footer-version">
                 Version
-              </h6>
-              <p>2023</p>
+              </dt>
+              <dd>2023</dd>
             </article>
 
             <article
               className="footer__meta-item"
               aria-labelledby="footer-local-time"
             >
-              <h6 id="footer-local-time" className="footer__title">
+              <dt id="footer-local-time" className="footer__title">
                 Local Time
-              </h6>
-              <LocalTime />
+              </dt>
+              <dd>
+                <LocalTime />
+              </dd>
             </article>
           </div>
         </div>

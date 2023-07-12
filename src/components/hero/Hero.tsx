@@ -1,7 +1,7 @@
 'use client';
 
 import './Hero.scss';
-import { Variants, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import AnimatedLetters from '../animations/AnimatedLetters';
 import Marquee from '../animations/Marquee';
 

@@ -49,6 +49,7 @@ function ContactInput(props: ContactInputProps) {
         minLength={minLength || -1}
         maxLength={maxLength || -1}
         required={isRequired || false}
+        aria-invalid={isValid}
         aria-errormessage={`contact-input-error--${name}`}
       />
 

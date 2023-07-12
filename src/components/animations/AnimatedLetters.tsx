@@ -39,8 +39,8 @@ function AnimatedLetters({
       variants={disabled ? undefined : bannerVariant}
       initial="initial"
       animate="animate"
-      aria-label={title}
     >
+      <span hidden>{title}</span>
       {[...title].map((letter, i) => (
         <motion.span
           className="anm__item"

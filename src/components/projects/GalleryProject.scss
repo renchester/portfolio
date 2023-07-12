@@ -4,12 +4,19 @@
 .gallery {
   position: relative;
   width: clamp(200px, 100%, 25vw);
-  padding: 1.25rem 0.75rem;
-  background: var(--color-grey-light-3);
+  padding: 1.5em 1em;
+  background: rgba(122, 116, 116, 0.65);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+
+  @include mx.breakpoint(md) {
+    padding: 1.25em 0.75em;
+    width: 100%;
+  }
 
   &__img {
     object-fit: cover;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 15.5 / 9;
     width: 100%;
   }
 
@@ -19,7 +26,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(46, 40, 40, 0.75);
+    background: rgba(55, 55, 55, 0.75);
     color: var(--color-grey-light-2);
 
     & svg {
@@ -32,11 +39,12 @@
 
   &__details {
     @include mx.center-self(both, absolute);
-    font-weight: 400;
-    font-size: min(1.8vw, 1.5rem);
-    font-family: var(--font-poppins);
-    line-height: 1.18;
-    letter-spacing: 0.5px;
+    font-weight: 700;
+    font-size: min(1.8vw, 1.35rem);
+    font-family: var(--font-inter);
+    line-height: 1.25;
+    letter-spacing: -0.5px;
     text-align: center;
+    text-transform: uppercase;
   }
 }

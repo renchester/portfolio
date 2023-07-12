@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import './GalleryProject.scss';
 import { useState } from 'react';
+import { Variants, motion, AnimatePresence } from 'framer-motion';
 
 type GalleryProjectProps = {
   image: string; //path
@@ -18,41 +19,64 @@ function GalleryProject(props: GalleryProjectProps) {
   const showDetails = () => setFocus(true);
   const hideDetails = () => setFocus(false);
 
+  const popVariant: Variants = {
+    initial: {
+      opacity: 0,
+      y: 40,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'tween',
+        duration: 0.25,
+      },
+    },
+  };
+
   return (
-    <li
-      className="gallery"
-      aria-label={title}
-      tabIndex={0}
-      onFocus={showDetails}
-      onBlur={hideDetails}
-      onMouseEnter={showDetails}
-      onMouseLeave={hideDetails}
-    >
-      <Link href={liveLink} target="_blank" rel="noopener noreferrer">
+    <li className="gallery" aria-label={title}>
+      <Link
+        href={liveLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        onFocus={showDetails}
+        onBlur={hideDetails}
+        onMouseEnter={showDetails}
+        onMouseLeave={hideDetails}
+      >
         <img
           src={image}
           alt={`Screen grab from ${title} live view`}
           className="gallery__img"
         />
 
-        {isFocus && (
-          <div className="gallery__pop">
-            <h4 className="gallery__details">{title}</h4>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="square"
-              strokeLinejoin="round"
+        <AnimatePresence>
+          {isFocus && (
+            <motion.div
+              className="gallery__pop"
+              variants={popVariant}
+              initial="initial"
+              animate="animate"
+              exit="initial"
             >
-              <path d="M7 7l9.2 9.2M17 7v10H7" />
-            </svg>
-          </div>
-        )}
+              <h4 className="gallery__details">{title}</h4>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                strokeLinecap="square"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7l9.2 9.2M17 7v10H7" />
+              </svg>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Link>
     </li>
   );

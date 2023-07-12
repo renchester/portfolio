@@ -78,7 +78,6 @@
   &__item {
     display: block;
     border-radius: var(--border-radius);
-    font-size: var(--text-sm);
     font-family: var(--font-raleway);
     font-weight: 700;
   }
@@ -90,6 +89,15 @@
     width: 100%;
     height: 100%;
     color: var(--color-text-alpha75);
+
+    @include mx.breakpoint(sm, max) {
+      padding-inline: 0.75em;
+      font-size: var(--text-sm);
+    }
+
+    @include mx.breakpoint(xs, max) {
+      padding-inline: 0.5em;
+    }
 
     &:hover,
     &:focus-within {

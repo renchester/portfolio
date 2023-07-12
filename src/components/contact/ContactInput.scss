@@ -76,6 +76,7 @@
     right: 0;
     padding: 5px;
     border-radius: 50%;
+    box-shadow: var(--box-shadow);
 
     &[data-valid='true'] {
       background: var(--color-success);

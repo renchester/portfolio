@@ -20,7 +20,6 @@
 
   &__img-wrapper {
     @include mx.center-self(horizontal);
-    // width: min(72vh, 720px);
     width: min(72vh, 88em);
     max-width: 100vw;
     overflow: hidden;
@@ -44,7 +43,7 @@
     @media screen and (max-height: 900px) and (min-width: 850px) {
       position: absolute;
       right: 0;
-      top: 35%;
+      top: 15%;
       text-align: right;
       margin-right: 1rem;
     }
@@ -52,7 +51,7 @@
     @media screen and (max-height: 400px) {
       position: absolute;
       right: 0;
-      top: 35%;
+      top: 10%;
       text-align: right;
       margin-right: 1rem;
       transform: scale(0.85);

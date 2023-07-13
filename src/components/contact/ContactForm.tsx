@@ -76,8 +76,6 @@ function ContactForm() {
 
     emailjs.sendForm(serviceID, templateID, formRef.current, userID).then(
       (result) => {
-        console.log(result.text);
-
         // Send success message
         setFormStatus({
           status: 'success',

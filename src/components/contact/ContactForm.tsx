@@ -210,6 +210,7 @@ function ContactForm() {
             name="from_name"
             id="from_name_emailjs"
             value="Renchester Ramos"
+            readOnly
             hidden
             aria-hidden
           />

@@ -117,12 +117,12 @@ function Header() {
                       visible: {
                         opacity: 1,
                         scale: 1,
-                        transformOrigin: 'right',
                         transition: {
                           bounce: 0.8,
                         },
                       },
                     }}
+                    style={{ transformOrigin: 'right' }}
                     initial="initial"
                     animate="visible"
                     exit="initial"

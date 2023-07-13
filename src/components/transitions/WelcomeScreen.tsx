@@ -2,9 +2,9 @@
 
 import './WelcomeScreen.scss';
 import { Variants, motion } from 'framer-motion';
-import getTagalogDayTime from '@/utils/getTagalogDayTime';
-import getEnglishDayTime from '@/utils/getEnglishDayTime';
-import { useState } from 'react';
+import getTagalogDayTime, { TagDayType } from '@/utils/getTagalogDayTime';
+import getEnglishDayTime, { EngDayType } from '@/utils/getEnglishDayTime';
+import { useEffect, useState } from 'react';
 
 type WelcomeScreenProps = {
   hideScreen: () => void;
@@ -13,13 +13,19 @@ type WelcomeScreenProps = {
 function WelcomeScreen(props: WelcomeScreenProps) {
   const { hideScreen } = props;
 
-  const currentHour = new Date().getHours();
-  const englishCurrent = getEnglishDayTime(currentHour);
-  const tagalogCurrent = getTagalogDayTime(currentHour);
-
+  const [englishCurrent, setEnglishCurrent] = useState<EngDayType>('day');
+  const [tagalogCurrent, setTagalogCurrent] = useState<TagDayType>('araw');
   const [isEnd, setEnd] = useState(false);
 
   const greetings = ['안녕하세요', 'bonjour', 'नमस्ते', 'ciao', '你好'];
+
+  useEffect(() => {
+    // Wrap date-related data in useEffect to be rendered on client
+
+    const currentHour = new Date().getHours();
+    setEnglishCurrent(getEnglishDayTime(currentHour));
+    setTagalogCurrent(getTagalogDayTime(currentHour));
+  }, []);
 
   const listVariant: Variants = {
     initial: {

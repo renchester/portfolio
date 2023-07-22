@@ -136,6 +136,7 @@ function Project(props: ProjectProps) {
               alt={`Mockup on Pixel 5 phone for ${title}`}
               className="featured__img mobile"
               tabIndex={0}
+              loading="lazy"
               initial={{ rotate: 0, y: '-50%', x: '-10%' }}
               whileHover={{
                 rotate: [null, 8, -8, 5, -5, 3, -3, 1.5, -1.5, 0],
@@ -152,6 +153,7 @@ function Project(props: ProjectProps) {
               src={desktopView}
               alt={`Mockup on Laptop for ${title}`}
               className="featured__img desktop"
+              loading="lazy"
             />
           </div>
 

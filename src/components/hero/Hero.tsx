@@ -27,6 +27,7 @@ function Hero({ startAnimation }: { startAnimation: boolean }) {
             src="./profile.png"
             alt="Profile Picture of portfolio subject. Man wearing white polo shirt"
             className="hero__img"
+            loading="eager"
           />
         </div>
       </div>

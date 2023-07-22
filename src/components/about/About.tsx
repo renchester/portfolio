@@ -18,6 +18,7 @@ function About() {
           src="/memoji_3.png"
           alt="Memoji of portfolio subject working on a Macbook"
           className="about__memoji"
+          loading="lazy"
           variants={{
             initial: {
               rotate: 0,

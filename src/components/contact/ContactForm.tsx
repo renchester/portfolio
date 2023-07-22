@@ -130,6 +130,7 @@ function ContactForm() {
             src="/memoji_2.png"
             alt="Memoji of portfolio subject"
             className="contact__img"
+            loading="lazy"
             initial={{ rotate: 12 }}
             whileHover={{ scale: 1.2, rotate: 0 }}
           />

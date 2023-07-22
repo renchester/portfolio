@@ -49,6 +49,7 @@ function GalleryProject(props: GalleryProjectProps) {
           src={image}
           alt={`Screen grab from ${title} live view`}
           className="gallery__img"
+          loading="lazy"
         />
 
         <AnimatePresence>

@@ -1,111 +1,119 @@
 const stacks = {
   react: {
     title: 'React',
-    logo: '/logos/react.svg',
+    logo: '/react.svg',
   },
   next: {
     title: 'Next.js',
-    logo: '/logos/next.svg',
+    logo: '/next.svg',
   },
   sass: {
     title: 'Sass',
-    logo: '/logos/sass.svg',
+    logo: '/sass.svg',
   },
   tailwind: {
     title: 'TailwindCSS',
-    logo: '/logos/tailwind.svg',
+    logo: '/tailwind.svg',
   },
   javascript: {
     title: 'Javascript',
-    logo: '/logos/javascript.svg',
+    logo: '/javascript.svg',
   },
   typescript: {
     title: 'Typescript',
-    logo: '/logos/typescript.svg',
+    logo: '/typescript.svg',
   },
   node: {
     title: 'Node.js',
-    logo: '/logos/node.svg',
+    logo: '/node.svg',
   },
   express: {
     title: 'Express.js',
-    logo: '/logos/express.svg',
+    logo: '/express.svg',
   },
   mongodb: {
     title: 'MongoDB',
-    logo: '/logos/mongodb.svg',
+    logo: '/mongodb.svg',
   },
   mongoose: {
     title: 'Mongoose',
-    logo: '/logos/mongoose.svg',
+    logo: '/mongoose.svg',
   },
   react_router: {
     title: 'React Router',
-    logo: '/logos/react-router.svg',
+    logo: '/react-router.svg',
   },
   git: {
     title: 'Git',
-    logo: '/logos/git.svg',
+    logo: '/git.svg',
   },
   github: {
     title: 'Github',
-    logo: '/logos/github.svg',
+    logo: '/github.svg',
   },
   jest: {
     title: 'Jest',
-    logo: '/logos/jest.svg',
+    logo: '/jest.svg',
   },
   vite: {
     title: 'Vite',
-    logo: '/logos/vite.svg',
+    logo: '/vite.svg',
   },
   vitest: {
     title: 'Vitest',
-    logo: '/logos/vitest.svg',
+    logo: '/vitest.svg',
   },
   html: {
     title: 'HTML5',
-    logo: '/logos/html.svg',
+    logo: '/html.svg',
   },
   css: {
     title: 'CSS3',
-    logo: '/logos/css.svg',
+    logo: '/css.svg',
   },
   firebase: {
     title: 'Firebase',
-    logo: '/logos/firebase.svg',
+    logo: '/firebase.svg',
   },
   linux: {
     title: 'Linux',
-    logo: '/logos/linux.svg',
+    logo: '/linux.svg',
   },
   notion: {
     title: 'Notion',
-    logo: '/logos/notion.svg',
+    logo: '/notion.svg',
   },
   webpack: {
     title: 'Webpack',
-    logo: '/logos/webpack.svg',
+    logo: '/webpack.svg',
   },
   affinity_photo: {
     title: 'Affinity Photo',
-    logo: '/logos/affinity-photo.svg',
+    logo: '/affinity-photo.svg',
   },
   affinity_publisher: {
     title: 'Affinity Publisher',
-    logo: '/logos/affinity-publisher.svg',
+    logo: '/affinity-publisher.svg',
   },
   affinity_designer: {
     title: 'Affinity Designer',
-    logo: '/logos/affinity-designer.svg',
+    logo: '/affinity-designer.svg',
   },
   passportjs: {
     title: 'PassportJS',
-    logo: '/logos/passportjs.svg',
+    logo: '/passportjs.svg',
   },
   framer: {
     title: 'Framer Motion',
-    logo: '/logos/framer.svg',
+    logo: '/framer.svg',
+  },
+  figma: {
+    title: 'Figma',
+    logo: '/figma.svg',
+  },
+  npm: {
+    title: 'NPM',
+    logo: '/npm.svg',
   },
 };
 

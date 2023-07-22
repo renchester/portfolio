@@ -46,7 +46,7 @@ function StackItem(props: StackItemProps) {
             width: `${width}px`,
             height: `${width}px`,
           }}
-          src={target.logo}
+          src={`/logos/${target.logo}`}
           alt={`Logo for ${target.title}`}
           className={`stkm__logo ${isFocus && 'focus'}`}
           data-theme={initTheme}

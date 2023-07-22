@@ -159,10 +159,15 @@ function Projects() {
           />
         </ul>
         <ul className="projects__gallery-list">
-          <GalleryProject
+          {/* <GalleryProject
             image="/projects/gallery/knights-travails.png"
             title="Knight's Travails"
             liveLink="https://renchester.github.io/knights-travails/"
+          /> */}
+          <GalleryProject
+            image="/projects/gallery/todo-list.png"
+            title="To-Do App"
+            liveLink="https://todo-list-renchester.vercel.app/"
           />
           <GalleryProject
             image="/projects/gallery/memory-game.png"
@@ -170,14 +175,14 @@ function Projects() {
             liveLink="https://renchester.github.io/memory-game/"
           />
           <GalleryProject
+            image="/projects/gallery/patient-booking.png"
+            title="SwiftCare Mockups"
+            liveLink="http://tinyurl.com/figma-patient-booking-app"
+          />
+          <GalleryProject
             image="/projects/gallery/tic-tac-toe.png"
             title="Tic-Tac-Toe"
             liveLink="https://renchester.github.io/top-tictactoe/"
-          />
-          <GalleryProject
-            image="/projects/gallery/todo-list.png"
-            title="To-Do App"
-            liveLink="https://todo-list-renchester.vercel.app/"
           />
         </ul>
       </section>

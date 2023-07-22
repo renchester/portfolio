@@ -31,6 +31,10 @@
     &:focus {
       outline: none;
     }
+
+    & a {
+      @extend %parent-with-centered-children;
+    }
   }
 
   &__logo {

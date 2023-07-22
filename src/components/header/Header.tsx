@@ -5,6 +5,7 @@ import './Header.scss';
 import Logo from './Logo';
 import NavLink from './NavLink';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 function Header() {
   const [isVisible, setVisibility] = useState(true);
@@ -84,7 +85,7 @@ function Header() {
           exit="hidden"
         >
           <div className="header__wrapper">
-            <motion.div
+            <motion.button
               className="header__logo-wrapper"
               variants={{
                 initial: { background: '#fff' },
@@ -95,13 +96,16 @@ function Header() {
                   background: '#eee',
                 },
               }}
+              aria-label="Logo"
               initial="initial"
               whileHover="focus"
               whileFocus="focus"
               whileTap="tap"
             >
-              <Logo className="header__logo" />
-            </motion.div>
+              <Link href="#hero-section">
+                <Logo className="header__logo" ariaHidden />
+              </Link>
+            </motion.button>
 
             <div className="header__nav-wrapper" ref={navRef}>
               <AnimatePresence>
@@ -138,6 +142,7 @@ function Header() {
               <motion.button
                 type="button"
                 className="header__btn-nav"
+                aria-label="Open navigation menu"
                 aria-haspopup
                 aria-expanded={isNavExpanded}
                 aria-controls="nav"

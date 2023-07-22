@@ -131,6 +131,8 @@ function About() {
                 <StackItem name="vitest" />
                 <StackItem name="jest" />
                 <StackItem name="notion" />
+                <StackItem name="npm" />
+                <StackItem name="figma" />
               </ul>
             </li>
           </ul>

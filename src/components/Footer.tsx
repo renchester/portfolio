@@ -78,6 +78,16 @@ function Footer() {
                 Github
               </Link>
             </li>
+            <li>
+              <Link
+                className="footer__link"
+                href={`https://drive.google.com/file/d/1qJy4oltcu4WbtMfHHZhw8SJUCvnapjRk/view?usp=drive_link`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Architecture Portfolio
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

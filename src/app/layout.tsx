@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     default: 'Renchester Ramos | Web Developer & Designer',
   },
   description: 'Web developer portfolio and personal site for Rencbester Ramos',
+  openGraph: {
+    title: 'Renchester Ramos - Portfolio',
+    description:
+      'Web developer portfolio and personal site for Rencbester Ramos',
+  },
 };
 
 export default function RootLayout({

@@ -93,14 +93,14 @@ function About() {
                 {/* //* FRONT END */}
                 <StackItem name="react" />
                 <StackItem name="next" />
-                <StackItem name="react_router" />
-                <StackItem name="framer" />
+                <StackItem name="redux" />
                 <StackItem name="javascript" />
                 <StackItem name="typescript" />
                 <StackItem name="html" />
                 <StackItem name="css" />
                 <StackItem name="sass" />
                 <StackItem name="tailwind" />
+                <StackItem name="framer" />
               </ul>
             </li>
             <li className="stack__tech-item">
@@ -109,11 +109,16 @@ function About() {
               </h3>
               <ul className="stack__list" aria-labelledby="back-end--list">
                 {/* //* BACK END */}
+                <StackItem name="node" />
                 <StackItem name="mongodb" />
                 <StackItem name="mongoose" />
                 <StackItem name="express" />
-                <StackItem name="node" />
+                <StackItem name="hono" />
                 <StackItem name="firebase" />
+                <StackItem name="postgresql" />
+                <StackItem name="sqlite" />
+                <StackItem name="prisma" />
+                <StackItem name="cloudflare" />
                 <StackItem name="passportjs" />
               </ul>
             </li>
@@ -131,6 +136,7 @@ function About() {
                 <StackItem name="vitest" />
                 <StackItem name="jest" />
                 <StackItem name="notion" />
+                <StackItem name="capacitor" />
                 <StackItem name="npm" />
                 <StackItem name="figma" />
               </ul>

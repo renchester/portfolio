@@ -21,7 +21,7 @@
     "eslint-config-next": "13.4.9",
     "framer-motion": "^10.12.18",
     "lodash.debounce": "^4.0.8",
-    "next": "13.4.9",
+    "next": "^14.2.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.6",

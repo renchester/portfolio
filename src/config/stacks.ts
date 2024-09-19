@@ -115,6 +115,34 @@ const stacks = {
     title: 'NPM',
     logo: '/npm.svg',
   },
+  postgresql: {
+    title: 'PostgreSQL',
+    logo: '/postgresql.svg',
+  },
+  cloudflare: {
+    title: 'Cloudflare Workers',
+    logo: '/cloudflare-workers.svg',
+  },
+  capacitor: {
+    title: 'Ionic Capacitor',
+    logo: '/capacitor.svg',
+  },
+  redux: {
+    title: 'Redux Toolkit',
+    logo: '/redux.svg',
+  },
+  hono: {
+    title: 'Hono',
+    logo: '/hono.svg',
+  },
+  sqlite: {
+    title: 'SQLite',
+    logo: '/sqlite.svg',
+  },
+  prisma: {
+    title: 'Prisma',
+    logo: '/prisma.svg',
+  },
 };
 
 export default stacks;

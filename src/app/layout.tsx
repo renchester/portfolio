@@ -8,14 +8,14 @@ import ButtonToTop from '@/components/ButtonToTop';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s by Renchester Ramos | Web Developer & Designer',
-    default: 'Renchester Ramos | Web Developer & Designer',
+    template: '%s by Renchester Ramos | Full-stack Developer & Designer',
+    default: 'Renchester Ramos | Full-stack Developer & Designer',
   },
-  description: 'Web developer portfolio and personal site for Rencbester Ramos',
+  description: 'Web developer portfolio and personal site for Renchester Ramos',
   openGraph: {
     title: 'Renchester Ramos - Portfolio',
     description:
-      'Web developer portfolio and personal site for Rencbester Ramos',
+      'Full-stack developer portfolio and personal site for Renchester Ramos',
   },
 };
 

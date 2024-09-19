@@ -26,7 +26,6 @@ function About() {
             },
             focus: {
               rotate: [null, -10, 10, -5, 5, 0],
-              transformOrigin: 'bottom',
               transition: {
                 duration: 1,
                 ease: 'easeInOut',

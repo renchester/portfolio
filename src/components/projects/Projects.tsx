@@ -159,16 +159,6 @@ function Projects() {
           />
         </ul>
         <ul className="projects__gallery-list">
-          {/* <GalleryProject
-            image="/projects/gallery/knights-travails.png"
-            title="Knight's Travails"
-            liveLink="https://renchester.github.io/knights-travails/"
-          /> */}
-          <GalleryProject
-            image="/projects/gallery/todo-list.png"
-            title="To-Do App"
-            liveLink="https://todo-list-renchester.vercel.app/"
-          />
           <GalleryProject
             image="/projects/gallery/memory-game.png"
             title="Avatar Memory Game"
@@ -180,9 +170,27 @@ function Projects() {
             liveLink="http://tinyurl.com/figma-patient-booking-app"
           />
           <GalleryProject
+            image="/projects/gallery/timepieces.png"
+            title="Timepieces"
+            subtitle="A time-tracking web app"
+            liveLink="https://timepieces.vercel.app/"
+          />
+          <GalleryProject
             image="/projects/gallery/tic-tac-toe.png"
             title="Tic-Tac-Toe"
             liveLink="https://renchester.github.io/top-tictactoe/"
+          />
+        </ul>
+        <ul className="projects__gallery-list">
+          <GalleryProject
+            image="/projects/gallery/knights-travails.png"
+            title="Knight's Travails"
+            liveLink="https://renchester.github.io/knights-travails/"
+          />
+          <GalleryProject
+            image="/projects/gallery/todo-list.png"
+            title="To-Do App"
+            liveLink="https://todo-list-renchester.vercel.app/"
           />
         </ul>
       </section>

@@ -8,11 +8,12 @@ import { Variants, motion, AnimatePresence } from 'framer-motion';
 type GalleryProjectProps = {
   image: string; //path
   title: string;
+  subtitle?: string;
   liveLink: string;
 };
 
 function GalleryProject(props: GalleryProjectProps) {
-  const { image, title, liveLink } = props;
+  const { image, title, subtitle, liveLink } = props;
 
   const [isFocus, setFocus] = useState(false);
 
@@ -61,7 +62,12 @@ function GalleryProject(props: GalleryProjectProps) {
               animate="animate"
               exit="initial"
             >
-              <h4 className="gallery__details">{title}</h4>
+              <div className="gallery__details">
+                <h4 className="gallery__title">{title}</h4>
+                {subtitle && (
+                  <span className="gallery__subtitle">{subtitle}</span>
+                )}
+              </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

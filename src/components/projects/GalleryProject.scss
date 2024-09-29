@@ -39,12 +39,25 @@
 
   &__details {
     @include mx.center-self(both, absolute);
-    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
     font-size: min(1.8vw, 1.35rem);
+  }
+
+  &__title {
+    font-weight: 700;
     font-family: var(--font-inter);
     line-height: 1.25;
     letter-spacing: -0.5px;
     text-align: center;
     text-transform: uppercase;
+  }
+
+  &__subtitle {
+    transform: scale(0.9);
+    text-align: center;
+    text-wrap: nowrap;
   }
 }

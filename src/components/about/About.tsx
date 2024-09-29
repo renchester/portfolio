@@ -160,19 +160,6 @@ function About() {
                   alt="Linkedin Logo"
                 />
                 <span>Linkedin</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeLinecap="square"
-                  strokeLinejoin="round"
-                >
-                  <path d="M7 7l9.2 9.2M17 7v10H7" />
-                </svg>
               </Link>
             </li>
             <li>
@@ -188,19 +175,6 @@ function About() {
                   alt="Github Logo"
                 />
                 <span>Github</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeLinecap="square"
-                  strokeLinejoin="round"
-                >
-                  <path d="M7 7l9.2 9.2M17 7v10H7" />
-                </svg>
               </Link>
             </li>
             <li>

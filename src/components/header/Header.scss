@@ -20,6 +20,7 @@
 
   &__logo-wrapper {
     @extend %parent-with-centered-children;
+    position: relative;
     flex-shrink: 0;
     width: 45px;
     height: 45px;
@@ -41,6 +42,11 @@
     width: 65%;
     height: 65%;
     fill: var(--color-text-alpha75);
+  }
+
+  &__logo-label {
+    visibility: hidden;
+    position: absolute;
   }
 
   &__nav-wrapper {

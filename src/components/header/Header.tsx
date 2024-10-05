@@ -104,6 +104,9 @@ function Header() {
             >
               <Link href="#hero-section">
                 <Logo className="header__logo" ariaHidden />
+                <span className="header__logo-label">
+                  Logo for portfolio subject
+                </span>
               </Link>
             </motion.button>
 

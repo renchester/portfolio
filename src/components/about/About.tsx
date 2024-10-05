@@ -15,7 +15,7 @@ function About() {
     >
       <div className="about__wrapper">
         <motion.img
-          src="/memoji_3.png"
+          src="/memoji_3.webp"
           alt="Memoji of portfolio subject working on a Macbook"
           className="about__memoji"
           loading="lazy"

@@ -20,8 +20,8 @@ function Projects() {
         <ol className="projects__featured">
           {/* // * Reddit Clone */}
           <FeaturedProject
-            mobileView={`/projects/reddit/mobile.png`}
-            desktopView={`/projects/reddit/desktop.png`}
+            mobileView={`/projects/reddit/mobile.webp`}
+            desktopView={`/projects/reddit/desktop.webp`}
             index={1}
             logo="/projects/reddit/logo.png"
             type="Full-stack Social Media App"
@@ -41,8 +41,8 @@ function Projects() {
           ></FeaturedProject>
           {/* // * Dezien Blog */}
           <FeaturedProject
-            mobileView={`/projects/dezien/mobile.png`}
-            desktopView={`/projects/dezien/desktop.png`}
+            mobileView={`/projects/dezien/mobile.webp`}
+            desktopView={`/projects/dezien/desktop.webp`}
             index={2}
             logo="/projects/dezien/logo.png"
             type="Full-stack Blog Application"
@@ -65,8 +65,8 @@ function Projects() {
           />
           {/* // * Hidden Hunt */}
           <FeaturedProject
-            mobileView={`/projects/hidden-hunt/mobile.png`}
-            desktopView={`/projects/hidden-hunt/desktop.png`}
+            mobileView={`/projects/hidden-hunt/mobile.webp`}
+            desktopView={`/projects/hidden-hunt/desktop.webp`}
             index={3}
             logo="/projects/hidden-hunt/logo.png"
             type="Full-stack Web Game"
@@ -86,8 +86,8 @@ function Projects() {
           />
           {/* // * Savant Eyewear */}
           <FeaturedProject
-            mobileView={`/projects/savant/mobile.png`}
-            desktopView={`/projects/savant/desktop.png`}
+            mobileView={`/projects/savant/mobile.webp`}
+            desktopView={`/projects/savant/desktop.webp`}
             index={4}
             logo="/projects/savant/logo.png"
             type="Front-end E-commerce Site"
@@ -113,7 +113,7 @@ function Projects() {
         className="projects__gallery"
         aria-label="Gallery of portfolio subject's other projects"
       >
-        <h4 className="projects__gallery-title">
+        <span className="projects__gallery-title">
           <Link
             href={`https://github.com/renchester?tab=repositories`}
             target="_blank"
@@ -135,60 +135,60 @@ function Projects() {
               <path d="M7 7l9.2 9.2M17 7v10H7" />
             </svg>
           </Link>
-        </h4>
+        </span>
         <ul className="projects__gallery-list">
           <GalleryProject
-            image="/projects/gallery/what-to-watch-next.png"
+            image="/projects/gallery/what-to-watch-next.webp"
             title="What to Watch Next"
             liveLink="https://what-to-watch-next.vercel.app/"
           />
           <GalleryProject
-            image="/projects/gallery/battleship.png"
+            image="/projects/gallery/battleship.webp"
             title="Battleship"
             liveLink="https://renchester.github.io/top-battleship/"
           />
           <GalleryProject
-            image="/projects/gallery/weather-app.png"
+            image="/projects/gallery/weather-app.webp"
             title="Weather App"
             liveLink="https://renchester.github.io/top-weather-app/"
           />
           <GalleryProject
-            image="/projects/gallery/cv-generator.png"
+            image="/projects/gallery/cv-generator.webp"
             title="CV Generator"
             liveLink="https://renchester.github.io/cv-generator/"
           />
         </ul>
         <ul className="projects__gallery-list">
           <GalleryProject
-            image="/projects/gallery/memory-game.png"
+            image="/projects/gallery/memory-game.webp"
             title="Avatar Memory Game"
             liveLink="https://renchester.github.io/memory-game/"
           />
           <GalleryProject
-            image="/projects/gallery/patient-booking.png"
+            image="/projects/gallery/patient-booking.webp"
             title="SwiftCare Mockups"
             liveLink="http://tinyurl.com/figma-patient-booking-app"
           />
           <GalleryProject
-            image="/projects/gallery/timepieces.png"
+            image="/projects/gallery/timepieces.webp"
             title="Timepieces"
             subtitle="A time-tracking web app"
             liveLink="https://timepieces.vercel.app/"
           />
           <GalleryProject
-            image="/projects/gallery/tic-tac-toe.png"
+            image="/projects/gallery/tic-tac-toe.webp"
             title="Tic-Tac-Toe"
             liveLink="https://renchester.github.io/top-tictactoe/"
           />
         </ul>
         <ul className="projects__gallery-list">
           <GalleryProject
-            image="/projects/gallery/knights-travails.png"
+            image="/projects/gallery/knights-travails.webp"
             title="Knight's Travails"
             liveLink="https://renchester.github.io/knights-travails/"
           />
           <GalleryProject
-            image="/projects/gallery/todo-list.png"
+            image="/projects/gallery/todo-list.webp"
             title="To-Do App"
             liveLink="https://todo-list-renchester.vercel.app/"
           />

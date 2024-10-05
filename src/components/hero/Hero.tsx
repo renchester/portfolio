@@ -24,7 +24,7 @@ function Hero({ startAnimation }: { startAnimation: boolean }) {
         </div>
         <div className="hero__img-wrapper">
           <img
-            src="./profile.png"
+            src="./profile.webp"
             alt="Profile Picture of portfolio subject. Man wearing white polo shirt"
             className="hero__img"
             loading="eager"
@@ -44,9 +44,9 @@ function Hero({ startAnimation }: { startAnimation: boolean }) {
       </div>
 
       <div className="hero__pop">
-        <h6 className="hero__pop-loc">
+        <span className="hero__pop-loc">
           Currently based in Bulacan, Philippines
-        </h6>
+        </span>
       </div>
     </motion.section>
   );

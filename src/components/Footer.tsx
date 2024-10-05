@@ -9,37 +9,37 @@ function Footer() {
       <div className="footer__wrapper">
         <div className="footer__col-1">
           <article aria-labelledby="footer__name">
-            <h3 className="footer__name" id="footer__name">
+            <span className="footer__name" id="footer__name">
               <Link href="#hero-section">Renchester Ramos</Link>
-            </h3>
-            <h4 className="footer__loc">Bulacan, Philippines</h4>
+            </span>
+            <span className="footer__loc">Bulacan, Philippines</span>
           </article>
           <div className="footer__meta">
             <article
               className="footer__meta-item"
               aria-labelledby="footer-version"
             >
-              <dt className="footer__title" id="footer-version">
+              <span className="footer__title" id="footer-version">
                 Version
-              </dt>
-              <dd>2023</dd>
+              </span>
+              <span>2023</span>
             </article>
 
             <article
               className="footer__meta-item"
               aria-labelledby="footer-local-time"
             >
-              <dt id="footer-local-time" className="footer__title">
+              <span id="footer-local-time" className="footer__title">
                 Local Time
-              </dt>
-              <dd>
+              </span>
+              <span>
                 <LocalTime />
-              </dd>
+              </span>
             </article>
           </div>
         </div>
         <div className="footer__col-2">
-          <h3 className="footer__title">This portfolio was built with:</h3>
+          <span className="footer__title">This portfolio was built with:</span>
           <ul className="footer__stack">
             <StackItem width={40} name="react" initTheme="light" />
             <StackItem width={40} name="next" initTheme="light" />
@@ -56,7 +56,7 @@ function Footer() {
           </p>
         </div>
         <div className="footer__col-3">
-          <h3 className="footer__title">Links</h3>
+          <span className="footer__title">Links</span>
           <ul className="footer__links">
             <li>
               <Link

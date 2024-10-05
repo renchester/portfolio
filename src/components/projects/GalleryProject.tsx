@@ -63,7 +63,7 @@ function GalleryProject(props: GalleryProjectProps) {
               exit="initial"
             >
               <div className="gallery__details">
-                <h4 className="gallery__title">{title}</h4>
+                <span className="gallery__title">{title}</span>
                 {subtitle && (
                   <span className="gallery__subtitle">{subtitle}</span>
                 )}

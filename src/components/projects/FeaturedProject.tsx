@@ -75,11 +75,11 @@ function Project(props: ProjectProps) {
               className="featured__logo"
             />
           </motion.a>
-          <h4 className="featured__title-wrapper">
+          <span className="featured__title-wrapper">
             <span className="featured__title" id={projectID}>
               {title}
             </span>
-          </h4>
+          </span>
           <p className="featured__description">
             {description}
 

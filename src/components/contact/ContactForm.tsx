@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import validateEmail from '@/utils/validateEmail';
 import debounce from 'lodash.debounce';
 import emailjs from '@emailjs/browser';
-import { AnimatePresence, motion } from 'framer-motion';
+import { animate, AnimatePresence, motion } from 'framer-motion';
 import ContactInput from './ContactInput';
 import SectionTitle from '../animations/SectionTitle';
 
@@ -127,7 +127,7 @@ function ContactForm() {
           />
 
           <motion.img
-            src="/memoji_2.png"
+            src="/memoji_2.webp"
             alt="Memoji of portfolio subject"
             className="contact__img"
             loading="lazy"
@@ -214,31 +214,44 @@ function ContactForm() {
             aria-hidden
           />
 
-          <motion.button
-            type="submit"
-            className="contact__send"
-            disabled={isButtonDisabled}
-            variants={{
-              initial: {
-                scale: 1,
-                rotate: 0,
-              },
-              focus: {
-                scale: 1.1,
-                rotate: -15,
-              },
-              tap: {
-                scale: 0.9,
-                rotate: 0,
-              },
-            }}
-            initial="initial"
-            whileFocus="focus"
-            whileHover="focus"
-            whileTap="tap"
-          >
-            Send it!
-          </motion.button>
+          <AnimatePresence>
+            {!isButtonDisabled && (
+              <motion.button
+                type="submit"
+                className="contact__send"
+                disabled={isButtonDisabled}
+                variants={{
+                  initial: {
+                    scale: 0,
+                    rotate: 90,
+                  },
+                  animate: {
+                    scale: 1,
+                    rotate: 0,
+                  },
+                  focus: {
+                    scale: 1.1,
+                    rotate: -15,
+                  },
+                  tap: {
+                    scale: 0.9,
+                    rotate: 0,
+                  },
+                  exit: {
+                    scale: 0,
+                  },
+                }}
+                initial="initial"
+                animate="animate"
+                whileFocus="focus"
+                whileHover="focus"
+                whileTap="tap"
+                exit="exit"
+              >
+                Send it!
+              </motion.button>
+            )}
+          </AnimatePresence>
 
           <AnimatePresence>
             {formStatus && (

@@ -4,6 +4,7 @@ import './StackItem.scss';
 import stacks from '@/config/stacks';
 import { useState } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { ReactSVG } from 'react-svg';
 
 type StackItemProps = {
   name: keyof typeof stacks;
@@ -41,16 +42,17 @@ function StackItem(props: StackItemProps) {
         onMouseEnter={showTitle}
         onMouseLeave={hideTitle}
       >
-        <img
-          style={{
-            width: `${width}px`,
-            height: `${width}px`,
+        <ReactSVG
+          beforeInjection={(svg) => {
+            svg.classList.add('stkm__logo');
+            isFocus && svg.classList.add('focus');
+            svg.setAttribute('style', `height: ${width}px; width: ${width}px`);
+            svg.setAttribute('data-theme', initTheme);
           }}
           src={`/logos/${target.logo}`}
-          alt={`Logo for ${target.title}`}
-          className={`stkm__logo ${isFocus && 'focus'}`}
-          data-theme={initTheme}
+          wrapper="span"
         />
+
         <AnimatePresence>
           {isFocus && (
             <motion.span

@@ -1,6 +1,7 @@
 import '@/styles/globals.scss';
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { nunito, inter, poppins, openSans, raleway } from '@/utils/fonts';
 import Header from '@/components/header/Header';
 import Footer from '@/components/Footer';
@@ -37,6 +38,7 @@ export default function RootLayout({
         <ButtonToTop />
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

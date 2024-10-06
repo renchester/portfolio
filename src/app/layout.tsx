@@ -6,6 +6,8 @@ import { nunito, inter, poppins, openSans, raleway } from '@/utils/fonts';
 import Header from '@/components/header/Header';
 import Footer from '@/components/Footer';
 import ButtonToTop from '@/components/ButtonToTop';
+import Script from 'next/script';
+import { WebSite, WithContext } from 'schema-dts';
 
 export const metadata: Metadata = {
   title: {
@@ -25,6 +27,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const structuredData: WithContext<WebSite> = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Renchester Ramos',
+    description:
+      'Full-stack developer portfolio and personal site for Renchester Ramos',
+    thumbnailUrl: `https://avatars.githubusercontent.com/u/61845973?v=4`,
+    alternateName: ['Renchester', 'Chester', 'RJR', 'RR', 'Chester Ramos'],
+    url: 'https://renchester.dev/',
+  };
+
   return (
     <html lang="en">
       <body
@@ -40,6 +53,11 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
       </body>
+      <Script
+        id="seo-json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
     </html>
   );
 }

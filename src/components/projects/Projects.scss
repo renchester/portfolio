@@ -46,13 +46,13 @@
 
   &__gallery-title {
     @extend %text-subtitle;
-    text-align: center;
-
-    width: fit-content;
-    margin-inline: auto;
 
     & a {
       padding: 0.25em 1.25em;
+      width: fit-content;
+      margin-inline: auto;
+      text-align: center;
+      transition: box-shadow 150ms ease-in;
       @extend %parent-with-centered-children;
 
       &:focus,

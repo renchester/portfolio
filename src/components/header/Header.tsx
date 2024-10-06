@@ -17,12 +17,7 @@ function Header() {
     if (!window) return;
 
     const controlHeader = () => {
-      if (window.scrollY > prevScrollPosition) {
-        setVisibility(false);
-      } else {
-        setVisibility(true);
-      }
-
+      setVisibility(!(window.scrollY > prevScrollPosition));
       setPrevScrollPosition(window.scrollY);
     };
 

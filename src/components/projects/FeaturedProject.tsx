@@ -1,43 +1,36 @@
+'use client';
+
 import './FeaturedProject.scss';
 import Link from 'next/link';
-import stacks from '@/config/stacks';
 import StackItem from '../stacks/StackItem';
-import { ReactNode } from 'react';
 import { Variants, motion } from 'framer-motion';
+import { PROJECT_ID_QUERYResult, type Project } from '@/sanity/types';
+import { urlFor } from '@/sanity/lib/image';
+import { DEFAULT_GITHUB, DEFAULT_LIVE } from '@/constants';
 
-type ProjectProps = {
-  children?: ReactNode;
-  index: number;
-  logo: string; //path
-  type: string;
-  title: string;
-  description: string;
-  disclaimer?: string;
-  liveLink: string;
-  repoLink: string;
-  background: string;
-  mobileView: string;
-  desktopView: string;
-  techStack: (keyof typeof stacks)[];
-};
-
-function Project(props: ProjectProps) {
+function Project({
+  project,
+  children,
+}: {
+  project: PROJECT_ID_QUERYResult;
+  children?: React.ReactNode;
+}) {
   const {
-    children,
     index,
     logo,
     type,
-    title,
+    name,
     description,
     liveLink,
     repoLink,
-    mobileView,
-    desktopView,
+    mobileImage,
+    image,
     disclaimer,
-    techStack,
+    stack,
     background,
-  } = props;
-  const projectID = `project-${index}-${title}`;
+  } = project!;
+
+  const projectID = `project-${index}-${name}`;
 
   const logoVariant: Variants = {
     focus: {
@@ -70,14 +63,14 @@ function Project(props: ProjectProps) {
             tabIndex={0}
           >
             <img
-              src={logo}
-              alt={`Logo for ${title}`}
+              src={urlFor(logo || '').url()}
+              alt={`Logo for ${name}`}
               className="featured__logo"
             />
           </motion.a>
-          <span className="featured__title-wrapper">
-            <span className="featured__title" id={projectID}>
-              {title}
+          <span className="featured__name-wrapper">
+            <span className="featured__name" id={projectID}>
+              {name}
             </span>
           </span>
           <p className="featured__description">
@@ -88,18 +81,18 @@ function Project(props: ProjectProps) {
             )}
           </p>
           <ul className="featured__stack">
-            {techStack.map((item) => (
+            {stack?.map((item) => (
               <StackItem
-                name={item}
+                item={item}
                 width={35}
-                key={`${title}-stack--${item}`}
+                key={`${name}-stack--${item}`}
                 initTheme="light"
               />
             ))}
           </ul>
           <div className="featured__links">
             <Link
-              href={repoLink}
+              href={repoLink || DEFAULT_GITHUB}
               className="featured__link github"
               target="_blank"
               rel="noopener noreferrer"
@@ -107,7 +100,7 @@ function Project(props: ProjectProps) {
               <img src="/logos/github.svg" alt="Github Logo" />
             </Link>
             <Link
-              href={liveLink}
+              href={liveLink || DEFAULT_LIVE}
               className="featured__link live"
               target="_blank"
               rel="noopener noreferrer"
@@ -132,8 +125,8 @@ function Project(props: ProjectProps) {
         <div className="featured__img-gallery">
           <div className="featured__img-wrapper">
             <motion.img
-              src={mobileView}
-              alt={`Mockup on Pixel 5 phone for ${title}`}
+              src={urlFor(mobileImage || '').url()}
+              alt={`Mockup on Pixel 5 phone for ${name}`}
               className="featured__img mobile"
               tabIndex={0}
               loading="lazy"
@@ -150,8 +143,8 @@ function Project(props: ProjectProps) {
               }}
             />
             <motion.img
-              src={desktopView}
-              alt={`Mockup on Laptop for ${title}`}
+              src={urlFor(image || '').url()}
+              alt={`Mockup on Laptop for ${name}`}
               className="featured__img desktop"
               loading="lazy"
             />

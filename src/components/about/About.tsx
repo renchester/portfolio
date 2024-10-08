@@ -1,12 +1,18 @@
-'use client';
-
 import './About.scss';
 import Link from 'next/link';
 import StackItem from '../stacks/StackItem';
 import SectionTitle from '../animations/SectionTitle';
-import { motion } from 'framer-motion';
+import AboutMemoji from './AboutMemoji';
+import { client } from '@/sanity/lib/client';
+import { STACKS_QUERY } from '@/sanity/queries';
+import { PortableText } from 'next-sanity';
+import { AUTHOR_QUERYResult } from '@/sanity/types';
 
-function About() {
+const options = { next: { revalidate: 3600 } }; // 1 hour
+
+async function About({ author }: { author: AUTHOR_QUERYResult }) {
+  const stacks = await client.fetch(STACKS_QUERY, undefined, options);
+
   return (
     <section
       className="home-section about"
@@ -14,70 +20,13 @@ function About() {
       id="about"
     >
       <div className="about__wrapper">
-        <motion.img
-          src="/memoji_3.webp"
-          alt="Memoji of portfolio subject working on a Macbook"
-          className="about__memoji"
-          loading="lazy"
-          variants={{
-            initial: {
-              rotate: 0,
-              opacity: 0.85,
-            },
-            focus: {
-              rotate: [null, -10, 10, -5, 5, 0],
-              transition: {
-                duration: 1,
-                ease: 'easeInOut',
-              },
-            },
-          }}
-          initial="initial"
-          whileFocus="focus"
-          whileHover="focus"
-        />
+        <AboutMemoji imgSrc={author?.memojiImage1} />
+        <article className="about__main" aria-labelledby="about-me">
+          <SectionTitle id="about-me" className="about__title" title="About" />
 
-        <article className="about__main" aria-labelledby="about-renchester">
-          <SectionTitle
-            id="about-renchester"
-            className="about__title"
-            title="About"
-          />
-
-          <p className="about__description">
-            Hi, I&apos;m Chester. I am a self-taught web
-            developer—fully-investing my time into learning web development at
-            the beginning of 2023. My background in architecture allows me to
-            always view projects from the perspective of the end-user. Just as
-            an architect&apos;s fundamentals are functionality, aesthetics, and
-            usability—I strive to create products that not only meet the
-            technical requirements of the project, but are also user-friendly
-            and enjoyable to use.
-          </p>
-
-          <p className="about__description">
-            I learned web development skills through{' '}
-            <Link
-              href="https://theodinproject.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              The Odin Project
-            </Link>{' '}
-            and{' '}
-            <Link
-              href="https://fullstackopen.com/en/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Full Stack Open
-            </Link>
-            . This has provided me with opportunities to work on projects that
-            constantly challenge me to learn and apply new principles,
-            frameworks, and technologies. There is always so much to learn and I
-            cannot wait to tackle the endless learning possibilities in this
-            field.
-          </p>
+          <div className="about__description">
+            <PortableText value={author?.bio || []} />
+          </div>
         </article>
         <article className="stack" aria-labelledby="about-stack--title">
           <h2 className="stack__title" id="about-stack--title">
@@ -91,7 +40,11 @@ function About() {
               </h3>
               <ul className="stack__list" aria-labelledby="front-end--list">
                 {/* //* FRONT END */}
-                <StackItem name="react" />
+                {stacks.frontend.map((stack) => (
+                  <StackItem key={stack._id} item={stack} />
+                ))}
+
+                {/* <StackItem name="react" />
                 <StackItem name="next" />
                 <StackItem name="redux" />
                 <StackItem name="javascript" />
@@ -100,7 +53,7 @@ function About() {
                 <StackItem name="css" />
                 <StackItem name="sass" />
                 <StackItem name="tailwind" />
-                <StackItem name="framer" />
+                <StackItem name="framer" /> */}
               </ul>
             </li>
             <li className="stack__tech-item">
@@ -109,7 +62,11 @@ function About() {
               </h3>
               <ul className="stack__list" aria-labelledby="back-end--list">
                 {/* //* BACK END */}
-                <StackItem name="node" />
+                {stacks.backend.map((stack) => (
+                  <StackItem key={stack._id} item={stack} />
+                ))}
+
+                {/* <StackItem name="node" />
                 <StackItem name="mongodb" />
                 <StackItem name="mongoose" />
                 <StackItem name="express" />
@@ -119,7 +76,7 @@ function About() {
                 <StackItem name="sqlite" />
                 <StackItem name="prisma" />
                 <StackItem name="cloudflare" />
-                <StackItem name="passportjs" />
+                <StackItem name="passportjs" /> */}
               </ul>
             </li>
             <li className="stack__tech-item">
@@ -128,7 +85,11 @@ function About() {
               </h3>
               <ul aria-labelledby="dev-tools--list" className="stack__list">
                 {/*  //* DEV TOOLS */}
-                <StackItem name="git" />
+                {stacks.devtools.map((stack) => (
+                  <StackItem key={stack._id} item={stack} />
+                ))}
+
+                {/* <StackItem name="git" />
                 <StackItem name="github" />
                 <StackItem name="linux" />
                 <StackItem name="webpack" />
@@ -138,7 +99,7 @@ function About() {
                 <StackItem name="notion" />
                 <StackItem name="capacitor" />
                 <StackItem name="npm" />
-                <StackItem name="figma" />
+                <StackItem name="figma" /> */}
               </ul>
             </li>
           </ul>
@@ -150,7 +111,7 @@ function About() {
             <li>
               <Link
                 className="about__link"
-                href={`https://www.linkedin.com/in/renchesterramos/`}
+                href={author?.linkedin || ''}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -165,7 +126,7 @@ function About() {
             <li>
               <Link
                 className="about__link"
-                href={`https://github.com/renchester`}
+                href={author?.github || ''}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -179,7 +140,7 @@ function About() {
             </li>
             <li>
               <Link className="about__link" href="#contact">
-                renchesterjramos@gmail.com
+                {author?.email || ''}
               </Link>
             </li>
           </ul>

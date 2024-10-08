@@ -3,9 +3,6 @@ import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { nunito, inter, poppins, openSans, raleway } from '@/utils/fonts';
-import Header from '@/components/header/Header';
-import Footer from '@/components/Footer';
-import ButtonToTop from '@/components/ButtonToTop';
 import Script from 'next/script';
 import { WebSite, WithContext } from 'schema-dts';
 
@@ -43,13 +40,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${nunito.variable} ${poppins.variable}  ${openSans.variable} ${raleway.variable}`}
       >
-        <Header />
-
         {children}
-
-        <Footer />
-        <ButtonToTop />
-
         <Analytics />
         <SpeedInsights />
       </body>

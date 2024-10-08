@@ -5,11 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import validateEmail from '@/utils/validateEmail';
 import debounce from 'lodash.debounce';
 import emailjs from '@emailjs/browser';
-import { animate, AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import ContactInput from './ContactInput';
 import SectionTitle from '../animations/SectionTitle';
+import { AUTHOR_QUERYResult } from '@/sanity/types';
+import { urlFor } from '@/sanity/lib/image';
 
-function ContactForm() {
+function ContactForm({ author }: { author: AUTHOR_QUERYResult }) {
   const [name, setName] = useState('');
   const [services, setServices] = useState('');
   const [message, setMessage] = useState('');
@@ -127,7 +129,7 @@ function ContactForm() {
           />
 
           <motion.img
-            src="/memoji_2.webp"
+            src={urlFor(author?.memojiImage2 || '').url()}
             alt="Memoji of portfolio subject"
             className="contact__img"
             loading="lazy"

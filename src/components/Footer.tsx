@@ -1,18 +1,29 @@
-import './Footer.scss';
 import Link from 'next/link';
 import StackItem from './stacks/StackItem';
 import LocalTime from './LocalTime';
+import { AUTHOR_QUERY, FOOTER_STACKS_QUERY } from '@/sanity/queries';
+import { client } from '@/sanity/lib/client';
+import './Footer.scss';
 
-function Footer() {
+const options = { next: { revalidate: 3600 } }; // 1 hour
+
+async function Footer() {
+  const [author, stacks] = await Promise.all([
+    client.fetch(AUTHOR_QUERY, undefined, options),
+    client.fetch(FOOTER_STACKS_QUERY, undefined, options),
+  ]);
+
+  console.log(author?.timezone);
+
   return (
     <footer className="footer">
       <div className="footer__wrapper">
         <div className="footer__col-1">
           <article aria-labelledby="footer__name">
             <span className="footer__name" id="footer__name">
-              <Link href="#hero-section">Renchester Ramos</Link>
+              <Link href="#hero-section">{`${author?.firstName} ${author?.lastName}`}</Link>
             </span>
-            <span className="footer__loc">Bulacan, Philippines</span>
+            <span className="footer__loc">{author?.location}</span>
           </article>
           <div className="footer__meta">
             <article
@@ -33,7 +44,7 @@ function Footer() {
                 Local Time
               </span>
               <span>
-                <LocalTime />
+                <LocalTime timeZone={author?.timezone ?? 'Europe/London'} />
               </span>
             </article>
           </div>
@@ -41,11 +52,20 @@ function Footer() {
         <div className="footer__col-2">
           <span className="footer__title">This portfolio was built with:</span>
           <ul className="footer__stack">
-            <StackItem width={40} name="react" initTheme="light" />
+            {stacks.map((stack) => (
+              <StackItem
+                item={stack}
+                key={stack.name}
+                width={40}
+                initTheme="light"
+              />
+            ))}
+
+            {/* <StackItem width={40} name="react" initTheme="light" />
             <StackItem width={40} name="next" initTheme="light" />
             <StackItem width={40} name="typescript" initTheme="light" />
             <StackItem width={40} name="framer" initTheme="light" />
-            <StackItem width={40} name="sass" initTheme="light" />
+            <StackItem width={40} name="sass" initTheme="light" /> */}
           </ul>
           <p className="footer__coffee">
             and 16 cups of{' '}
@@ -61,7 +81,7 @@ function Footer() {
             <li>
               <Link
                 className="footer__link"
-                href={`https://www.linkedin.com/in/renchesterramos/`}
+                href={author?.linkedin || ''}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -71,24 +91,27 @@ function Footer() {
             <li>
               <Link
                 className="footer__link"
-                href={`https://github.com/renchester`}
+                href={author?.github || ''}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Github
               </Link>
             </li>
-            <li>
-              <Link
-                className="footer__link"
-                // href={`https://drive.google.com/file/d/1qJy4oltcu4WbtMfHHZhw8SJUCvnapjRk/view?usp=drive_link`}
-                href={`https://nxjncryln9z0izl4.public.blob.vercel-storage.com/architecture-portfolio`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Architecture Portfolio
-              </Link>
-            </li>
+            {author?.customLink && (
+              <li>
+                <Link
+                  className="footer__link"
+                  href={author.customLink.value || ''}
+                  // href={`https://drive.google.com/file/d/1qJy4oltcu4WbtMfHHZhw8SJUCvnapjRk/view?usp=drive_link`}
+                  // href={`https://nxjncryln9z0izl4.public.blob.vercel-storage.com/architecture-portfolio`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {author.customLink.label || ''}
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

@@ -1,19 +1,23 @@
 'use client';
 
 import './StackItem.scss';
-import stacks from '@/config/stacks';
 import { useState } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { urlFor } from '@/sanity/lib/image';
 
-type StackItemProps = {
-  name: keyof typeof stacks;
+function StackItem(props: {
+  item: {
+    name?: string | null;
+    logo?: SanityImageSource | null;
+    type?: string | null;
+  };
   initTheme?: 'dark' | 'light';
   width?: number;
-};
+}) {
+  const { item, width = 60, initTheme = 'dark' } = props;
 
-function StackItem(props: StackItemProps) {
-  const { name, width = 60, initTheme = 'dark' } = props;
-  const target = stacks[name];
+  const { name, logo } = item;
 
   const [isFocus, setFocus] = useState(false);
 
@@ -33,8 +37,8 @@ function StackItem(props: StackItemProps) {
     <li className="stkm__container">
       <article
         className="stkm"
-        title={target.title}
-        aria-label={`${target.title} logo`}
+        title={name ?? ''}
+        aria-label={`${name} logo`}
         tabIndex={0}
         onFocus={showTitle}
         onBlur={hideTitle}
@@ -46,8 +50,8 @@ function StackItem(props: StackItemProps) {
             width: `${width}px`,
             height: `${width}px`,
           }}
-          src={`/logos/${target.logo}`}
-          alt={`Logo for ${target.title}`}
+          src={`${urlFor(logo || '').url()}`}
+          alt={`Logo for ${name}`}
           className={`stkm__logo ${isFocus && 'focus'}`}
           data-theme={initTheme}
         />
@@ -61,7 +65,7 @@ function StackItem(props: StackItemProps) {
               animate="animate"
               exit="initial "
             >
-              {target.title}
+              {name}
             </motion.span>
           )}
         </AnimatePresence>

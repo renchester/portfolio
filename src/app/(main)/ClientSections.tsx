@@ -13,7 +13,7 @@ function ClientSections({ author }: { author: AUTHOR_QUERYResult }) {
   return (
     <>
       <AnimatePresence>
-        {/* {onWelcome && <WelcomeScreen hideScreen={hideWelcome} />} */}
+        {onWelcome && <WelcomeScreen hideScreen={hideWelcome} />}
       </AnimatePresence>
 
       {/* Hero */}

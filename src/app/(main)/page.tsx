@@ -4,7 +4,7 @@ import Projects from '@/components/projects/Projects';
 import ClientSections from './ClientSections';
 import { client } from '@/sanity/lib/client';
 import { AUTHOR_QUERY } from '@/sanity/queries';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 const options = { next: { revalidate: 1800 } }; // 30 mins
 
@@ -12,7 +12,8 @@ export default async function Home() {
   const author = await client.fetch(AUTHOR_QUERY, undefined, options);
 
   if (!author) {
-    notFound();
+    // notFound();
+    redirect('https://renchester.dev');
   }
 
   return (

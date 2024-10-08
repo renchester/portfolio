@@ -13,8 +13,6 @@ async function Footer() {
     client.fetch(FOOTER_STACKS_QUERY, undefined, options),
   ]);
 
-  console.log(author?.timezone);
-
   return (
     <footer className="footer">
       <div className="footer__wrapper">

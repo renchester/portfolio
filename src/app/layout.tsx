@@ -8,7 +8,7 @@ import { WebSite, WithContext } from 'schema-dts';
 import { client } from '@/sanity/lib/client';
 import { AUTHOR_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/lib/image';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 const options = { next: { revalidate: 3600 } }; // 1 hour
 
@@ -62,7 +62,8 @@ export default async function RootLayout({
   const author = await client.fetch(AUTHOR_QUERY, undefined, options);
 
   if (!author) {
-    notFound();
+    redirect('https://renchester.dev');
+    // notFound();
   }
 
   const fullName = `${author.firstName} ${author.lastName}`;

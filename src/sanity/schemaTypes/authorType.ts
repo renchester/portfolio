@@ -10,7 +10,11 @@ export const authorType = defineType({
   icon: UserIcon,
   fields: [
     defineField({
-      name: 'name',
+      name: 'firstName',
+      type: 'string',
+    }),
+    defineField({
+      name: 'lastName',
       type: 'string',
     }),
     defineField({
@@ -130,6 +134,28 @@ export const authorType = defineType({
       name: 'github',
       type: 'url',
       title: 'Your Github URL',
+    }),
+    defineField({
+      name: 'email',
+      type: 'email',
+      title: 'Your email',
+    }),
+    defineField({
+      name: 'customLink',
+      type: 'object',
+      title: 'Custom Link',
+      fields: [
+        {
+          name: 'label',
+          type: 'string',
+          title: 'Label',
+        },
+        {
+          name: 'value',
+          type: 'url',
+          title: 'Value',
+        },
+      ],
     }),
   ],
   preview: {

@@ -35,6 +35,11 @@ export const projectType = defineType({
         }),
     }),
     defineField({
+      name: 'disclaimer',
+      type: 'string',
+      title: 'Project Disclaimer',
+    }),
+    defineField({
       name: 'isFeatured',
       type: 'boolean',
       title: 'Is this a featured project?',

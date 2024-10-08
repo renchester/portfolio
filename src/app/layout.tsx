@@ -5,34 +5,79 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { nunito, inter, poppins, openSans, raleway } from '@/utils/fonts';
 import Script from 'next/script';
 import { WebSite, WithContext } from 'schema-dts';
+import { client } from '@/sanity/lib/client';
+import { AUTHOR_QUERY } from '@/sanity/queries';
+import { urlFor } from '@/sanity/lib/image';
+import { notFound } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s by Renchester Ramos | Full-stack Developer & Designer',
-    default: 'Renchester Ramos | Full-stack Developer & Designer',
-  },
-  description: 'Web developer portfolio and personal site for Renchester Ramos',
-  openGraph: {
-    title: 'Renchester Ramos - Portfolio',
-    description:
-      'Full-stack developer portfolio and personal site for Renchester Ramos',
-  },
-};
+const options = { next: { revalidate: 3600 } }; // 1 hour
 
-export default function RootLayout({
+export async function generateMetadata(): Promise<Metadata> {
+  const author = await client.fetch(AUTHOR_QUERY, undefined, options);
+
+  if (!author)
+    return {
+      title: 'Portfolio',
+      description: 'This is a portfolio page',
+    };
+
+  const fullName = `${author.firstName} ${author.lastName}`;
+  const description = author.seoDescription;
+  const imageUrl = urlFor(author.seoImage || '').url();
+
+  const url = author.seoUrl;
+
+  return {
+    title: `${fullName} | ${author.job}`,
+    description: author.seoDescription,
+    openGraph: {
+      title: `${fullName} — Portfolio`,
+      description,
+      url,
+      siteName: `${fullName} — Portfolio`,
+      type: 'website',
+      locale: 'en_US',
+      images: [
+        {
+          url: imageUrl, // Must be an absolute URL
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${fullName} — Portfolio`,
+      description,
+      images: [imageUrl], // Must be an absolute URL
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const author = await client.fetch(AUTHOR_QUERY, undefined, options);
+
+  if (!author) {
+    notFound();
+  }
+
+  const fullName = `${author.firstName} ${author.lastName}`;
+  const description = author.seoDescription;
+  const imageUrl = urlFor(author.seoImage || '').url();
+  const url = author.seoUrl;
+
   const structuredData: WithContext<WebSite> = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Renchester Ramos',
-    description:
-      'Full-stack developer portfolio and personal site for Renchester Ramos',
-    thumbnailUrl: `https://avatars.githubusercontent.com/u/61845973?v=4`,
-    alternateName: ['Renchester', 'Chester', 'RJR', 'RR', 'Chester Ramos'],
-    url: 'https://renchester.dev/',
+    name: `${fullName} — Portfolio`,
+    description,
+    thumbnailUrl: imageUrl,
+    alternateName: author.seoAlternateNames,
+    url,
   };
 
   return (

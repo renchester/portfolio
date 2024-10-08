@@ -252,17 +252,6 @@ export type Author = {
     _type: "block";
     _key: string;
   }>;
-  seoImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
   heroImage?: {
     asset?: {
       _ref: string;
@@ -304,6 +293,31 @@ export type Author = {
   customLink?: {
     label?: string;
     value?: string;
+  };
+  seoImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  seoDescription?: string;
+  seoAlternateNames?: Array<string>;
+  seoUrl?: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
   };
 };
 
@@ -578,17 +592,6 @@ export type AUTHOR_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
-  seoImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
   heroImage?: {
     asset?: {
       _ref: string;
@@ -630,6 +633,31 @@ export type AUTHOR_QUERYResult = {
   customLink?: {
     label?: string;
     value?: string;
+  };
+  seoImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  seoDescription?: string;
+  seoAlternateNames?: Array<string>;
+  seoUrl?: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
   };
 } | null;
 // Variable: STACKS_QUERY

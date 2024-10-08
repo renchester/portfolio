@@ -8,6 +8,17 @@ export const authorType = defineType({
   title: 'Author',
   type: 'document',
   icon: UserIcon,
+  fieldsets: [
+    {
+      name: 'seo',
+      title: 'SEO Data',
+      description: 'Fill this out for SEO purposes',
+    },
+    {
+      name: 'contact',
+      title: 'Contact Details',
+    },
+  ],
   fields: [
     defineField({
       name: 'firstName',
@@ -68,15 +79,6 @@ export const authorType = defineType({
       ],
     }),
     defineField({
-      name: 'seoImage',
-      type: 'image',
-      title: 'SEO Image',
-      description: 'Image for SEO purposes',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
       name: 'heroImage',
       type: 'image',
       title: 'Hero Image',
@@ -129,16 +131,19 @@ export const authorType = defineType({
       name: 'linkedin',
       type: 'url',
       title: 'Your Linkedin URL',
+      fieldset: 'contact',
     }),
     defineField({
       name: 'github',
       type: 'url',
       title: 'Your Github URL',
+      fieldset: 'contact',
     }),
     defineField({
       name: 'email',
       type: 'email',
       title: 'Your email',
+      fieldset: 'contact',
     }),
     defineField({
       name: 'customLink',
@@ -157,11 +162,51 @@ export const authorType = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'seoImage',
+      type: 'image',
+      title: 'SEO Image',
+      description: 'Image for SEO purposes',
+      fieldset: 'seo',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'seoDescription',
+      type: 'string',
+      title: 'Portfolio Description',
+      description: 'A short description for your portfolio',
+      fieldset: 'seo',
+    }),
+    defineField({
+      name: 'seoAlternateNames',
+      type: 'array',
+      title: 'Alternate Names',
+      of: [{ type: 'string' }],
+      description: 'What other names could this portfolio have?',
+      fieldset: 'seo',
+    }),
+    defineField({
+      name: 'seoUrl',
+      type: 'url',
+      description: 'URL of your portfolio',
+      title: 'Site URL',
+      fieldset: 'seo',
+    }),
+    defineField({
+      name: 'logo',
+      type: 'image',
+      description: 'Best with 1:1 aspect ratio',
+      fieldset: 'seo',
+      validation: (rule) =>
+        rule.required().error('You must provide a logo for your site'),
+    }),
   ],
   preview: {
     select: {
-      title: 'name',
-      media: 'image',
+      title: 'firstName',
+      media: 'seoImage',
     },
   },
 });

@@ -81,7 +81,8 @@ function Footer() {
             <li>
               <Link
                 className="footer__link"
-                href={`https://drive.google.com/file/d/1qJy4oltcu4WbtMfHHZhw8SJUCvnapjRk/view?usp=drive_link`}
+                // href={`https://drive.google.com/file/d/1qJy4oltcu4WbtMfHHZhw8SJUCvnapjRk/view?usp=drive_link`}
+                href={`https://nxjncryln9z0izl4.public.blob.vercel-storage.com/architecture-portfolio`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

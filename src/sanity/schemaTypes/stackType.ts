@@ -5,7 +5,7 @@ export const stackType = defineType({
   name: 'stack',
   title: 'Tech Stack',
   type: 'document',
-  icon: FolderIcon,
+  // icon: FolderIcon,
   fields: [
     defineField({
       name: 'name',

@@ -5,7 +5,7 @@ export const projectType = defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
-  icon: ProjectsIcon,
+  // icon: ProjectsIcon,
   fields: [
     defineField({
       name: 'name',

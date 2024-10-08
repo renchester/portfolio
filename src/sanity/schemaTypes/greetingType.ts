@@ -5,7 +5,7 @@ export const greetingType = defineType({
   name: 'greeting',
   title: 'Welcome Greetings',
   type: 'document',
-  icon: SunIcon,
+  // icon: SunIcon,
   fields: [
     defineField({
       name: 'content',

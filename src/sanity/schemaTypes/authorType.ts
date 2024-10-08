@@ -7,7 +7,7 @@ export const authorType = defineType({
   name: 'author',
   title: 'Author',
   type: 'document',
-  icon: UserIcon,
+  // icon: UserIcon,
   fieldsets: [
     {
       name: 'seo',

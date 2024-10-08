@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "npm run typegen",
     "dev": "next dev",
+    "prebuild": "npm run typegen",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typegen": "sanity schema extract --path=src/sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "@motionone/utils": "^10.15.1",
+    "@sanity/icons": "^3.4.0",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.59.1",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
@@ -23,9 +29,12 @@
     "framer-motion": "^10.18.0",
     "lodash.debounce": "^4.0.8",
     "next": "^14.2.12",
+    "next-sanity": "^9.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sanity": "^3.59.1",
     "schema-dts": "^1.1.2",
+    "styled-components": "^6.1.13",
     "typescript": "5.1.6",
     "validator": "^13.9.0"
   },

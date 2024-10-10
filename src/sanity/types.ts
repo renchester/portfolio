@@ -716,7 +716,7 @@ export type AUTHOR_QUERYResult = {
   };
 } | null;
 // Variable: STACKS_QUERY
-// Query: {  "frontend": *[_type == "stack" && name == "react"] | order(proficiency desc, name asc),  "backend": *[_type == "stack" && type == "backend"] | order(proficiency desc, name asc),  "devtools": *[_type == "stack" && type == "devtools"] | order(proficiency desc, name asc),  "others": *[_type == "stack" && type == "others"] | order(proficiency desc, name asc)}
+// Query: {  "frontend": *[_type == "stack" && type == "frontend"] | order(proficiency desc, name asc),  "backend": *[_type == "stack" && type == "backend"] | order(proficiency desc, name asc),  "devtools": *[_type == "stack" && type == "devtools"] | order(proficiency desc, name asc),  "others": *[_type == "stack" && type == "others"] | order(proficiency desc, name asc)}
 export type STACKS_QUERYResult = {
   frontend: Array<{
     _id: string;
@@ -828,7 +828,7 @@ declare module "@sanity/client" {
     "*[_type == \"project\"] | order(index asc) {..., stack[]->{name, logo, type} }": PROJECTS_QUERYResult;
     "*[_type == \"project\" && _id == $id][0]{..., stack[]->{name, logo, type} }": PROJECT_ID_QUERYResult;
     "*[_type == \"author\"][0]": AUTHOR_QUERYResult;
-    "{\n  \"frontend\": *[_type == \"stack\" && name == \"react\"] | order(proficiency desc, name asc),\n  \"backend\": *[_type == \"stack\" && type == \"backend\"] | order(proficiency desc, name asc),\n  \"devtools\": *[_type == \"stack\" && type == \"devtools\"] | order(proficiency desc, name asc),\n  \"others\": *[_type == \"stack\" && type == \"others\"] | order(proficiency desc, name asc)\n}": STACKS_QUERYResult;
+    "{\n  \"frontend\": *[_type == \"stack\" && type == \"frontend\"] | order(proficiency desc, name asc),\n  \"backend\": *[_type == \"stack\" && type == \"backend\"] | order(proficiency desc, name asc),\n  \"devtools\": *[_type == \"stack\" && type == \"devtools\"] | order(proficiency desc, name asc),\n  \"others\": *[_type == \"stack\" && type == \"others\"] | order(proficiency desc, name asc)\n}": STACKS_QUERYResult;
     "*[\n _type == \"stack\" &&\n   name in [\"React\", \"Next.js\", \"Typescript\", \"Framer\", \"Sass\", \"Sanity CMS\"]\n] | order(type asc){name, logo, type}": FOOTER_STACKS_QUERYResult;
   }
 }

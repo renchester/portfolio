@@ -68,6 +68,60 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Experience = {
+  _id: string;
+  _type: "experience";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  company?: string;
+  position?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      blank?: boolean;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  startDate?: string;
+  isCurrent?: boolean;
+  endDate?: string;
+  location?: string;
+  locationType?: "onSite" | "hybrid" | "remote";
+  employmentType?: "fullTime" | "partTime" | "selfEmployed" | "freelance" | "contract" | "internship" | "apprenticeship" | "seasonal";
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  url?: string;
+  stacks?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "stack";
+  }>;
+};
+
 export type Stack = {
   _id: string;
   _type: "stack";
@@ -87,6 +141,7 @@ export type Stack = {
     _type: "image";
   };
   type?: "devtools" | "frontend" | "backend" | "others";
+  proficiency?: number;
 };
 
 export type Greeting = {
@@ -426,11 +481,11 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Stack | Greeting | Project | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Experience | Stack | Greeting | Project | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries.ts
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "project"]{..., stack[]->{name, logo, type} }
+// Query: *[_type == "project"] | order(index asc) {..., stack[]->{name, logo, type} }
 export type PROJECTS_QUERYResult = Array<{
   _id: string;
   _type: "project";
@@ -661,7 +716,7 @@ export type AUTHOR_QUERYResult = {
   };
 } | null;
 // Variable: STACKS_QUERY
-// Query: {  "frontend": *[_type == "stack" && type == "frontend"],  "backend": *[_type == "stack" && type == "backend"],  "devtools": *[_type == "stack" && type == "devtools"]}
+// Query: {  "frontend": *[_type == "stack" && name == "react"] | order(proficiency desc, name asc),  "backend": *[_type == "stack" && type == "backend"] | order(proficiency desc, name asc),  "devtools": *[_type == "stack" && type == "devtools"] | order(proficiency desc, name asc),  "others": *[_type == "stack" && type == "others"] | order(proficiency desc, name asc)}
 export type STACKS_QUERYResult = {
   frontend: Array<{
     _id: string;
@@ -682,6 +737,7 @@ export type STACKS_QUERYResult = {
       _type: "image";
     };
     type?: "backend" | "devtools" | "frontend" | "others";
+    proficiency?: number;
   }>;
   backend: Array<{
     _id: string;
@@ -702,6 +758,7 @@ export type STACKS_QUERYResult = {
       _type: "image";
     };
     type?: "backend" | "devtools" | "frontend" | "others";
+    proficiency?: number;
   }>;
   devtools: Array<{
     _id: string;
@@ -722,10 +779,32 @@ export type STACKS_QUERYResult = {
       _type: "image";
     };
     type?: "backend" | "devtools" | "frontend" | "others";
+    proficiency?: number;
+  }>;
+  others: Array<{
+    _id: string;
+    _type: "stack";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    logo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    type?: "backend" | "devtools" | "frontend" | "others";
+    proficiency?: number;
   }>;
 };
 // Variable: FOOTER_STACKS_QUERY
-// Query: *[    _type == "project" && name in ["react", "next", "typescript", "framer", "sass", "sanity"]]{name, logo, type}
+// Query: *[ _type == "stack" &&   name in ["React", "Next.js", "Typescript", "Framer", "Sass", "Sanity CMS"]] | order(type asc){name, logo, type}
 export type FOOTER_STACKS_QUERYResult = Array<{
   name: string | null;
   logo: {
@@ -739,17 +818,17 @@ export type FOOTER_STACKS_QUERYResult = Array<{
     crop?: SanityImageCrop;
     _type: "image";
   } | null;
-  type: string | null;
+  type: "backend" | "devtools" | "frontend" | "others" | null;
 }>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"project\"]{..., stack[]->{name, logo, type} }": PROJECTS_QUERYResult;
+    "*[_type == \"project\"] | order(index asc) {..., stack[]->{name, logo, type} }": PROJECTS_QUERYResult;
     "*[_type == \"project\" && _id == $id][0]{..., stack[]->{name, logo, type} }": PROJECT_ID_QUERYResult;
     "*[_type == \"author\"][0]": AUTHOR_QUERYResult;
-    "{\n  \"frontend\": *[_type == \"stack\" && type == \"frontend\"],\n  \"backend\": *[_type == \"stack\" && type == \"backend\"],\n  \"devtools\": *[_type == \"stack\" && type == \"devtools\"]\n}": STACKS_QUERYResult;
-    "*[\n    _type == \"project\" && name in [\"react\", \"next\", \"typescript\", \"framer\", \"sass\", \"sanity\"]\n]{name, logo, type}": FOOTER_STACKS_QUERYResult;
+    "{\n  \"frontend\": *[_type == \"stack\" && name == \"react\"] | order(proficiency desc, name asc),\n  \"backend\": *[_type == \"stack\" && type == \"backend\"] | order(proficiency desc, name asc),\n  \"devtools\": *[_type == \"stack\" && type == \"devtools\"] | order(proficiency desc, name asc),\n  \"others\": *[_type == \"stack\" && type == \"others\"] | order(proficiency desc, name asc)\n}": STACKS_QUERYResult;
+    "*[\n _type == \"stack\" &&\n   name in [\"React\", \"Next.js\", \"Typescript\", \"Framer\", \"Sass\", \"Sanity CMS\"]\n] | order(type asc){name, logo, type}": FOOTER_STACKS_QUERYResult;
   }
 }

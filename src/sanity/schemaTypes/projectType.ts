@@ -23,7 +23,7 @@ export const projectType = defineType({
     }),
     defineField({
       name: 'description',
-      type: 'string',
+      type: 'text',
       title: 'Project Description',
       validation: (rule) =>
         rule.custom((value, { document }) => {
@@ -36,8 +36,10 @@ export const projectType = defineType({
     }),
     defineField({
       name: 'disclaimer',
-      type: 'string',
+      type: 'text',
       title: 'Project Disclaimer',
+      description:
+        "Is there something else that you'd like your audience to know more about this project?",
     }),
     defineField({
       name: 'isFeatured',
@@ -51,7 +53,7 @@ export const projectType = defineType({
       type: 'number',
       title: 'Project Index',
       description:
-        'If this project is featured, indicate here the order in which you want this project to be shown',
+        'Indicate here the order in which you want this project to be shown',
       initialValue: 1,
       validation: (rule) =>
         rule.custom((value, { document }) => {
@@ -61,7 +63,6 @@ export const projectType = defineType({
 
           return true; // No validation error
         }),
-      hidden: ({ document }) => !document?.isFeatured,
     }),
     defineField({
       name: 'logo',
@@ -83,6 +84,8 @@ export const projectType = defineType({
       title: 'Main Image',
       description:
         'Main image or screengrab to be used for your application. If this project is a featured project, use a screengrab with a laptop view.',
+      validation: (rule) =>
+        rule.required().error('You must provide an image for this project'),
     }),
     defineField({
       name: 'mobileImage',

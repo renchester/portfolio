@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const fullName = `${author.firstName} ${author.lastName}`;
   const description = author.seoDescription;
-  const imageUrl = urlFor(author.seoImage || '').url();
+  const imageUrl = urlFor(author.seoImage).url();
 
   const url = author.seoUrl;
 
@@ -68,7 +68,7 @@ export default async function RootLayout({
 
   const fullName = `${author.firstName} ${author.lastName}`;
   const description = author.seoDescription;
-  const imageUrl = urlFor(author.seoImage || '').url();
+  const imageUrl = urlFor(author.seoImage).url();
   const url = author.seoUrl;
 
   const structuredData: WithContext<WebSite> = {

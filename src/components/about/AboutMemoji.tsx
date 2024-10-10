@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 function AboutMemoji({ imgSrc }: { imgSrc?: SanityImageSource | null }) {
   return (
     <motion.img
-      src={urlFor(imgSrc || '').url()}
+      src={urlFor(imgSrc).url()}
       alt="Memoji of portfolio subject working on a Macbook"
       className="about__memoji"
       loading="lazy"

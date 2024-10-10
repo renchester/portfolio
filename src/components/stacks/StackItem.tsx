@@ -50,7 +50,7 @@ function StackItem(props: {
             width: `${width}px`,
             height: `${width}px`,
           }}
-          src={`${urlFor(logo || '').url()}`}
+          src={`${urlFor(logo).url()}`}
           alt={`Logo for ${name}`}
           className={`stkm__logo ${isFocus && 'focus'}`}
           data-theme={initTheme}

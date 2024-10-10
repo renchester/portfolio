@@ -129,7 +129,7 @@ function ContactForm({ author }: { author: AUTHOR_QUERYResult }) {
           />
 
           <motion.img
-            src={urlFor(author?.memojiImage2 || '').url()}
+            src={urlFor(author?.memojiImage2).url()}
             alt="Memoji of portfolio subject"
             className="contact__img"
             loading="lazy"

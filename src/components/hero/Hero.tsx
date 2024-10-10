@@ -36,7 +36,7 @@ function Hero({
         </div>
         <div className="hero__img-wrapper">
           <img
-            src={urlFor(author?.heroImage || '').url()}
+            src={urlFor(author?.heroImage).url()}
             alt="Profile Picture of portfolio subject. Man wearing white polo shirt"
             className="hero__img"
             loading="eager"

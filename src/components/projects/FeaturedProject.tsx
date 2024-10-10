@@ -63,13 +63,13 @@ function Project({
             tabIndex={0}
           >
             <img
-              src={urlFor(logo || '').url()}
+              src={urlFor(logo).url()}
               alt={`Logo for ${name}`}
               className="featured__logo"
             />
           </motion.a>
-          <span className="featured__name-wrapper">
-            <span className="featured__name" id={projectID}>
+          <span className="featured__title-wrapper">
+            <span className="featured__title" id={projectID}>
               {name}
             </span>
           </span>
@@ -125,7 +125,7 @@ function Project({
         <div className="featured__img-gallery">
           <div className="featured__img-wrapper">
             <motion.img
-              src={urlFor(mobileImage || '').url()}
+              src={urlFor(mobileImage).url()}
               alt={`Mockup on Pixel 5 phone for ${name}`}
               className="featured__img mobile"
               tabIndex={0}
@@ -143,7 +143,7 @@ function Project({
               }}
             />
             <motion.img
-              src={urlFor(image || '').url()}
+              src={urlFor(image).url()}
               alt={`Mockup on Laptop for ${name}`}
               className="featured__img desktop"
               loading="lazy"

@@ -58,15 +58,9 @@ async function Footer() {
                 initTheme="light"
               />
             ))}
-
-            {/* <StackItem width={40} name="react" initTheme="light" />
-            <StackItem width={40} name="next" initTheme="light" />
-            <StackItem width={40} name="typescript" initTheme="light" />
-            <StackItem width={40} name="framer" initTheme="light" />
-            <StackItem width={40} name="sass" initTheme="light" /> */}
           </ul>
           <p className="footer__coffee">
-            and 16 cups of{' '}
+            and a lot of{' '}
             <span title="coffee" aria-label="coffee emoji">
               ☕
             </span>{' '}

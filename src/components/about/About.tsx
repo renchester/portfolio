@@ -43,17 +43,6 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
                 {stacks.frontend.map((stack) => (
                   <StackItem key={stack._id} item={stack} />
                 ))}
-
-                {/* <StackItem name="react" />
-                <StackItem name="next" />
-                <StackItem name="redux" />
-                <StackItem name="javascript" />
-                <StackItem name="typescript" />
-                <StackItem name="html" />
-                <StackItem name="css" />
-                <StackItem name="sass" />
-                <StackItem name="tailwind" />
-                <StackItem name="framer" /> */}
               </ul>
             </li>
             <li className="stack__tech-item">
@@ -65,18 +54,6 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
                 {stacks.backend.map((stack) => (
                   <StackItem key={stack._id} item={stack} />
                 ))}
-
-                {/* <StackItem name="node" />
-                <StackItem name="mongodb" />
-                <StackItem name="mongoose" />
-                <StackItem name="express" />
-                <StackItem name="hono" />
-                <StackItem name="firebase" />
-                <StackItem name="postgresql" />
-                <StackItem name="sqlite" />
-                <StackItem name="prisma" />
-                <StackItem name="cloudflare" />
-                <StackItem name="passportjs" /> */}
               </ul>
             </li>
             <li className="stack__tech-item">
@@ -88,18 +65,6 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
                 {stacks.devtools.map((stack) => (
                   <StackItem key={stack._id} item={stack} />
                 ))}
-
-                {/* <StackItem name="git" />
-                <StackItem name="github" />
-                <StackItem name="linux" />
-                <StackItem name="webpack" />
-                <StackItem name="vite" />
-                <StackItem name="vitest" />
-                <StackItem name="jest" />
-                <StackItem name="notion" />
-                <StackItem name="capacitor" />
-                <StackItem name="npm" />
-                <StackItem name="figma" /> */}
               </ul>
             </li>
           </ul>

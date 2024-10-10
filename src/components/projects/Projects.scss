@@ -29,19 +29,20 @@
   &__gallery {
     margin-top: var(--header-height);
     padding-block: 2em;
+    padding-inline: 0.75rem;
     position: relative;
 
-    &::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      left: 0;
-      height: 25%;
-      bottom: 0;
-      z-index: -1;
-      transform: skewY(-2.5deg) translateY(15%);
-      background-color: var(--background);
-    }
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   right: 0;
+    //   left: 0;
+    //   height: 25%;
+    //   bottom: 0;
+    //   z-index: -1;
+    //   transform: skewY(-2.5deg) translateY(15%);
+    //   background-color: var(--background);
+    // }
   }
 
   &__gallery-title {

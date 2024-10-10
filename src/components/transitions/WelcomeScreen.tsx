@@ -35,7 +35,7 @@ function WelcomeScreen(props: WelcomeScreenProps) {
       opacity: 1,
       transition: {
         when: 'beforeChildren',
-        staggerChildren: 0.45,
+        staggerChildren: 0.35,
       },
     },
   };

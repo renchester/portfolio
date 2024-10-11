@@ -20,4 +20,4 @@ export const STACKS_QUERY = defineQuery(`{
 export const FOOTER_STACKS_QUERY = defineQuery(`*[
  _type == "stack" &&
    name in ["React", "Next.js", "Typescript", "Framer", "Sass", "Sanity CMS"]
-] | order(type asc){name, logo, type}`);
+] | order(type desc, name asc){name, logo, type}`);

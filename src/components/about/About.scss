@@ -3,15 +3,13 @@
 
 .about {
   padding-top: var(--header-height);
+  padding-bottom: 2.5em;
 
   &__wrapper {
     position: relative;
     margin-inline: auto;
     max-width: var(--max-page-width);
     padding-inline: var(--section-padding);
-
-    @include mx.breakpoint(3xl) {
-    }
   }
 
   &__main {
@@ -71,7 +69,6 @@
 
   &__links-wrapper {
     margin-block: 2.25em;
-    padding-bottom: 2.5em;
   }
 
   &__links-title {

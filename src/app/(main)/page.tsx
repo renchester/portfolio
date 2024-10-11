@@ -5,6 +5,7 @@ import ClientSections from './ClientSections';
 import { client } from '@/sanity/lib/client';
 import { AUTHOR_QUERY } from '@/sanity/queries';
 import { notFound, redirect } from 'next/navigation';
+import WorkExperience from '@/components/experience/WorkExperience';
 
 const options = { next: { revalidate: 1800 } }; // 30 mins
 
@@ -23,6 +24,9 @@ export default async function Home() {
 
       {/* About */}
       <About author={author} />
+
+      {/* Experience  */}
+      <WorkExperience />
 
       {/* Projects */}
       <Projects />

@@ -10,6 +10,12 @@ export const PROJECT_ID_QUERY = defineQuery(
 
 export const AUTHOR_QUERY = defineQuery(`*[_type == "author"][0]`);
 
+export const EXPERIENCE_QUERY = defineQuery(
+  `*[_type == "experience"] | order(startDate desc)`,
+);
+
+export const EXPERIENCE_ID_QUERY = defineQuery(`*[_type == "experience"][0]`);
+
 export const STACKS_QUERY = defineQuery(`{
   "frontend": *[_type == "stack" && type == "frontend"] | order(proficiency desc, name asc),
   "backend": *[_type == "stack" && type == "backend"] | order(proficiency desc, name asc),

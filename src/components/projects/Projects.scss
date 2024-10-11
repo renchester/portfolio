@@ -9,9 +9,10 @@
   &__wrapper {
     max-width: var(--max-page-width);
     margin-inline: auto;
+    padding-inline: var(--section-padding);
 
-    @include mx.breakpoint(3xl) {
-      padding-inline: var(--section-padding);
+    @include mx.breakpoint(lg) {
+      padding-inline: calc(var(--section-padding) * 0.5);
     }
   }
 
@@ -29,20 +30,7 @@
   &__gallery {
     margin-top: var(--header-height);
     padding-block: 2em;
-    padding-inline: 0.75rem;
     position: relative;
-
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   right: 0;
-    //   left: 0;
-    //   height: 25%;
-    //   bottom: 0;
-    //   z-index: -1;
-    //   transform: skewY(-2.5deg) translateY(15%);
-    //   background-color: var(--background);
-    // }
   }
 
   &__gallery-title {
@@ -74,9 +62,9 @@
     display: flex;
     justify-content: center;
     gap: 1.25em;
+    padding-inline: 0.5em;
 
     @include mx.breakpoint(md) {
-      padding-inline: 0.5em;
       margin-block: 1em;
       display: grid;
       grid-template-columns: 1fr 1fr;

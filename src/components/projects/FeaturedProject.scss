@@ -10,6 +10,10 @@
   isolation: isolate;
   box-shadow: var(--box-shadow-3);
 
+  @include mx.breakpoint(sm, max) {
+    flex-direction: column;
+  }
+
   &__bg-wrapper {
     position: absolute;
     z-index: -1;
@@ -47,8 +51,13 @@
       min-width: 360px;
     }
 
+    @include mx.breakpoint(xs, max) {
+      min-width: 0;
+    }
+
     @include mx.breakpoint(sm, max) {
       padding-inline: 1.5em;
+      padding-block: 3em;
     }
   }
 
@@ -119,7 +128,8 @@
     border: 1px solid currentColor;
     width: fit-content;
     padding: 0.75em 1.5em;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 
     font-weight: 600;
@@ -153,10 +163,6 @@
     display: grid;
     place-items: center;
     flex-grow: 1;
-
-    @include mx.breakpoint(sm, max) {
-      display: none;
-    }
   }
 
   &__img-wrapper {
@@ -175,12 +181,22 @@
     &.mobile {
       position: absolute;
       z-index: 1;
-      top: 57%;
-      max-width: 155px;
+      top: 60%;
+      max-width: 150px;
+
+      @include mx.breakpoint(sm, max) {
+        scale: 85%;
+        top: 50%;
+        left: 2%;
+      }
     }
 
     &.desktop {
       max-width: 620px;
+
+      @include mx.breakpoint(sm, max) {
+        transform: scale(85%);
+      }
     }
   }
 }

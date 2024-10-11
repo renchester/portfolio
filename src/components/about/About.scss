@@ -8,9 +8,9 @@
     position: relative;
     margin-inline: auto;
     max-width: var(--max-page-width);
+    padding-inline: var(--section-padding);
 
     @include mx.breakpoint(3xl) {
-      padding-inline: var(--section-padding);
     }
   }
 
@@ -31,7 +31,14 @@
     width: 250px;
     height: 250px;
 
-    @include mx.breakpoint(xl) {
+    @include mx.breakpoint(lg) {
+      width: 110px;
+      height: 110px;
+      top: -65px;
+      right: var(--section-padding);
+    }
+
+    @include mx.breakpoint(xs) {
       display: none;
     }
   }

@@ -85,7 +85,7 @@ function Project({
               <StackItem
                 item={item}
                 width={35}
-                key={`${name}-stack--${item}`}
+                key={`${name}-stack--${item.name}`}
                 initTheme="light"
               />
             ))}

@@ -210,7 +210,11 @@ function ContactForm({ author }: { author: AUTHOR_QUERYResult }) {
             type="text"
             name="from_name"
             id="from_name_emailjs"
-            value="Renchester Ramos"
+            value={
+              author
+                ? `${author?.firstName} ${author?.lastName}`
+                : 'Renchester Jardiel'
+            }
             readOnly
             hidden
             aria-hidden

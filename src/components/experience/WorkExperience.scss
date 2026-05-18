@@ -86,6 +86,7 @@
   &__more {
     margin-left: 0.5rem;
     transition: all 200ms ease-in;
+    transform: translateY(10%);
 
     &[data-active='true'] {
       rotate: 90deg;

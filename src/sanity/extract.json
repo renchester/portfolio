@@ -2549,6 +2549,10 @@
             },
             {
               "type": "string",
+              "value": "America/Coyhaique"
+            },
+            {
+              "type": "string",
               "value": "America/Creston"
             },
             {
@@ -3090,10 +3094,6 @@
             {
               "type": "string",
               "value": "Asia/Chita"
-            },
-            {
-              "type": "string",
-              "value": "Asia/Choibalsan"
             },
             {
               "type": "string",

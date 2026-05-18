@@ -31,7 +31,7 @@ async function Footer() {
               <span className="footer__title" id="footer-version">
                 Version
               </span>
-              <span>2023</span>
+              <span>2026</span>
             </article>
 
             <article

@@ -1797,6 +1797,13 @@
         },
         "optional": true
       },
+      "statement": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "marquee": {
         "type": "objectAttribute",
         "value": {
@@ -2546,10 +2553,6 @@
             {
               "type": "string",
               "value": "America/Costa_Rica"
-            },
-            {
-              "type": "string",
-              "value": "America/Coyhaique"
             },
             {
               "type": "string",

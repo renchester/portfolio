@@ -1,10 +1,11 @@
 import About from '@/components/about/About';
+import Bridge from '@/components/bridge/Bridge';
 import ContactForm from '@/components/contact/ContactForm';
 import Projects from '@/components/projects/Projects';
-import ClientSections from './ClientSections';
+import Hero from '@/components/hero/Hero';
 import { client } from '@/sanity/lib/client';
 import { AUTHOR_QUERY } from '@/sanity/queries';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import WorkExperience from '@/components/experience/WorkExperience';
 
 const options = { next: { revalidate: 1800 } }; // 30 mins
@@ -13,17 +14,19 @@ export default async function Home() {
   const author = await client.fetch(AUTHOR_QUERY, undefined, options);
 
   if (!author) {
-    // notFound();
-    redirect('https://renchester.dev');
+    notFound();
   }
 
   return (
     <main className="home-page">
-      {/* Welcome and Hero sections */}
-      <ClientSections author={author} />
+      {/* Hero */}
+      <Hero author={author} />
 
       {/* About */}
       <About author={author} />
+
+      {/* Statement bridge */}
+      <Bridge author={author} />
 
       {/* Experience  */}
       <WorkExperience />

@@ -1,0 +1,42 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+
+.bridge {
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-background);
+
+  &__wrapper {
+    max-width: var(--max-page-width);
+    margin-inline: auto;
+    padding-inline: clamp(1.5rem, 4vw, 4rem);
+    padding-block: clamp(7rem, 16vh, 12rem);
+  }
+
+  &__statement {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.28em;
+    max-width: 22ch;
+
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1rem + 4.2vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    color: var(--color-text);
+  }
+
+  &__mask {
+    display: inline-block;
+    overflow: hidden;
+    // keep descenders visible once words settle
+    padding-bottom: 0.1em;
+    margin-bottom: -0.1em;
+  }
+
+  &__word {
+    display: inline-block;
+    will-change: transform;
+  }
+}

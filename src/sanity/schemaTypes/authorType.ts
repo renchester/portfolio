@@ -34,6 +34,14 @@ export const authorType = defineType({
       title: 'Job Title',
     }),
     defineField({
+      name: 'statement',
+      type: 'text',
+      title: 'Statement',
+      rows: 3,
+      description:
+        'A one-to-two sentence positioning statement shown between the About and Experience sections. Falls back to a default if left empty.',
+    }),
+    defineField({
       name: 'marquee',
       type: 'array',
       title: 'Marquee Text',

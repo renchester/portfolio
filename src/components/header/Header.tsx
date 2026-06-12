@@ -16,6 +16,7 @@ const NAV_ITEMS = [
 
 function Header({ name }: { name?: string | null }) {
   const [isScrolled, setScrolled] = useState(false);
+  const [isPastHero, setPastHero] = useState(false);
   const [isNavExpanded, setNavExpansion] = useState(false);
   const navRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,6 +27,24 @@ function Header({ name }: { name?: string | null }) {
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // The hero already states the name at full size; the header repeats it
+  // only once the hero has scrolled out from under the header bar.
+  useEffect(() => {
+    const hero = document.getElementById('hero-section');
+    if (!hero) {
+      setPastHero(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(!entry.isIntersecting),
+      { rootMargin: '-72px 0px 0px 0px' },
+    );
+    observer.observe(hero);
+
+    return () => observer.disconnect();
   }, []);
 
   // Hide mobile nav on Escape key or outside click
@@ -60,7 +79,13 @@ function Header({ name }: { name?: string | null }) {
           aria-label="Back to top"
         >
           <Logo className="header__logo" ariaHidden />
-          {name && <span className="header__name">{name}</span>}
+          {name && (
+            <span className="header__name-mask">
+              <span className="header__name" data-visible={isPastHero}>
+                {name}
+              </span>
+            </span>
+          )}
         </Link>
 
         {/* Desktop navigation */}

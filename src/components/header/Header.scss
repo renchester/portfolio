@@ -52,10 +52,23 @@
     fill: var(--color-text);
   }
 
+  &__name-mask {
+    display: inline-block;
+    overflow: hidden;
+  }
+
   &__name {
     @extend %text-annotation;
+    display: inline-block;
     color: var(--color-text);
-    transition: color var(--dur-instant) var(--ease-out-expo);
+    transform: translateY(130%);
+    transition:
+      transform var(--dur-base) var(--ease-out-expo),
+      color var(--dur-instant) var(--ease-out-expo);
+
+    &[data-visible='true'] {
+      transform: none;
+    }
   }
 
   // Desktop navigation

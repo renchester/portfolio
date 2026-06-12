@@ -1,103 +1,94 @@
 @use '@/styles/placeholders';
 @use '@/styles/mixins' as mx;
 
-%text-input {
-  font-size: var(--text-lg);
-  font-family: var(--font-inter);
-  font-weight: 600;
-  letter-spacing: -1px;
-}
+// Inquiry-sheet field: numbered annotation label over a hairline-ruled
+// input; the rule turns redline on focus, ok/rev markers echo drawing review
+.field {
+  position: relative;
+  padding-block: 1.6em 0;
 
-.contact-input {
-  &__wrapper {
-    --index-width: 30px;
-    position: relative;
-    padding-block: 2em;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      'index label'
-      'free input';
-
-    &:not(:first-of-type) {
-      border-top: 1px solid var(--color-text-alpha50);
-    }
+  &__head {
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+    cursor: text;
   }
 
   &__index {
-    grid-area: index;
-    display: inline-block;
-    width: var(--index-width);
-    padding-top: 2px;
-    padding-right: 1em;
-    font-weight: 500;
-    font-size: var(--text-xs);
-    color: var(--color-text-alpha75);
-    letter-spacing: -0.5px;
-
-    &::before {
-      content: '0';
-    }
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-redline);
   }
 
   &__label {
-    @extend %text-input;
-    grid-area: label;
-    color: var(--color-text-accent);
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+    transition: color var(--dur-instant) var(--ease-out-expo);
+  }
+
+  &__req {
+    text-decoration: none;
+    color: var(--color-redline);
+    margin-left: 0.35em;
+  }
+
+  &__state {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    margin-left: auto;
 
     &[data-valid='true'] {
-      color: var(--color-text-alpha75);
+      color: var(--color-annotation);
+    }
+
+    &[data-valid='false'] {
+      color: var(--color-redline);
     }
   }
 
   &__input {
-    @extend %text-input;
-    grid-area: input;
-    margin-top: 1em;
-    font-weight: 400;
-    width: 95%;
+    display: block;
+    width: 100%;
+    margin-top: 0.65em;
+    padding-bottom: 0.85em;
+    border: none;
+    border-bottom: 1px solid var(--color-line-strong);
+    background: transparent;
+    resize: none;
 
-    &:focus,
-    &:hover {
-      outline: none;
-      box-shadow: 0px 2px 0px 0px currentColor;
-      color: var(--color-grad-1);
-    }
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+
+    transition: border-color var(--dur-fast) var(--ease-out-expo);
 
     &::placeholder {
-      color: var(--color-text-alpha50);
+      color: var(--color-annotation);
+      opacity: 0.55;
+    }
+
+    &:hover {
+      border-color: var(--color-ink);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-redline);
     }
   }
 
-  &__validation {
-    @extend %parent-with-centered-children;
-    position: absolute;
-    top: 55%;
-    right: 0;
-    padding: 5px;
-    border-radius: 50%;
-    box-shadow: var(--box-shadow);
-
-    &[data-valid='true'] {
-      background: var(--color-success);
-    }
-
-    &[data-valid='false'] {
-      background: var(--color-error);
-    }
-  }
-
-  &__icon {
-    stroke: var(--color-light-1);
+  &:focus-within .field__label {
+    color: var(--color-text);
   }
 
   &__error {
-    position: absolute;
-    top: 100%;
-    padding-left: var(--index-width);
-    padding-bottom: 5px;
-    transform: translateY(-100%);
-    font-size: var(--text-2xs);
-    color: red;
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    text-transform: none;
+    letter-spacing: 0.04em;
+    color: var(--color-redline);
+    padding-top: 0.6em;
   }
 }

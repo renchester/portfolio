@@ -8,14 +8,18 @@ type ContactInputProps = {
   label: string;
   value: string;
   placeholder?: string;
-  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   minLength?: number;
   maxLength?: number;
   isRequired?: boolean;
   isValid?: boolean;
   errorMessage?: string;
+  multiline?: boolean;
 };
 
+/** A numbered field on the inquiry sheet: annotation label, hairline rule. */
 function ContactInput(props: ContactInputProps) {
   const {
     id,
@@ -31,77 +35,58 @@ function ContactInput(props: ContactInputProps) {
     isValid,
     errorMessage,
     isRequired,
+    multiline,
   } = props;
 
+  const showState = value.length > 0 && isValid !== undefined;
+  const showError = Boolean(errorMessage) && !isValid && value.length > 0;
+
+  const sharedProps = {
+    id,
+    name,
+    className: 'field__input',
+    onChange: handleChange,
+    placeholder: placeholder || '',
+    minLength: minLength || -1,
+    maxLength: maxLength || -1,
+    required: isRequired || false,
+    'aria-invalid': showState ? !isValid : undefined,
+    'aria-errormessage': showError ? `field-error--${name}` : undefined,
+  };
+
   return (
-    <div className="contact-input__wrapper">
-      <span className="contact-input__index">{index}</span>
-      <label htmlFor={id} className="contact-input__label" data-valid={isValid}>
-        {label} {isRequired && <abbr title="required">*</abbr>}
+    <div className="field" data-filled={value.length > 0}>
+      <label htmlFor={id} className="field__head">
+        <span className="field__index" aria-hidden>
+          {String(index).padStart(2, '0')}
+        </span>
+        <span className="field__label">
+          {label}
+          {isRequired && (
+            <abbr className="field__req" title="required">
+              *
+            </abbr>
+          )}
+        </span>
+        {showState && (
+          <span
+            className="field__state"
+            data-valid={isValid}
+            aria-label={isValid ? `${name} is valid` : `${name} is invalid`}
+          >
+            {isValid ? 'ok' : 'rev'}
+          </span>
+        )}
       </label>
-      <input
-        id={id}
-        type={type}
-        name={name}
-        className="contact-input__input"
-        onChange={handleChange}
-        placeholder={placeholder || ''}
-        minLength={minLength || -1}
-        maxLength={maxLength || -1}
-        required={isRequired || false}
-        aria-invalid={isValid}
-        aria-errormessage={`contact-input-error--${name}`}
-      />
 
-      {value.length > 0 &&
-        isValid !== undefined &&
-        (isValid ? (
-          <div
-            className="contact-input__validation"
-            aria-label={`${name} is valid`}
-            data-valid="true"
-          >
-            <svg
-              className="contact-input__icon contact-input__valid-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </div>
-        ) : (
-          <div
-            className="contact-input__validation"
-            aria-label={`${name} is invalid`}
-            data-valid="false"
-          >
-            <svg
-              className="contact-input__icon contact-input__invalid-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-        ))}
+      {multiline ? (
+        <textarea {...sharedProps} rows={4} />
+      ) : (
+        <input {...sharedProps} type={type} />
+      )}
 
-      {errorMessage && !isValid && value.length > 0 && (
-        <p className="contact-input__error" id={`contact-input-error--${name}`}>
+      {showError && (
+        <p className="field__error" id={`field-error--${name}`}>
           {errorMessage}
         </p>
       )}

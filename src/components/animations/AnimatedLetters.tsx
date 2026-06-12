@@ -3,32 +3,32 @@
 import './AnimatedLetters.scss';
 import { motion, Variants } from 'framer-motion';
 
+// Masked word-rise reveal. Splitting on words (not letters) keeps the
+// serif's kerning intact and settles in well under a second.
 function AnimatedLetters({
   title,
-  initialY = 400,
   disabled = false,
 }: {
   title: string;
-  initialY?: number;
   disabled?: boolean;
 }) {
-  const bannerVariant: Variants = {
+  const containerVariant: Variants = {
     animate: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.06,
       },
     },
   };
 
-  const letterVariant: Variants = {
+  const wordVariant: Variants = {
     initial: {
-      y: initialY,
+      y: '110%',
     },
     animate: {
       y: 0,
       transition: {
-        ease: [0.6, 0.01, -0.05, 0.95],
-        duration: 1,
+        ease: [0.16, 1, 0.3, 1],
+        duration: 0.7,
       },
     },
   };
@@ -36,20 +36,20 @@ function AnimatedLetters({
   return (
     <motion.span
       className="anm"
-      variants={disabled ? undefined : bannerVariant}
+      variants={disabled ? undefined : containerVariant}
       initial="initial"
       animate="animate"
     >
       <span hidden>{title}</span>
-      {[...title].map((letter, i) => (
-        <motion.span
-          className="anm__item"
-          key={`letter-${letter}-${i}`}
-          variants={disabled ? undefined : letterVariant}
-          aria-hidden
-        >
-          {letter}
-        </motion.span>
+      {title.split(' ').map((word, i) => (
+        <span className="anm__mask" key={`word-${word}-${i}`} aria-hidden>
+          <motion.span
+            className="anm__item"
+            variants={disabled ? undefined : wordVariant}
+          >
+            {word}
+          </motion.span>
+        </span>
       ))}
     </motion.span>
   );

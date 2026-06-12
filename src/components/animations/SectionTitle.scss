@@ -1,0 +1,31 @@
+@use '@/styles/placeholders';
+
+.sec-title {
+  &__index {
+    @extend %text-annotation;
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    margin-bottom: 1em;
+
+    // hairline rule trailing the section number
+    &::after {
+      content: '';
+      flex: 0 0 3rem;
+      height: 1px;
+      background: var(--color-line-strong);
+    }
+  }
+
+  // clips the heading for the rise-from-baseline reveal
+  &__mask {
+    overflow: hidden;
+    // keep descenders visible once the title settles
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+
+    h2 {
+      will-change: transform;
+    }
+  }
+}

@@ -1,6 +1,20 @@
 .anm {
+  display: inline-flex;
+  flex-wrap: wrap;
+  column-gap: 0.25em;
+  justify-content: inherit;
+
+  &__mask {
+    display: inline-block;
+    overflow: hidden;
+    // breathing room so descenders aren't clipped by the mask
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
   &__item {
     display: inline-block;
     white-space: pre-wrap;
+    will-change: transform;
   }
 }

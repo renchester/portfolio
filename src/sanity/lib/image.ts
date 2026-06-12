@@ -6,8 +6,8 @@ import { dataset, projectId } from '../env';
 // https://www.sanity.io/docs/image-url
 const builder = createImageUrlBuilder({ projectId, dataset });
 
+// auto('format') lets the Sanity CDN serve WebP/AVIF to browsers that
+// support it. Callers should chain .width(n) to avoid shipping originals.
 export const urlFor = (source?: SanityImageSource | null) => {
-  // ('https://placehold.co/600x400?text=Something+went+wrong+while+loading+this+image.');
-
-  return builder.image(source!);
+  return builder.image(source!).auto('format');
 };

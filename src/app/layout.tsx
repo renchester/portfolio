@@ -2,13 +2,12 @@ import '@/styles/globals.scss';
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { nunito, inter, poppins, openSans, raleway } from '@/utils/fonts';
+import { archivo, instrumentSerif, plexMono } from '@/utils/fonts';
 import Script from 'next/script';
 import { WebSite, WithContext } from 'schema-dts';
 import { client } from '@/sanity/lib/client';
 import { AUTHOR_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/lib/image';
-import { notFound, redirect } from 'next/navigation';
 
 const options = { next: { revalidate: 3600 } }; // 1 hour
 
@@ -23,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const fullName = `${author.firstName} ${author.lastName}`;
   const description = author.seoDescription;
-  const imageUrl = urlFor(author.seoImage).url();
+  const imageUrl = urlFor(author.seoImage).width(1200).url();
 
   const url = author.seoUrl;
 
@@ -61,40 +60,34 @@ export default async function RootLayout({
 }) {
   const author = await client.fetch(AUTHOR_QUERY, undefined, options);
 
-  if (!author) {
-    redirect('https://renchester.dev');
-    // notFound();
-  }
-
-  const fullName = `${author.firstName} ${author.lastName}`;
-  const description = author.seoDescription;
-  const imageUrl = urlFor(author.seoImage).url();
-  const url = author.seoUrl;
-
-  const structuredData: WithContext<WebSite> = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: `${fullName} — Portfolio`,
-    description,
-    thumbnailUrl: imageUrl,
-    alternateName: author.seoAlternateNames,
-    url,
-  };
+  const structuredData: WithContext<WebSite> | null = author
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: `${author.firstName} ${author.lastName} — Portfolio`,
+        description: author.seoDescription,
+        thumbnailUrl: urlFor(author.seoImage).width(1200).url(),
+        alternateName: author.seoAlternateNames,
+        url: author.seoUrl,
+      }
+    : null;
 
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nunito.variable} ${poppins.variable}  ${openSans.variable} ${raleway.variable}`}
+        className={`${archivo.variable} ${instrumentSerif.variable} ${plexMono.variable}`}
       >
         {children}
         <Analytics />
         <SpeedInsights />
       </body>
-      <Script
-        id="seo-json-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      {structuredData && (
+        <Script
+          id="seo-json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
     </html>
   );
 }

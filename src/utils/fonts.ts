@@ -1,43 +1,27 @@
-import {
-  Nunito_Sans,
-  Open_Sans,
-  Inter,
-  Poppins,
-  Raleway,
-} from 'next/font/google';
+import { Archivo, IBM_Plex_Mono, Instrument_Serif } from 'next/font/google';
 
-export const inter = Inter({
+// Display voice — sharp editorial serif, used large for statements/titles.
+export const instrumentSerif = Instrument_Serif({
+  weight: '400',
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-inter',
+  variable: '--font-display',
   display: 'swap',
-  preload: false,
+  preload: true,
 });
 
-export const nunito = Nunito_Sans({
+// Text/UI voice — grotesk for body copy and interface.
+export const archivo = Archivo({
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-nunito',
+  variable: '--font-sans',
   display: 'swap',
-  preload: false,
+  preload: true,
 });
 
-export const poppins = Poppins({
-  weight: ['400', '500', '700', '100'],
+// Annotation voice — mono for labels, coordinates, dates, indices.
+export const plexMono = IBM_Plex_Mono({
+  weight: ['400', '500'],
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-poppins',
-  display: 'swap',
-  preload: false,
-});
-
-export const openSans = Open_Sans({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-open-sans',
-  display: 'swap',
-  preload: false,
-});
-
-export const raleway = Raleway({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-raleway',
+  variable: '--font-mono',
   display: 'swap',
   preload: false,
 });

@@ -1,36 +1,27 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-function NavLink({ href, label }: { href: string; label: string }) {
+function NavLink({
+  href,
+  label,
+  index,
+  onNavigate,
+}: {
+  href: string;
+  label: string;
+  index?: string;
+  onNavigate?: () => void;
+}) {
   return (
-    <motion.li
-      className="nav__item"
-      variants={{
-        initial: {},
-        focus: {
-          opacity: 1,
-          scale: 1.05,
-          backgroundColor: 'var(--color-grad-1)',
-          color: 'var(--color-light-1)',
-          transition: {
-            duration: 0.25,
-          },
-        },
-        tap: {
-          scale: 0.9,
-        },
-      }}
-      whileHover="focus"
-      whileFocus="focus"
-      whileTap="tap"
-      tabIndex={-1}
-    >
-      <Link href={href} className="nav__link">
+    <li className="nav__item">
+      <Link href={href} className="nav__link" onClick={onNavigate}>
+        {index && (
+          <span className="nav__index" aria-hidden>
+            {index}
+          </span>
+        )}
         {label}
       </Link>
-    </motion.li>
+    </li>
   );
 }
 export default NavLink;

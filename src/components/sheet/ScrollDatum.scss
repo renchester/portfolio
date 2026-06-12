@@ -1,0 +1,13 @@
+@use '@/styles/maps' as maps;
+
+.scroll-datum {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-redline);
+  transform-origin: top;
+  z-index: map-get($map: maps.$zindex, $key: rail);
+  pointer-events: none;
+}

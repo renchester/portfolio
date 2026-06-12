@@ -7,29 +7,29 @@ import NavLink from './NavLink';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-function Header() {
-  const [isVisible, setVisibility] = useState(true);
-  const [prevScrollPosition, setPrevScrollPosition] = useState(0);
+const NAV_ITEMS = [
+  { index: '02', label: 'About', href: '#about' },
+  { index: '03', label: 'Experience', href: '#experience' },
+  { index: '04', label: 'Projects', href: '#projects' },
+  { index: '05', label: 'Contact', href: '#contact' },
+];
+
+function Header({ name }: { name?: string | null }) {
+  const [isScrolled, setScrolled] = useState(false);
   const [isNavExpanded, setNavExpansion] = useState(false);
   const navRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!window) return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
 
-    const controlHeader = () => {
-      setVisibility(!(window.scrollY > prevScrollPosition));
-      setPrevScrollPosition(window.scrollY);
-    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
 
-    window.addEventListener('scroll', controlHeader);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    return () => window.removeEventListener('scroll', controlHeader);
-  }, [prevScrollPosition]);
-
-  // Hide nav on Global Escape Key
+  // Hide mobile nav on Escape key or outside click
   useEffect(() => {
-    if (!window) return;
-
     const escKeyListener = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
 
@@ -47,137 +47,99 @@ function Header() {
 
     return () => {
       window.removeEventListener('keydown', escKeyListener);
-      window.addEventListener('click', globalClickListener);
+      window.removeEventListener('click', globalClickListener);
     };
   }, []);
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.header
-          className="header"
-          variants={{
-            hidden: {
-              y: -100,
-              opacity: 0,
-              transition: {
-                duration: 1.5,
-                type: 'spring',
-              },
-            },
-            visible: {
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 1,
-                type: 'spring',
-                bounce: 0.5,
-              },
-            },
-          }}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
+    <header className="header" data-scrolled={isScrolled}>
+      <div className="header__wrapper">
+        <Link
+          href="#hero-section"
+          className="header__wordmark"
+          aria-label="Back to top"
         >
-          <div className="header__wrapper">
-            <motion.button
-              className="header__logo-wrapper"
-              variants={{
-                initial: { background: '#fff' },
-                focus: { scale: 1.1, rotate: -10 },
-                tap: {
-                  scale: 0.9,
-                  rotate: -370,
-                  background: '#eee',
-                },
-              }}
-              aria-label="Logo"
-              initial="initial"
-              whileHover="focus"
-              whileFocus="focus"
-              whileTap="tap"
-            >
-              <Link href="#hero-section">
-                <Logo className="header__logo" ariaHidden />
-                <span className="header__logo-label">
-                  Logo for portfolio subject
-                </span>
-              </Link>
-            </motion.button>
+          <Logo className="header__logo" ariaHidden />
+          {name && <span className="header__name">{name}</span>}
+        </Link>
 
-            <div className="header__nav-wrapper" ref={navRef}>
-              <AnimatePresence>
-                {isNavExpanded && (
-                  <motion.nav
-                    className="nav"
-                    id="nav"
-                    variants={{
-                      initial: {
-                        opacity: 0,
-                        scale: 0,
-                      },
-                      visible: {
-                        opacity: 1,
-                        scale: 1,
-                        transition: {
-                          bounce: 0.8,
-                        },
-                      },
-                    }}
-                    style={{ transformOrigin: 'right' }}
-                    initial="initial"
-                    animate="visible"
-                    exit="initial"
-                  >
-                    <motion.ul className="nav__links">
-                      <NavLink label="About" href="#about" />
-                      <NavLink label="Projects" href="#projects" />
-                      <NavLink label="Contact" href="#contact" />
-                    </motion.ul>
-                  </motion.nav>
-                )}
-              </AnimatePresence>
-              <motion.button
-                type="button"
-                className="header__btn-nav"
-                aria-label="Open navigation menu"
-                aria-haspopup
-                aria-expanded={isNavExpanded}
-                aria-controls="nav"
-                onClick={() => setNavExpansion((prev) => !prev)}
-                whileFocus={{ scale: 1.1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+        {/* Desktop navigation */}
+        <nav className="header__nav" aria-label="Primary">
+          <ul className="header__links">
+            {NAV_ITEMS.map((item) => (
+              <NavLink
+                key={item.href}
+                index={item.index}
+                label={item.label}
+                href={item.href}
+              />
+            ))}
+          </ul>
+        </nav>
+
+        {/* Mobile navigation */}
+        <div className="header__nav-wrapper" ref={navRef}>
+          <AnimatePresence>
+            {isNavExpanded && (
+              <motion.nav
+                className="nav"
+                id="nav"
+                aria-label="Primary"
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
               >
-                <svg className="hamburger" data-expanded={isNavExpanded}>
-                  <line
-                    x1="0"
-                    y1="50%"
-                    x2="100%"
-                    y2="50%"
-                    className="hamburger__bar hamburger__bar--top"
-                  />
-                  <line
-                    x1="0"
-                    y1="50%"
-                    x2="100%"
-                    y2="50%"
-                    className="hamburger__bar hamburger__bar--mid"
-                  />
-                  <line
-                    x1="0"
-                    y1="50%"
-                    x2="100%"
-                    y2="50%"
-                    className="hamburger__bar hamburger__bar--bot"
-                  />
-                </svg>
-              </motion.button>
-            </div>
-          </div>
-        </motion.header>
-      )}
-    </AnimatePresence>
+                <ul className="nav__links">
+                  {NAV_ITEMS.map((item) => (
+                    <NavLink
+                      key={item.href}
+                      index={item.index}
+                      label={item.label}
+                      href={item.href}
+                      onNavigate={() => setNavExpansion(false)}
+                    />
+                  ))}
+                </ul>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+          <button
+            type="button"
+            className="header__btn-nav"
+            aria-label="Open navigation menu"
+            aria-haspopup
+            aria-expanded={isNavExpanded}
+            aria-controls="nav"
+            onClick={() => setNavExpansion((prev) => !prev)}
+          >
+            <svg className="hamburger" data-expanded={isNavExpanded}>
+              <line
+                x1="0"
+                y1="50%"
+                x2="100%"
+                y2="50%"
+                className="hamburger__bar hamburger__bar--top"
+              />
+              <line
+                x1="0"
+                y1="50%"
+                x2="100%"
+                y2="50%"
+                className="hamburger__bar hamburger__bar--mid"
+              />
+              <line
+                x1="0"
+                y1="50%"
+                x2="100%"
+                y2="50%"
+                className="hamburger__bar hamburger__bar--bot"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
   );
 }
 export default Header;

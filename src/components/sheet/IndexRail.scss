@@ -1,0 +1,62 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+@use '@/styles/maps' as maps;
+
+.rail {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: map-get($map: maps.$zindex, $key: rail);
+  display: none;
+
+  @include mx.breakpoint(xl, min) {
+    display: block;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    text-align: right;
+  }
+
+  &__link {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 0.6em;
+    color: var(--color-annotation);
+    transition: color var(--dur-instant) var(--ease-out-expo);
+
+    &:focus-visible {
+      outline: 1px solid var(--color-ink);
+      outline-offset: 3px;
+    }
+  }
+
+  &__label {
+    opacity: 0;
+    transform: translateX(4px);
+    transition:
+      opacity var(--dur-fast) var(--ease-out-expo),
+      transform var(--dur-fast) var(--ease-out-expo);
+  }
+
+  &__link:hover &__label,
+  &__link:focus-visible &__label,
+  &__link[data-active='true'] &__label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &__link[data-active='true'] {
+    color: var(--color-text);
+
+    .rail__index {
+      color: var(--color-redline);
+    }
+  }
+}

@@ -1,39 +1,17 @@
 'use client';
 
-import { Variants, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function ButtonToTop() {
-  const buttonVariant: Variants = {
-    initial: {
-      scale: 1,
-    },
-    animate: {
-      rotate: [20, -20],
-      transition: {
-        rotate: {
-          repeat: Infinity,
-          repeatType: 'reverse',
-          duration: 2,
-          ease: 'linear',
-        },
-      },
-    },
-    focus: {
-      scale: 1.5,
-    },
-  };
-
   return (
     <motion.button
       className="btn-top"
       onClick={() => window.scrollTo({ left: 0, top: 0 })}
       aria-label="Scroll to top"
       title="Scroll to top"
-      variants={buttonVariant}
-      initial="initial"
-      animate="animate"
-      whileHover="focus"
-      whileFocus="focus"
+      whileHover={{ scale: 1.15 }}
+      whileFocus={{ scale: 1.15 }}
+      whileTap={{ scale: 0.95 }}
     >
       <svg
         aria-hidden

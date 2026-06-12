@@ -3,7 +3,6 @@
 @use '@/styles/maps' as maps;
 
 .header {
-  --border-radius: 10rem;
   height: 0px;
   position: sticky;
   top: 0;
@@ -16,105 +15,142 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color var(--dur-fast) var(--ease-out-expo),
+      border-color var(--dur-fast) var(--ease-out-expo);
   }
 
-  &__logo-wrapper {
-    @extend %parent-with-centered-children;
-    position: relative;
-    flex-shrink: 0;
-    width: 45px;
-    height: 45px;
-    border-radius: var(--border-radius);
-    padding: 5px;
-    background: var(--color-primary);
-    box-shadow: var(--box-shadow-2);
+  &[data-scrolled='true'] &__wrapper {
+    background: var(--color-background-alpha75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom-color: var(--color-line);
+  }
 
-    &:focus {
-      outline: none;
+  &__wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-shrink: 0;
+    color: var(--color-text);
+
+    &:hover .header__name,
+    &:focus-visible .header__name {
+      color: var(--color-redline);
     }
 
-    & a {
-      @extend %parent-with-centered-children;
+    &:focus-visible {
+      outline: 1px solid var(--color-ink);
+      outline-offset: 4px;
     }
   }
 
   &__logo {
-    width: 65%;
-    height: 65%;
-    fill: var(--color-text-alpha75);
+    width: 26px;
+    height: 26px;
+    fill: var(--color-text);
   }
 
-  &__logo-label {
-    visibility: hidden;
-    position: absolute;
+  &__name {
+    @extend %text-annotation;
+    color: var(--color-text);
+    transition: color var(--dur-instant) var(--ease-out-expo);
   }
 
+  // Desktop navigation
+  &__nav {
+    display: none;
+
+    @include mx.breakpoint(lg, min) {
+      display: block;
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+  }
+
+  // Mobile navigation
   &__nav-wrapper {
-    @extend %parent-with-centered-children;
-    justify-content: space-between;
-    gap: 0.75em;
-    border-radius: var(--border-radius);
-    margin-left: 0.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    @include mx.breakpoint(lg, min) {
+      display: none;
+    }
   }
 
   &__btn-nav {
     @extend %parent-with-centered-children;
-    background: var(--color-primary);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
     width: 40px;
     height: 40px;
-    padding: 12px;
-    color: var(--color-light-1);
+    padding: 11px;
+    color: var(--color-text);
+
+    &:focus-visible {
+      outline: 1px solid var(--color-ink);
+      outline-offset: 2px;
+    }
   }
 }
 
+// Shared link styles (desktop bar + mobile panel)
 .nav {
-  box-shadow: var(--box-shadow-2);
-  background: var(--color-background);
-  outline: 1px solid var(--color-light-1);
-  border-radius: var(--border-radius);
-  opacity: 0.95;
-
-  &__links {
-    @extend %parent-with-centered-children;
-    gap: 0.25em;
-
-    @include mx.breakpoint(sm, max) {
-      gap: 0;
-    }
-  }
-
   &__item {
     display: block;
-    border-radius: var(--border-radius);
-    font-family: var(--font-raleway);
-    font-weight: 700;
+  }
+
+  &__index {
+    color: var(--color-annotation);
+    margin-right: 0.5em;
+    transition: color var(--dur-instant) var(--ease-out-expo);
   }
 
   &__link {
+    @extend %text-annotation;
     display: block;
-    border-radius: var(--border-radius);
-    padding: 0.625em 1.5em;
-    width: 100%;
-    height: 100%;
     color: var(--color-text-alpha75);
-
-    @include mx.breakpoint(sm, max) {
-      padding-inline: 0.75em;
-      font-size: var(--text-sm);
-    }
-
-    @include mx.breakpoint(xs, max) {
-      padding-inline: 0.5em;
-    }
+    padding-block: 0.25em;
+    transition: color var(--dur-instant) var(--ease-out-expo);
 
     &:hover,
-    &:focus-within {
-      outline: none;
-      background-color: var(--color-grad-1);
-      color: var(--color-light-1);
+    &:focus-visible {
+      color: var(--color-text);
+
+      .nav__index {
+        color: var(--color-redline);
+      }
     }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-ink);
+      outline-offset: 3px;
+    }
+  }
+}
+
+// Mobile dropdown panel
+nav.nav {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  min-width: 12rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-line-strong);
+  padding: 0.75rem 1rem;
+
+  .nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+  }
+
+  .nav__link {
+    padding-block: 0.5em;
   }
 }
 
@@ -127,15 +163,15 @@
     transition-duration: 0.3s;
     transform-origin: center;
     stroke: currentColor;
-    stroke-width: 10%;
+    stroke-width: 7%;
   }
 
   &__bar--top {
-    transform: translateY(-40%);
+    transform: translateY(-35%);
   }
 
   &__bar--bot {
-    transform: translateY(40%);
+    transform: translateY(35%);
   }
 
   &[data-expanded='true'] &__bar--top {

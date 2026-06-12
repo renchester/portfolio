@@ -101,6 +101,12 @@ body {
     --section-padding: 0.75em;
     --text-base-size: 0.9rem;
   }
+
+  // The index rail occupies a fixed margin strip at xl+; widen the sheet
+  // margins so marginalia never crosses the drawing field.
+  @include mx.breakpoint(xl, min) {
+    --section-padding: 6.5em;
+  }
 }
 
 // "Night plot": inverted sheet for a future dark mode toggle.

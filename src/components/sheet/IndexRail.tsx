@@ -47,6 +47,7 @@ function IndexRail() {
             >
               <span className="rail__label">{section.label}</span>
               <span className="rail__index">{section.index}</span>
+              <span className="rail__tick" aria-hidden />
             </a>
           </li>
         ))}

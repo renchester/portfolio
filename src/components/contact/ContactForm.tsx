@@ -9,7 +9,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ContactInput from './ContactInput';
 import SectionTitle from '../animations/SectionTitle';
 import { AUTHOR_QUERYResult } from '@/sanity/types';
-import { urlFor } from '@/sanity/lib/image';
 
 function ContactForm({ author }: { author: AUTHOR_QUERYResult }) {
   const [name, setName] = useState('');
@@ -126,15 +125,7 @@ function ContactForm({ author }: { author: AUTHOR_QUERYResult }) {
             className="contact__title"
             id="contact__title"
             title="Let's Connect"
-          />
-
-          <motion.img
-            src={urlFor(author?.memojiImage2).url()}
-            alt="Memoji of portfolio subject"
-            className="contact__img"
-            loading="lazy"
-            initial={{ rotate: 12 }}
-            whileHover={{ scale: 1.2, rotate: 0 }}
+            index="05"
           />
         </div>
         <form
@@ -220,44 +211,13 @@ function ContactForm({ author }: { author: AUTHOR_QUERYResult }) {
             aria-hidden
           />
 
-          <AnimatePresence>
-            {!isButtonDisabled && (
-              <motion.button
-                type="submit"
-                className="contact__send"
-                disabled={isButtonDisabled}
-                variants={{
-                  initial: {
-                    scale: 0,
-                    rotate: 90,
-                  },
-                  animate: {
-                    scale: 1,
-                    rotate: 0,
-                  },
-                  focus: {
-                    scale: 1.1,
-                    rotate: -15,
-                  },
-                  tap: {
-                    scale: 0.9,
-                    rotate: 0,
-                  },
-                  exit: {
-                    scale: 0,
-                  },
-                }}
-                initial="initial"
-                animate="animate"
-                whileFocus="focus"
-                whileHover="focus"
-                whileTap="tap"
-                exit="exit"
-              >
-                Send it!
-              </motion.button>
-            )}
-          </AnimatePresence>
+          <button
+            type="submit"
+            className="contact__send"
+            disabled={isButtonDisabled}
+          >
+            Send message
+          </button>
 
           <AnimatePresence>
             {formStatus && (

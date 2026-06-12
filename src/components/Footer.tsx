@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import StackItem from './stacks/StackItem';
 import LocalTime from './LocalTime';
 import { AUTHOR_QUERY, FOOTER_STACKS_QUERY } from '@/sanity/queries';
 import { client } from '@/sanity/lib/client';
@@ -13,66 +12,26 @@ async function Footer() {
     client.fetch(FOOTER_STACKS_QUERY, undefined, options),
   ]);
 
+  const fullName = `${author?.firstName} ${author?.lastName}`;
+  const year = new Date().getFullYear();
+
   return (
     <footer className="footer">
       <div className="footer__wrapper">
-        <div className="footer__col-1">
-          <article aria-labelledby="footer__name">
-            <span className="footer__name" id="footer__name">
-              <Link href="#hero-section">{`${author?.firstName} ${author?.lastName}`}</Link>
-            </span>
-            <span className="footer__loc">{author?.location}</span>
-          </article>
-          <div className="footer__meta">
-            <article
-              className="footer__meta-item"
-              aria-labelledby="footer-version"
-            >
-              <span className="footer__title" id="footer-version">
-                Version
-              </span>
-              <span>2026</span>
-            </article>
+        <div className="footer__id">
+          <span className="footer__name" id="footer__name">
+            <Link href="#hero-section">{fullName}</Link>
+          </span>
+        </div>
 
-            <article
-              className="footer__meta-item"
-              aria-labelledby="footer-local-time"
-            >
-              <span id="footer-local-time" className="footer__title">
-                Local Time
-              </span>
-              <span>
-                <LocalTime timeZone={author?.timezone ?? 'Europe/London'} />
-              </span>
-            </article>
-          </div>
-        </div>
-        <div className="footer__col-2">
-          <span className="footer__title">This portfolio was built with:</span>
-          <ul className="footer__stack">
-            {stacks.map((stack) => (
-              <StackItem
-                item={stack}
-                key={stack.name}
-                width={40}
-                initTheme="light"
-              />
-            ))}
-          </ul>
-          <p className="footer__coffee">
-            and a lot of{' '}
-            <span title="coffee" aria-label="coffee emoji">
-              ☕
-            </span>{' '}
-            ...
-          </p>
-        </div>
-        <div className="footer__col-3">
-          <span className="footer__title">Links</span>
+        <nav className="footer__links-block" aria-labelledby="footer-links">
+          <h2 className="footer__label" id="footer-links">
+            Links
+          </h2>
           <ul className="footer__links">
             <li>
               <Link
-                className="footer__link"
+                className="footer__link u-underline"
                 href={author?.linkedin || ''}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -82,7 +41,7 @@ async function Footer() {
             </li>
             <li>
               <Link
-                className="footer__link"
+                className="footer__link u-underline"
                 href={author?.github || ''}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -93,10 +52,8 @@ async function Footer() {
             {author?.customLink && (
               <li>
                 <Link
-                  className="footer__link"
+                  className="footer__link u-underline"
                   href={author.customLink.value || ''}
-                  // href={`https://drive.google.com/file/d/1qJy4oltcu4WbtMfHHZhw8SJUCvnapjRk/view?usp=drive_link`}
-                  // href={`https://nxjncryln9z0izl4.public.blob.vercel-storage.com/architecture-portfolio`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -105,7 +62,30 @@ async function Footer() {
               </li>
             )}
           </ul>
-        </div>
+        </nav>
+
+        <dl className="footer__meta">
+          <div className="footer__meta-row">
+            <dt>Based in</dt>
+            <dd>{author?.location}</dd>
+          </div>
+          <div className="footer__meta-row">
+            <dt>Local time</dt>
+            <dd>
+              <LocalTime timeZone={author?.timezone ?? 'Asia/Manila'} />
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div className="footer__base">
+        <span className="footer__built">
+          Designed &amp; built with{' '}
+          {stacks.map((stack) => stack.name).join(' / ')}
+        </span>
+        <span className="footer__copy">
+          © {year} {fullName}
+        </span>
       </div>
     </footer>
   );

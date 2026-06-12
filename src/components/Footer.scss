@@ -3,117 +3,113 @@
 
 .footer {
   position: relative;
-  padding-block: 4em;
-  bottom: 0;
-  background: var(--color-grey-dark-2);
-  font-family: var(--font-inter);
-  color: var(--color-grey-light-3);
+  border-top: 1px solid var(--color-line-strong);
+  background: var(--color-paper);
+  color: var(--color-text);
 
   &__wrapper {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.2fr;
     column-gap: 2em;
+    row-gap: 3em;
     max-width: var(--max-page-width);
     margin-inline: auto;
+    padding-block: 4em 3.5em;
 
     @include mx.breakpoint(3xl) {
       padding-inline: var(--section-padding);
     }
 
     @include mx.breakpoint(sm, max) {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
+      grid-template-columns: 1fr;
     }
   }
 
   &__name {
-    @extend %text-subtitle;
-    letter-spacing: -0.5px;
-    color: inherit;
-  }
+    @extend %text-title;
+    font-size: var(--text-2xl);
+    line-height: 1.1;
 
-  &__loc {
-    display: block;
-    margin-top: 0.15rem;
-    font-size: var(--text-md);
-  }
-
-  &__meta {
-    margin-top: 2.75em;
-    display: flex;
-    justify-content: flex-start;
-    gap: 2.5em;
-    font-size: var(--text-xs);
-
-    @include mx.breakpoint(sm, max) {
-      flex-direction: column;
-      gap: 1em;
-    }
-
-    &-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75em;
-
-      & *:not(:first-child) {
-        line-height: normal;
-      }
+    a:focus-visible,
+    a:hover {
+      outline: none;
+      color: var(--color-redline);
     }
   }
 
-  &__title {
-    font-size: var(--text-md);
-    font-weight: 500;
-    letter-spacing: -1px;
-  }
-
-  &__col-2 {
-    padding-inline: 1.65em;
-
-    @include mx.breakpoint(sm, max) {
-      padding-inline: 0;
-    }
-  }
-
-  &__stack {
-    margin-top: 1.25em;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    row-gap: 2.25em;
-  }
-
-  &__coffee {
-    display: inline-block;
-    margin-top: 2em;
-
-    & span {
-      font-size: var(--text-lg);
-    }
-  }
-
-  &__col-3 {
-    display: flex;
-    flex-direction: column;
+  &__label {
+    @extend %text-annotation;
+    color: var(--color-annotation);
   }
 
   &__links {
     margin-top: 1.25em;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 0.75em;
 
     @include mx.breakpoint(sm, max) {
       flex-direction: row;
+      gap: 1.5em;
     }
   }
 
   &__link {
-    &:focus,
+    font-size: var(--text-sm);
+
+    &:focus-visible,
     &:hover {
       outline: none;
-      color: var(--color-primary);
+      color: var(--color-redline);
     }
+  }
+
+  &__meta {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+
+    &-row {
+      dt {
+        @extend %text-annotation;
+        font-size: var(--text-3xs);
+        margin-bottom: 0.4em;
+      }
+
+      dd {
+        font-size: var(--text-sm);
+        color: var(--color-text);
+      }
+    }
+  }
+
+  &__base {
+    border-top: 1px solid var(--color-line);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    column-gap: 2em;
+    row-gap: 0.75em;
+    max-width: var(--max-page-width);
+    margin-inline: auto;
+    padding-block: 1.25em;
+
+    @include mx.breakpoint(3xl) {
+      padding-inline: var(--section-padding);
+    }
+
+    @include mx.breakpoint(sm, max) {
+      flex-direction: column;
+    }
+  }
+
+  &__built,
+  &__copy {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    text-transform: none;
+    letter-spacing: 0.04em;
   }
 }

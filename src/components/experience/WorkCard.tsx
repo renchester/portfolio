@@ -9,12 +9,13 @@ import { useState } from 'react';
 function WorkCard({ exp }: { exp: EXPERIENCE_ID_QUERYResult | null }) {
   const [isExpanded, setExpanded] = useState(false);
 
-  const dateNow = new Date();
+  // date-only value so server and client render the same attribute
+  const today = format(new Date(), 'yyyy-MM-dd');
 
   return (
     <li className="exp__listItem">
       <img
-        src={urlFor(exp?.logo).url()}
+        src={urlFor(exp?.logo).width(160).url()}
         alt={`Logo for ${exp?.company}`}
         className="exp__img"
       />
@@ -24,6 +25,8 @@ function WorkCard({ exp }: { exp: EXPERIENCE_ID_QUERYResult | null }) {
             type="button"
             className="exp__main"
             onClick={() => setExpanded((prev) => !prev)}
+            aria-expanded={isExpanded}
+            aria-controls={`exp-desc-${exp?._id}`}
           >
             <h3 className="exp__company">
               {exp?.company}
@@ -56,13 +59,15 @@ function WorkCard({ exp }: { exp: EXPERIENCE_ID_QUERYResult | null }) {
                   {format(new Date(exp?.endDate!), 'LLLL yyyy')}
                 </time>
               ) : (
-                <time dateTime={dateNow.toISOString()}>present</time>
+                <time dateTime={today} suppressHydrationWarning>
+                  present
+                </time>
               )}
             </div>
           </div>
         </article>
         {isExpanded && (
-          <div className="exp__description">
+          <div className="exp__description" id={`exp-desc-${exp?._id}`}>
             <PortableText value={exp?.description || []} />
           </div>
         )}

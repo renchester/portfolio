@@ -1,5 +1,6 @@
 import { client } from '@/sanity/lib/client';
 import { EXPERIENCE_QUERY } from '@/sanity/queries';
+import Reveal from '../animations/Reveal';
 import SectionTitle from '../animations/SectionTitle';
 import './WorkExperience.scss';
 import WorkCard from './WorkCard';
@@ -16,13 +17,16 @@ async function WorkExperience() {
           id="experience-label"
           className="exp__title"
           title="Work Experience"
+          index="03"
         />
 
-        <ul className="exp__list">
-          {experience.map((exp) => (
-            <WorkCard key={exp._id} exp={exp} />
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="exp__list">
+            {experience.map((exp) => (
+              <WorkCard key={exp._id} exp={exp} />
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

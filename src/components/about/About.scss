@@ -20,27 +20,6 @@
     }
   }
 
-  &__memoji {
-    @extend %memoji;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 1em;
-    width: 250px;
-    height: 250px;
-
-    @include mx.breakpoint(lg) {
-      width: 110px;
-      height: 110px;
-      top: -65px;
-      right: var(--section-padding);
-    }
-
-    @include mx.breakpoint(xs) {
-      display: none;
-    }
-  }
-
   &__title {
     @extend %text-title;
   }
@@ -50,14 +29,14 @@
     margin-top: 1.25em;
 
     & a {
-      color: var(--color-grad-1);
+      color: var(--color-text);
       font-weight: 500;
       letter-spacing: -0.5px;
       box-shadow: 0px 1px 0px 0px currentColor;
 
       &:hover,
       &:focus {
-        color: var(--color-primary);
+        color: var(--color-redline);
         outline: 0;
       }
     }
@@ -72,75 +51,77 @@
   }
 
   &__links-title {
-    @extend %text-subtitle;
-    margin-bottom: 0.675em;
+    @extend %text-annotation;
+    margin-bottom: 1em;
   }
 
   &__links {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
   }
 
   &__link {
     @extend %parent-with-centered-children;
-    align-items: flex-end;
     line-height: normal;
-    padding: 0.75em 2.5em;
-    border: 1px solid var(--color-text-alpha25);
-    border-radius: 5rem;
-    box-shadow: var(--box-shadow-2);
+    padding: 0.6em 1.5em;
+    border: 1px solid var(--color-line-strong);
 
     font-size: var(--text-sm);
-    font-family: var(--font-nunito);
+    font-family: var(--font-mono);
+
+    transition:
+      background var(--dur-fast) var(--ease-out-expo),
+      color var(--dur-fast) var(--ease-out-expo);
 
     &:focus,
     &:hover {
-      background: var(--color-grad-1);
-      color: var(--color-light-1);
-
-      & img {
-        filter: var(--filter-grad-2);
-      }
+      outline: none;
+      background: var(--color-ink);
+      color: var(--color-paper);
     }
-  }
-
-  &__link-icon {
-    width: 22.5px;
-    margin-right: 1em;
   }
 }
 
-.stack {
-  margin-top: 2.5em;
+// Materials index — annotated spec-sheet stack listing
+.materials {
+  margin-top: 3.5em;
+  border-top: 1px solid var(--color-line-strong);
+  padding-top: 1.5em;
 
   &__title {
-    @extend %text-subtitle;
-    margin-bottom: 1.15em;
+    @extend %text-annotation;
   }
 
-  &__tech {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1em;
+  &__groups {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2em;
+    row-gap: 2.5em;
+
+    @include mx.breakpoint(sm, max) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  &__tech-item {
-    width: 100%;
-  }
-
-  &__tech-title {
-    @extend %text-subtitle;
-    font-size: var(--text-lg);
-    letter-spacing: -0.5px;
+  &__group-title {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    padding-bottom: 0.75em;
+    border-bottom: 1px solid var(--color-line);
   }
 
   &__list {
+    margin-top: 1em;
     display: flex;
-    column-gap: 1.65em;
-    row-gap: 2.5em;
-    flex-wrap: wrap;
-    padding-block: 2em;
+    flex-direction: column;
+    gap: 0.6em;
+  }
+
+  &__item {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-text);
   }
 }

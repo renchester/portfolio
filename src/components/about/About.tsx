@@ -1,8 +1,7 @@
 import './About.scss';
 import Link from 'next/link';
-import StackItem from '../stacks/StackItem';
+import Reveal from '../animations/Reveal';
 import SectionTitle from '../animations/SectionTitle';
-import AboutMemoji from './AboutMemoji';
 import { client } from '@/sanity/lib/client';
 import { STACKS_QUERY } from '@/sanity/queries';
 import { PortableText } from 'next-sanity';
@@ -13,6 +12,12 @@ const options = { next: { revalidate: 3600 } }; // 1 hour
 async function About({ author }: { author: AUTHOR_QUERYResult }) {
   const stacks = await client.fetch(STACKS_QUERY, undefined, options);
 
+  const materials = [
+    { id: 'front-end--list', label: 'Front End', items: stacks.frontend },
+    { id: 'back-end--list', label: 'Back End', items: stacks.backend },
+    { id: 'dev-tools--list', label: 'Tools', items: stacks.devtools },
+  ];
+
   return (
     <section
       className="home-section about"
@@ -20,53 +25,41 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
       id="about"
     >
       <div className="about__wrapper">
-        <AboutMemoji imgSrc={author?.memojiImage1} />
         <article className="about__main" aria-labelledby="about-me">
-          <SectionTitle id="about-me" className="about__title" title="About" />
+          <SectionTitle
+            id="about-me"
+            className="about__title"
+            title="About"
+            index="02"
+          />
 
-          <div className="about__description">
+          <Reveal className="about__description">
             <PortableText value={author?.bio || []} />
-          </div>
+          </Reveal>
         </article>
-        <article className="stack" aria-labelledby="about-stack--title">
-          <h2 className="stack__title" id="about-stack--title">
-            My Tech Stack
-          </h2>
 
-          <ul className="stack__tech">
-            <li className="stack__tech-item">
-              <h3 className="stack__tech-title" id="front-end--list">
-                Front End
-              </h3>
-              <ul className="stack__list" aria-labelledby="front-end--list">
-                {/* //* FRONT END */}
-                {stacks.frontend.map((stack) => (
-                  <StackItem key={stack._id} item={stack} />
-                ))}
-              </ul>
-            </li>
-            <li className="stack__tech-item">
-              <h3 className="stack__tech-title" id="back-end--list">
-                Back End
-              </h3>
-              <ul className="stack__list" aria-labelledby="back-end--list">
-                {/* //* BACK END */}
-                {stacks.backend.map((stack) => (
-                  <StackItem key={stack._id} item={stack} />
-                ))}
-              </ul>
-            </li>
-            <li className="stack__tech-item">
-              <h3 className="stack__tech-title" id="dev-tools--list">
-                Developer Tools
-              </h3>
-              <ul aria-labelledby="dev-tools--list" className="stack__list">
-                {/*  //* DEV TOOLS */}
-                {stacks.devtools.map((stack) => (
-                  <StackItem key={stack._id} item={stack} />
-                ))}
-              </ul>
-            </li>
+        <article className="materials" aria-labelledby="about-stack--title">
+          <h3 className="materials__title" id="about-stack--title">
+            Stack
+          </h3>
+
+          <ul className="materials__groups">
+            {materials.map((group, groupIndex) => (
+              <li className="materials__group" key={group.id}>
+                <Reveal delay={groupIndex * 0.12}>
+                  <h4 className="materials__group-title" id={group.id}>
+                    {group.label}
+                  </h4>
+                  <ul className="materials__list" aria-labelledby={group.id}>
+                    {group.items.map((stack) => (
+                      <li className="materials__item" key={stack._id}>
+                        {stack.name}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              </li>
+            ))}
           </ul>
         </article>
 
@@ -80,12 +73,7 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img
-                  src="/logos/linkedin.svg"
-                  className="about__link-icon"
-                  alt="Linkedin Logo"
-                />
-                <span>Linkedin</span>
+                Linkedin
               </Link>
             </li>
             <li>
@@ -95,12 +83,7 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img
-                  src="/logos/github.svg"
-                  className="about__link-icon"
-                  alt="Github Logo"
-                />
-                <span>Github</span>
+                Github
               </Link>
             </li>
             <li>

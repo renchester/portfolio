@@ -3,7 +3,7 @@ import { client } from '@/sanity/lib/client';
 import FeaturedProject from './FeaturedProject';
 import GalleryProject from './GalleryProject';
 import SectionTitle from '../animations/SectionTitle';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { PROJECTS_QUERYResult } from '@/sanity/types';
 import { PROJECTS_QUERY } from '@/sanity/queries';
 import { chunks } from '@/utils/chunks';
@@ -15,9 +15,8 @@ const options = { next: { revalidate: 600 } }; // 10 minutes
 async function Projects() {
   const projects = await client.fetch(PROJECTS_QUERY, undefined, options);
 
-  // Redirect back to main page if something is broken
   if (!projects || !projects[0]) {
-    redirect('https://renchester.dev');
+    notFound();
   }
 
   // Using reduce to split the array
@@ -40,13 +39,14 @@ async function Projects() {
     <section
       className="home-section projects"
       id="projects"
-      aria-labelledby='projects__title"'
+      aria-labelledby="projects__title"
     >
       <div className="projects__wrapper">
         <SectionTitle
           className="projects__title"
           id="projects__title"
           title="Projects"
+          index="04"
         />
         <ol className="projects__featured">
           {featuredProjects.map((proj) => (
@@ -61,6 +61,7 @@ async function Projects() {
       >
         <span className="projects__gallery-title">
           <Link
+            className="u-underline"
             href={`https://github.com/renchester?tab=repositories`}
             target="_blank"
             rel="noopener noreferrer"
@@ -88,7 +89,7 @@ async function Projects() {
             {projArr.map((proj) => (
               <GalleryProject
                 key={proj._id}
-                image={urlFor(proj.image).url()}
+                image={urlFor(proj.image).width(800).url()}
                 title={proj.name || ''}
                 subtitle={proj.type}
                 liveLink={proj.liveLink || ''}

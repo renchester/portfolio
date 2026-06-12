@@ -2,201 +2,120 @@
 @use '@/styles/mixins' as mx;
 
 .featured {
-  position: relative;
-  display: flex;
-  gap: 0.65rem;
-  border-radius: 5px;
-  color: var(--color-grey-light-1);
-  isolation: isolate;
-  box-shadow: var(--box-shadow-3);
+  border-top: 1px solid var(--color-line-strong);
+  padding-block: 3.5em 5em;
 
-  @include mx.breakpoint(sm, max) {
-    flex-direction: column;
-  }
-
-  &__bg-wrapper {
-    position: absolute;
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-  }
-
-  &__bg-overlay {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.95),
-      rgba(15, 15, 15, 0.75),
-      rgba(100, 100, 100, 0.45)
-    );
-  }
-
-  &__bg {
-    object-position: top left;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  &__main {
-    padding: 4.25em 2.25em;
+  &__head {
     display: flex;
-    flex-direction: column;
-    gap: 1.75em;
-
-    @include mx.breakpoint(xl, max) {
-      min-width: 360px;
-    }
-
-    @include mx.breakpoint(xs, max) {
-      min-width: 0;
-    }
-
-    @include mx.breakpoint(sm, max) {
-      padding-inline: 1.5em;
-      padding-block: 3em;
-    }
+    align-items: baseline;
+    gap: 1.5em;
   }
 
-  &__type {
-    font-size: var(--text-xs);
-    font-weight: 300;
-    text-transform: uppercase;
-  }
-
-  &__logo-wrapper {
-    position: relative;
-    max-width: 45px;
-    border-radius: 50%;
-    background: var(--color-background);
-
-    &:focus,
-    &:hover {
-      outline: none;
-    }
-  }
-
-  &__logo {
-    padding: 7.5px;
-    width: 100%;
-  }
-
-  &__title-wrapper {
-    position: relative;
+  &__no {
+    @extend %text-annotation;
+    color: var(--color-redline);
   }
 
   &__title {
-    font-size: var(--text-3xl);
-    font-family: var(--font-inter);
-    font-weight: 700;
-    letter-spacing: -1px;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1;
+    color: var(--color-text);
+  }
+
+  &__type {
+    @extend %text-annotation;
+    margin-top: 0.9em;
+  }
+
+  &__body {
+    margin-top: 2.75em;
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) 1.6fr;
+    gap: clamp(2em, 5vw, 5em);
+    align-items: start;
+
+    @include mx.breakpoint(md, max) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__description {
     @extend %text-paragraph;
     font-size: var(--text-sm);
-    max-width: 500px;
+    max-width: 48ch;
   }
 
   &__disclaimer {
     margin-top: 1em;
-    display: inline-block;
-    color: var(--color-grey-light-3);
+    display: block;
+    color: var(--color-annotation);
     font-style: italic;
     font-size: var(--text-xs);
   }
 
   &__stack {
-    margin-block: 2em;
+    margin-top: 2em;
+    padding-top: 1.25em;
+    border-top: 1px solid var(--color-line);
     display: flex;
     flex-wrap: wrap;
-    column-gap: 1.25rem;
-    row-gap: 1.75rem;
+    column-gap: 1.5em;
+    row-gap: 0.6em;
+  }
+
+  &__stack-item {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
   }
 
   &__links {
+    margin-top: 2.5em;
     display: flex;
-    gap: 1em;
+    gap: 2em;
   }
 
   &__link {
-    @extend %parent-with-centered-children;
-
-    border: 1px solid currentColor;
-    width: fit-content;
-    padding: 0.75em 1.5em;
-    box-shadow:
-      rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-
-    font-weight: 600;
-    font-size: var(--text-2xs);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
 
     &:hover,
-    &:focus {
-      color: var(--color-dark-1);
-      background: var(--color-light-1);
-      outline: 1px solid;
-
-      &.github img {
-        filter: var(--filter-grad-1);
-      }
+    &:focus-visible {
+      outline: none;
+      color: var(--color-redline);
     }
-
-    &.github img {
-      width: 20px;
-      height: 20px;
-      filter: var(--filter-grad-2);
-    }
-
-    &.live svg {
-      margin-left: 0.25rem;
-    }
-  }
-
-  &__img-gallery {
-    display: grid;
-    place-items: center;
-    flex-grow: 1;
   }
 
   &__img-wrapper {
     position: relative;
     isolation: isolate;
-    height: fit-content;
   }
 
   &__img {
+    display: block;
+    width: 100%;
     height: auto;
+  }
 
-    &:focus {
-      outline: none;
-    }
+  // phone mockup sized relative to the laptop so the pairing reads to scale
+  &__phone {
+    position: absolute;
+    z-index: 1;
+    bottom: -1.5em;
+    left: -1.25em;
+    width: max(84px, 18%);
 
-    &.mobile {
-      position: absolute;
-      z-index: 1;
-      top: 60%;
-      max-width: 150px;
-
-      @include mx.breakpoint(sm, max) {
-        scale: 85%;
-        top: 50%;
-        left: 2%;
-      }
-    }
-
-    &.desktop {
-      max-width: 620px;
-
-      @include mx.breakpoint(sm, max) {
-        transform: scale(85%);
-      }
+    @include mx.breakpoint(md, max) {
+      left: auto;
+      right: 1em;
     }
   }
 }

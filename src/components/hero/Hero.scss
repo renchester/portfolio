@@ -13,7 +13,9 @@
     height: 100%;
     max-width: var(--max-page-width);
     margin-inline: auto;
-    padding-inline: clamp(1.5rem, 4vw, 4rem);
+    // shares the sheet margin so the name hangs from the same left
+    // datum as every section title below it
+    padding-inline: var(--section-padding);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -27,8 +29,8 @@
   }
 
   &__title {
-    overflow: hidden;
-    height: fit-content;
+    // no overflow clipping here — the per-word masks handle the reveal,
+    // and clipping at the line box severs serif descenders
     margin-bottom: 0.1em;
     font-size: clamp(3.25rem, 10.5vw, 9.5rem);
     font-family: var(--font-display);
@@ -46,37 +48,6 @@
     @extend %text-annotation;
     font-size: var(--text-sm);
     color: var(--color-text-alpha75);
-  }
-
-  // portrait demoted to a small framed figure — the field carries the hero
-  &__img-wrapper {
-    position: absolute;
-    z-index: 1;
-    right: clamp(1.5rem, 4vw, 4rem);
-    bottom: 42%;
-    width: clamp(120px, 14vw, 200px);
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-    border: 1px solid var(--color-line-strong);
-    background: var(--color-background);
-
-    @include mx.breakpoint(md, max) {
-      bottom: auto;
-      top: 6%;
-      width: clamp(96px, 24vw, 130px);
-    }
-  }
-
-  &__img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    filter: grayscale(100%) contrast(1.02);
-    // headroom so the parallax drift never reveals the wrapper edge
-    scale: 1.12;
-    transform-origin: bottom;
   }
 
   &__pop {

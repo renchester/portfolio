@@ -7,9 +7,10 @@
   &__mask {
     display: inline-block;
     overflow: hidden;
-    // breathing room so descenders aren't clipped by the mask
-    padding-bottom: 0.08em;
-    margin-bottom: -0.08em;
+    // breathing room for deep serif descenders (Instrument Serif's J/g/y
+    // reach ~0.2em below the baseline)
+    padding-bottom: 0.22em;
+    margin-bottom: -0.22em;
   }
 
   &__item {

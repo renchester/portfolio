@@ -13,7 +13,7 @@ function HeroGreeting() {
     setGreeting(`Magandang ${getTagalogDayTime(currentHour)}`);
   }, []);
 
-  return <span className="hero__greeting">{greeting} —</span>;
+  return <span className="hero__greeting">{greeting}</span>;
 }
 
 export default HeroGreeting;

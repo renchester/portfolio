@@ -1,77 +1,152 @@
-'use client';
-
-import { urlFor } from '@/sanity/lib/image';
-import { EXPERIENCE_ID_QUERYResult } from '@/sanity/types';
-import { format } from 'date-fns';
+import { EXPERIENCE_QUERYResult } from '@/sanity/types';
+import {
+  differenceInCalendarMonths,
+  format,
+  parseISO,
+  startOfToday,
+} from 'date-fns';
 import { PortableText } from 'next-sanity';
-import { useState } from 'react';
+import Reveal from '../animations/Reveal';
 
-function WorkCard({ exp }: { exp: EXPERIENCE_ID_QUERYResult | null }) {
-  const [isExpanded, setExpanded] = useState(false);
+const EMPLOYMENT_LABELS: Record<string, string> = {
+  fullTime: 'Full-time',
+  partTime: 'Part-time',
+  selfEmployed: 'Self-employed',
+  freelance: 'Freelance',
+  contract: 'Contract',
+  internship: 'Internship',
+  apprenticeship: 'Apprenticeship',
+  seasonal: 'Seasonal',
+};
 
-  // date-only value so server and client render the same attribute
-  const today = format(new Date(), 'yyyy-MM-dd');
+const LOCATION_LABELS: Record<string, string> = {
+  onSite: 'On-site',
+  hybrid: 'Hybrid',
+  remote: 'Remote',
+};
+
+function tenureLabel(start: Date, end: Date) {
+  const months = differenceInCalendarMonths(end, start) + 1;
+  const yr = Math.floor(months / 12);
+  const mo = months % 12;
+  return [yr > 0 && `${yr} yr`, mo > 0 && `${mo} mo`]
+    .filter(Boolean)
+    .join(' ');
+}
+
+function WorkCard({
+  exp,
+  number,
+}: {
+  exp: EXPERIENCE_QUERYResult[number];
+  number: string;
+}) {
+  const start = exp.startDate ? parseISO(exp.startDate) : null;
+  const end = exp.endDate ? parseISO(exp.endDate) : null;
 
   return (
-    <li className="exp__listItem">
-      <img
-        src={urlFor(exp?.logo).width(160).url()}
-        alt={`Logo for ${exp?.company}`}
-        className="exp__img"
-      />
-      <div className="exp__card">
-        <article className="exp__top">
-          <button
-            type="button"
-            className="exp__main"
-            onClick={() => setExpanded((prev) => !prev)}
-            aria-expanded={isExpanded}
-            aria-controls={`exp-desc-${exp?._id}`}
-          >
-            <h3 className="exp__company">
-              {exp?.company}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="currentColor"
-                className="exp__more"
-                data-active={isExpanded}
-              >
-                <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
-              </svg>
-            </h3>
-            <span className="exp__position">{exp?.position}</span>
-          </button>
-          <div className="exp__details">
-            <span className="exp__location" aria-label="Company location">
-              {exp?.location}
+    <li className="record">
+      <Reveal>
+        <article className="record__grid" aria-label={exp.company ?? 'Role'}>
+          <header className="record__meta">
+            <span className="record__no" aria-hidden>
+              {number}
             </span>
-            <span className="exp__separator">•</span>
-            <div className="exp__dates">
-              <time dateTime={exp?.startDate}>
-                {format(new Date(exp?.startDate!), 'LLLL yyyy')}
-              </time>{' '}
-              -{' '}
-              {exp?.endDate ? (
-                <time dateTime={exp?.endDate}>
-                  {format(new Date(exp?.endDate!), 'LLLL yyyy')}
-                </time>
-              ) : (
-                <time dateTime={today} suppressHydrationWarning>
-                  present
+
+            <p className="record__dates">
+              {start && (
+                <time dateTime={exp.startDate!}>
+                  {format(start, 'MMM yyyy')}
                 </time>
               )}
-            </div>
+              <span aria-hidden>{' — '}</span>
+              {end ? (
+                <time dateTime={exp.endDate!}>{format(end, 'MMM yyyy')}</time>
+              ) : (
+                <span className="record__present">Present</span>
+              )}
+            </p>
+
+            <dl className="record__facts">
+              {start && (
+                <div className="record__fact">
+                  <dt>Tenure</dt>
+                  <dd suppressHydrationWarning>
+                    {tenureLabel(start, end ?? startOfToday())}
+                  </dd>
+                </div>
+              )}
+              <div className="record__fact">
+                <dt>Location</dt>
+                <dd>
+                  {exp.location}
+                  {exp.locationType
+                    ? ` · ${LOCATION_LABELS[exp.locationType] ?? exp.locationType}`
+                    : ''}
+                </dd>
+              </div>
+              {exp.employmentType && (
+                <div className="record__fact">
+                  <dt>Engagement</dt>
+                  <dd>
+                    {EMPLOYMENT_LABELS[exp.employmentType] ?? exp.employmentType}
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </header>
+
+          <div className="record__body">
+            <h3 className="record__company">
+              {exp.url ? (
+                <a
+                  href={exp.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="record__company-link"
+                >
+                  {exp.company}
+                  <svg
+                    aria-hidden
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="square"
+                    strokeLinejoin="round"
+                    className="record__arrow"
+                  >
+                    <path
+                      d="M7 7l9.2 9.2M17 7v10H7"
+                      transform="rotate(-90 12 12)"
+                    />
+                  </svg>
+                </a>
+              ) : (
+                exp.company
+              )}
+            </h3>
+            <p className="record__role">{exp.position}</p>
+
+            {exp.description && (
+              <div className="record__description">
+                <PortableText value={exp.description} />
+              </div>
+            )}
+
+            {exp.stacks && exp.stacks.length > 0 && (
+              <ul className="record__stack" aria-label="Technologies used">
+                {exp.stacks.map((stack) => (
+                  <li className="record__stack-item" key={stack._id}>
+                    {stack.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </article>
-        {isExpanded && (
-          <div className="exp__description" id={`exp-desc-${exp?._id}`}>
-            <PortableText value={exp?.description || []} />
-          </div>
-        )}
-      </div>
+      </Reveal>
     </li>
   );
 }

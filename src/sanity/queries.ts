@@ -11,7 +11,7 @@ export const PROJECT_ID_QUERY = defineQuery(
 export const AUTHOR_QUERY = defineQuery(`*[_type == "author"][0]`);
 
 export const EXPERIENCE_QUERY = defineQuery(
-  `*[_type == "experience"] | order(startDate desc)`,
+  `*[_type == "experience"] | order(startDate desc){..., stacks[]->{_id, name}}`,
 );
 
 export const EXPERIENCE_ID_QUERY = defineQuery(`*[_type == "experience"][0]`);

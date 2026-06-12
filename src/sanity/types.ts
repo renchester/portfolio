@@ -718,7 +718,7 @@ export type AUTHOR_QUERYResult = {
   };
 } | null;
 // Variable: EXPERIENCE_QUERY
-// Query: *[_type == "experience"] | order(startDate desc)
+// Query: *[_type == "experience"] | order(startDate desc){..., stacks[]->{_id, name}}
 export type EXPERIENCE_QUERYResult = Array<{
   _id: string;
   _type: "experience";
@@ -764,13 +764,10 @@ export type EXPERIENCE_QUERYResult = Array<{
     _type: "image";
   };
   url?: string;
-  stacks?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "stack";
-  }>;
+  stacks: Array<{
+    _id: string;
+    name: string | null;
+  }> | null;
 }>;
 // Variable: EXPERIENCE_ID_QUERY
 // Query: *[_type == "experience"][0]
@@ -940,7 +937,7 @@ declare module "@sanity/client" {
     "*[_type == \"project\"] | order(index asc) {..., stack[]->{name, logo, type} }": PROJECTS_QUERYResult;
     "*[_type == \"project\" && _id == $id][0]{..., stack[]->{name, logo, type} }": PROJECT_ID_QUERYResult;
     "*[_type == \"author\"][0]": AUTHOR_QUERYResult;
-    "*[_type == \"experience\"] | order(startDate desc)": EXPERIENCE_QUERYResult;
+    "*[_type == \"experience\"] | order(startDate desc){..., stacks[]->{_id, name}}": EXPERIENCE_QUERYResult;
     "*[_type == \"experience\"][0]": EXPERIENCE_ID_QUERYResult;
     "{\n  \"frontend\": *[_type == \"stack\" && type == \"frontend\"] | order(proficiency desc, name asc),\n  \"backend\": *[_type == \"stack\" && type == \"backend\"] | order(proficiency desc, name asc),\n  \"devtools\": *[_type == \"stack\" && type == \"devtools\"] | order(proficiency desc, name asc),\n  \"others\": *[_type == \"stack\" && type == \"others\"] | order(proficiency desc, name asc)\n}": STACKS_QUERYResult;
     "*[\n _type == \"stack\" &&\n   name in [\"React\", \"Next.js\", \"Typescript\", \"Framer\", \"Sass\", \"Sanity CMS\"]\n] | order(type desc, name asc){name, logo, type}": FOOTER_STACKS_QUERYResult;

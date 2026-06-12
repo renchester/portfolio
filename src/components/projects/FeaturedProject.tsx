@@ -5,14 +5,7 @@ import Reveal from '../animations/Reveal';
 import { PROJECT_ID_QUERYResult } from '@/sanity/types';
 import { urlFor } from '@/sanity/lib/image';
 import { DEFAULT_GITHUB, DEFAULT_LIVE } from '@/constants';
-
-// Sanity asset refs encode intrinsic size, e.g. "image-abc123-1216x735-png".
-// Width/height attributes let the browser reserve space before the image loads.
-function refDimensions(image?: { asset?: { _ref: string } | null } | null) {
-  const match = image?.asset?._ref.match(/-(\d+)x(\d+)-/);
-  if (!match) return undefined;
-  return { width: Number(match[1]), height: Number(match[2]) };
-}
+import refDimensions from '@/utils/refDimensions';
 
 function Project({
   project,
@@ -56,6 +49,7 @@ function Project({
 
         <div className="featured__body">
           <div className="featured__info">
+            <h4 className="featured__label">Brief</h4>
             <p className="featured__description">
               {description}
 
@@ -64,16 +58,19 @@ function Project({
               )}
             </p>
 
-            <ul className="featured__stack" aria-label="Built with">
-              {stack?.map((item) => (
-                <li
-                  className="featured__stack-item"
-                  key={`${name}-stack--${item.name}`}
-                >
-                  {item.name}
-                </li>
-              ))}
-            </ul>
+            <div className="featured__field">
+              <h4 className="featured__label">Built with</h4>
+              <ul className="featured__stack">
+                {stack?.map((item) => (
+                  <li
+                    className="featured__stack-item"
+                    key={`${name}-stack--${item.name}`}
+                  >
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <div className="featured__links">
               <Link

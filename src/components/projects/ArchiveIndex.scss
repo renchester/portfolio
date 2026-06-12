@@ -1,0 +1,114 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+
+.archive {
+  &__list {
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  &__row {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  &__link {
+    display: grid;
+    grid-template-columns: 3.5em minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.2fr) 2em;
+    align-items: baseline;
+    column-gap: 1.5em;
+    padding-block: 1.35em;
+    color: var(--color-text);
+    transition: color var(--dur-instant) var(--ease-out-expo);
+
+    &:hover,
+    &:focus-visible {
+      outline: none;
+      color: var(--color-redline);
+
+      .archive__arrow {
+        transform: translate(0.2em, -0.2em);
+        opacity: 1;
+      }
+    }
+
+    @include mx.breakpoint(md, max) {
+      grid-template-columns: 2.75em minmax(0, 1fr) 1.5em;
+      row-gap: 0.35em;
+    }
+  }
+
+  &__no {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 1.05rem + 1.2vw, 2rem);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  &__type {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+
+    @include mx.breakpoint(md, max) {
+      grid-column: 2;
+    }
+  }
+
+  &__materials {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+    text-transform: none;
+    letter-spacing: 0.04em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include mx.breakpoint(md, max) {
+      display: none;
+    }
+  }
+
+  &__arrow {
+    width: 1em;
+    height: 1em;
+    justify-self: end;
+    align-self: center;
+    opacity: 0.45;
+    transition:
+      transform var(--dur-fast) var(--ease-out-expo),
+      opacity var(--dur-fast) var(--ease-out-expo);
+  }
+
+  // floating plate preview — positioned via transform from the rAF loop
+  &__plate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: clamp(240px, 24vw, 360px);
+    pointer-events: none;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line-strong);
+    padding: 0.5em;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__plate-caption {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+    display: block;
+    padding-top: 0.5em;
+  }
+}

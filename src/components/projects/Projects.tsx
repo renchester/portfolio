@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { client } from '@/sanity/lib/client';
 import FeaturedProject from './FeaturedProject';
-import GalleryProject from './GalleryProject';
+import ArchiveIndex, { ArchiveEntry } from './ArchiveIndex';
 import SectionTitle from '../animations/SectionTitle';
+import Reveal from '../animations/Reveal';
 import { notFound } from 'next/navigation';
 import { PROJECTS_QUERYResult } from '@/sanity/types';
 import { PROJECTS_QUERY } from '@/sanity/queries';
-import { chunks } from '@/utils/chunks';
 import { urlFor } from '@/sanity/lib/image';
+import refDimensions from '@/utils/refDimensions';
 import './Projects.scss';
 
 const options = { next: { revalidate: 600 } }; // 10 minutes
@@ -33,7 +34,23 @@ async function Projects() {
       others: [] as PROJECTS_QUERYResult,
     },
   );
-  const otherProjects = [...chunks(others, 4)];
+  const archiveEntries: ArchiveEntry[] = others.map((proj) => {
+    const dims = refDimensions(proj.image);
+    return {
+      id: proj._id,
+      number: String(proj.index ?? 0).padStart(2, '0'),
+      name: proj.name || 'Untitled',
+      type: proj.type,
+      materials: (proj.stack ?? [])
+        .slice(0, 4)
+        .map((item) => item.name)
+        .filter((n): n is string => Boolean(n)),
+      href: proj.liveLink || proj.repoLink || '',
+      previewSrc: urlFor(proj.image).width(720).url(),
+      previewWidth: dims?.width,
+      previewHeight: dims?.height,
+    };
+  });
 
   return (
     <section
@@ -55,49 +72,31 @@ async function Projects() {
         </ol>
       </div>
 
-      <section
-        className="projects__gallery"
-        aria-label="Gallery of portfolio subject's other projects"
-      >
-        <span className="projects__gallery-title">
-          <Link
-            className="u-underline"
-            href={`https://github.com/renchester?tab=repositories`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>More Works</span>{' '}
-            <svg
-              aria-hidden
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="square"
-              strokeLinejoin="round"
-            >
-              <path d="M7 7l9.2 9.2M17 7v10H7" />
-            </svg>
-          </Link>
-        </span>
-
-        {otherProjects.map((projArr) => (
-          <ul className="projects__gallery-list" key={projArr[0]._id}>
-            {projArr.map((proj) => (
-              <GalleryProject
-                key={proj._id}
-                image={urlFor(proj.image).width(800).url()}
-                title={proj.name || ''}
-                subtitle={proj.type}
-                liveLink={proj.liveLink || ''}
-              />
-            ))}
-          </ul>
-        ))}
-      </section>
+      {archiveEntries.length > 0 && (
+        <section
+          className="projects__archive"
+          aria-label="Archive of additional works"
+        >
+          <div className="projects__wrapper">
+            <Reveal>
+              <header className="projects__archive-head">
+                <h3 className="projects__archive-title">
+                  Archive — additional works
+                </h3>
+                <Link
+                  className="projects__archive-more u-underline"
+                  href="https://github.com/renchester?tab=repositories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Full archive on Github
+                </Link>
+              </header>
+              <ArchiveIndex entries={archiveEntries} />
+            </Reveal>
+          </div>
+        </section>
+      )}
     </section>
   );
 }

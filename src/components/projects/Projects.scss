@@ -25,44 +25,33 @@
     flex-direction: column;
   }
 
-  &__gallery {
-    margin-top: var(--header-height);
-    padding-block: 2em;
-    position: relative;
+  &__archive {
+    margin-top: clamp(4rem, 10vh, 7rem);
+    padding-bottom: clamp(4rem, 10vh, 7rem);
   }
 
-  &__gallery-title {
-    display: block;
-    text-align: center;
-
-    & a {
-      @extend %text-annotation;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4em;
-      font-size: var(--text-sm);
-      color: var(--color-text);
-
-      &:focus-visible,
-      &:hover {
-        color: var(--color-redline);
-        outline: none;
-      }
-    }
-  }
-
-  &__gallery-list {
-    margin-block: 2.65em;
+  &__archive-head {
     display: flex;
-    justify-content: center;
-    gap: 1.25em;
-    padding-inline: 0.5em;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2em;
+    margin-bottom: 1.5em;
+  }
 
-    @include mx.breakpoint(md) {
-      margin-block: 1em;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1em;
+  &__archive-title {
+    @extend %text-annotation;
+    color: var(--color-annotation);
+  }
+
+  &__archive-more {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-text);
+
+    &:focus-visible,
+    &:hover {
+      color: var(--color-redline);
+      outline: none;
     }
   }
 }

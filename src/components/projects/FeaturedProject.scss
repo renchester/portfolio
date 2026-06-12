@@ -5,10 +5,13 @@
   border-top: 1px solid var(--color-line-strong);
   padding-block: 3.5em 5em;
 
+  // number stacks above the title so title, brief, and imagery all
+  // hang from the same left datum line
   &__head {
     display: flex;
-    align-items: baseline;
-    gap: 1.5em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1em;
   }
 
   &__no {
@@ -42,6 +45,13 @@
     }
   }
 
+  &__label {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+    margin-bottom: 0.9em;
+  }
+
   &__description {
     @extend %text-paragraph;
     font-size: var(--text-sm);
@@ -56,10 +66,13 @@
     font-size: var(--text-xs);
   }
 
-  &__stack {
+  &__field {
     margin-top: 2em;
     padding-top: 1.25em;
     border-top: 1px solid var(--color-line);
+  }
+
+  &__stack {
     display: flex;
     flex-wrap: wrap;
     column-gap: 1.5em;

@@ -1,0 +1,38 @@
+@use '@/styles/placeholders';
+@use '@/styles/mixins' as mx;
+
+.coda {
+  position: relative;
+  height: clamp(320px, 52vh, 540px);
+  isolation: isolate;
+  border-top: 1px solid var(--color-line);
+  overflow: hidden;
+
+  // soften the terrain at both edges so it reads as a passage,
+  // not a framed image
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 86%,
+    transparent 100%
+  );
+
+  &__mark {
+    @extend %text-annotation;
+    position: absolute;
+    z-index: 1;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+
+    &--tl {
+      top: 1.5em;
+      left: var(--section-padding);
+    }
+
+    &--br {
+      bottom: 1.5em;
+      right: var(--section-padding);
+    }
+  }
+}

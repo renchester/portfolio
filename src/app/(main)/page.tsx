@@ -1,5 +1,6 @@
 import About from '@/components/about/About';
 import Bridge from '@/components/bridge/Bridge';
+import Coda from '@/components/coda/Coda';
 import ContactForm from '@/components/contact/ContactForm';
 import Projects from '@/components/projects/Projects';
 import Hero from '@/components/hero/Hero';
@@ -36,6 +37,9 @@ export default async function Home() {
 
       {/* Contact */}
       <ContactForm author={author} />
+
+      {/* Terrain coda — bookends the hero's contour field */}
+      <Coda author={author} />
     </main>
   );
 }

@@ -1,69 +1,80 @@
 'use client';
 
 import './Hero.scss';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
 import AnimatedLetters from '../animations/AnimatedLetters';
-import Marquee from '../animations/Marquee';
+import ContourField from './ContourField';
+import HeroGreeting from './HeroGreeting';
+import LocalTime from '../LocalTime';
 import { AUTHOR_QUERYResult } from '@/sanity/types';
 import { urlFor } from '@/sanity/lib/image';
 
-// [0.6, 0.01, -0.05, 0.9];
+function Hero({ author }: { author: AUTHOR_QUERYResult }) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
-function Hero({
-  author,
-  startAnimation,
-}: {
-  author: AUTHOR_QUERYResult;
-  startAnimation: boolean;
-}) {
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // layers drift apart as the hero scrolls out
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-24%']);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
+
   return (
-    <motion.section
+    <section
       className="hero home-section"
       aria-label="Hero section"
       id="hero-section"
+      ref={sectionRef}
     >
+      <ContourField />
+
       <div className="hero__main">
-        <div className="hero__text-wrapper">
+        <motion.div
+          className="hero__text-wrapper"
+          style={
+            prefersReducedMotion ? undefined : { y: textY, opacity: textOpacity }
+          }
+        >
           <h1 className="hero__title">
-            {!startAnimation && (
-              <AnimatedLetters
-                title={`${author?.firstName} ${author?.lastName}`}
-              />
-            )}
+            <AnimatedLetters
+              title={`${author?.firstName} ${author?.lastName}`}
+            />
           </h1>
 
-          <h2 className="hero__subtitle">{author?.job}</h2>
-        </div>
-        <div className="hero__img-wrapper">
+          <p className="hero__subtitle">{author?.job}</p>
+        </motion.div>
+        <motion.div
+          className="hero__img-wrapper"
+          style={prefersReducedMotion ? undefined : { y: imgY }}
+        >
           <img
-            src={urlFor(author?.heroImage).url()}
-            alt="Profile Picture of portfolio subject. Man wearing white polo shirt"
+            src={urlFor(author?.heroImage).width(480).url()}
+            alt="Portrait of Renchester Ramos"
             className="hero__img"
             loading="eager"
-            fetchPriority="high"
           />
-        </div>
-      </div>
-
-      <div className="hero__marquee">
-        <Marquee baseVelocity={-1.5} repeatChildren={8}>
-          <span className="hero__marquee--name">
-            {`${author?.firstName} ${author?.lastName}`} —
-          </span>
-        </Marquee>
-        <Marquee baseVelocity={1.5} repeatChildren={6}>
-          <span className="hero__marquee--sub">
-            {author?.marquee?.join(' — ').concat(' - ')}
-          </span>
-        </Marquee>
+        </motion.div>
       </div>
 
       <div className="hero__pop">
         <span className="hero__pop-loc">
-          Currently based in {author?.location}
+          <HeroGreeting /> Currently based in {author?.location}
+        </span>
+        <span className="hero__pop-time">
+          <LocalTime timeZone={author?.timezone ?? 'Asia/Manila'} />
         </span>
       </div>
-    </motion.section>
+    </section>
   );
 }
 

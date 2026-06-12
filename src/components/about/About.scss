@@ -13,10 +13,53 @@
   }
 
   &__main {
-    width: 70%;
+    width: 100%;
+  }
 
-    @include mx.breakpoint(lg) {
-      width: 100%;
+  &__columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(180px, 240px);
+    gap: clamp(2em, 6vw, 6em);
+    align-items: start;
+
+    @include mx.breakpoint(md, max) {
+      grid-template-columns: 1fr;
+      gap: 2em;
+    }
+  }
+
+  // portrait reads as an archival figure, not a profile photo
+  &__figure {
+    margin-top: 1.5em;
+  }
+
+  &__portrait {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(100%) contrast(1.02);
+    border: 1px solid var(--color-line-strong);
+
+    @include mx.breakpoint(md, max) {
+      max-width: 220px;
+    }
+  }
+
+  &__figcaption {
+    @extend %text-annotation;
+    font-size: var(--text-3xs);
+    color: var(--color-annotation);
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    padding-top: 0.7em;
+    margin-top: 0.7em;
+    border-top: 1px solid var(--color-line);
+
+    @include mx.breakpoint(md, max) {
+      max-width: 220px;
     }
   }
 
@@ -120,8 +163,28 @@
   }
 
   &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.65em;
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     color: var(--color-text);
+
+    // ink-wash treatment keeps mixed brand marks reading as one set
+    &:hover .materials__icon {
+      filter: none;
+      opacity: 1;
+    }
+  }
+
+  &__icon {
+    width: 1.05em;
+    height: 1.05em;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition:
+      filter var(--dur-fast) var(--ease-out-expo),
+      opacity var(--dur-fast) var(--ease-out-expo);
   }
 }

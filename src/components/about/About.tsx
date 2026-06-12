@@ -6,6 +6,7 @@ import { client } from '@/sanity/lib/client';
 import { STACKS_QUERY } from '@/sanity/queries';
 import { PortableText } from 'next-sanity';
 import { AUTHOR_QUERYResult } from '@/sanity/types';
+import { urlFor } from '@/sanity/lib/image';
 
 const options = { next: { revalidate: 3600 } }; // 1 hour
 
@@ -33,9 +34,28 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
             index="02"
           />
 
-          <Reveal className="about__description">
-            <PortableText value={author?.bio || []} />
-          </Reveal>
+          <div className="about__columns">
+            <Reveal className="about__description">
+              <PortableText value={author?.bio || []} />
+            </Reveal>
+
+            {author?.heroImage && (
+              <Reveal className="about__figure-wrap" delay={0.15}>
+                <figure className="about__figure">
+                  <img
+                    src={urlFor(author.heroImage).width(480).url()}
+                    alt={`Portrait of ${author.firstName} ${author.lastName}`}
+                    className="about__portrait"
+                    loading="lazy"
+                  />
+                  <figcaption className="about__figcaption">
+                    <span aria-hidden>fig. 01</span>
+                    <span>{author.location}</span>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            )}
+          </div>
         </article>
 
         <article className="materials" aria-labelledby="about-stack--title">
@@ -53,7 +73,18 @@ async function About({ author }: { author: AUTHOR_QUERYResult }) {
                   <ul className="materials__list" aria-labelledby={group.id}>
                     {group.items.map((stack) => (
                       <li className="materials__item" key={stack._id}>
-                        {stack.name}
+                        {stack.logo && (
+                          <img
+                            className="materials__icon"
+                            src={urlFor(stack.logo).width(48).url()}
+                            alt=""
+                            aria-hidden
+                            loading="lazy"
+                            width={48}
+                            height={48}
+                          />
+                        )}
+                        <span>{stack.name}</span>
                       </li>
                     ))}
                   </ul>
